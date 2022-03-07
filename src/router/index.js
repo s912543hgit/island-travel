@@ -25,13 +25,27 @@ const routes = [
       }
     ]
   },
+  // // 登入頁面
+  {
+    path: '/login',
+    component: () => import('../views/LoginView.vue')
+  },
+  // 後台
   {
     path: '/admin',
     component: () => import('../views/DashboardView.vue'),
     children: [
       {
         path: 'products',
-        component: () => import('../views/AdminProducts.vue')
+        component: () => import('../views/Dashboard/ProductsView.vue')
+      },
+      {
+        path: 'orders',
+        component: () => import('../views/Dashboard/OrdersView.vue')
+      },
+      {
+        path: 'coupon',
+        component: () => import('../views/Dashboard/CouponView.vue')
       }
     ]
   }
