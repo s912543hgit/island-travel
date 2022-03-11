@@ -30,7 +30,6 @@
 </template>
 
 <script>
-// import AdminNavbar from '@/components/AdminNavbar.vue'
 
 export default {
   data () {
@@ -69,6 +68,7 @@ export default {
       }
     },
     logout () {
+      // 刪除cookie
       document.cookie = 'hexToken=;expires=;'
       alert('您已經登出')
       this.$router.push('/login')
