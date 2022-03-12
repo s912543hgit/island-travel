@@ -11,7 +11,7 @@
         <div class="modal-content border-0">
           <div class="modal-header bg-dark text-white">
             <h5 id="productModalLabel" class="modal-title">
-              <span v-if="status">新增產品</span>
+              <span v-if="isNew">新增產品</span>
               <span v-else>編輯產品</span>
             </h5>
             <button
@@ -36,6 +36,22 @@
                       v-model="tempProduct.imageUrl"
                     />
                   </div>
+                  <!-- <div class="mb-3">
+                    <label for="customFile" class="form-label"
+                      >或 上傳圖片
+                      <i
+                        class="fas fa-spinner fa-spin"
+                        v-if="status.fileUploading"
+                      ></i>
+                    </label>
+                    <input
+                      type="file"
+                      id="customFile"
+                      class="form-control"
+                      ref="fileInput"
+                      @change="uploadFile"
+                    />
+                  </div> -->
                   <!-- 主圖 -->
                   <img class="img-fluid" :src="tempProduct.imageUrl" alt="" />
                   <h3>多圖設置</h3>
@@ -209,20 +225,30 @@
           </div>
         </div>
       </div>
-    </div> `,
-}
+    </div>
 </template>
 <script>
 import Modal from 'bootstrap/js/dist/modal'
 export default {
   props: {
-    item: {}
+    // 利用prop 傳入
+    product: {
+      type: Object,
+      default () { return {} }
+    },
+    isNew: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
-      modal: ''
+      modal: '',
+      status: {},
+      tempProduct: {}
     }
   },
+  emits: ['update-product'],
   methods: {
     openModal () {
       this.modal.show()

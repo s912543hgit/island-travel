@@ -6,7 +6,7 @@
         data-bs-toggle="modal"
         id="modal"
         type="button"
-        @click="openModal('new', item)"
+        @click="openModal(true)"
       >
         建立新的產品
       </button>
@@ -38,7 +38,7 @@
               <button
                 type="button"
                 class="btn btn-outline-primary btn-sm"
-                @click="openModal('edit', item)"
+                @click="openModal(false,item)"
               >
                 編輯
               </button>
@@ -59,7 +59,7 @@
     <!-- del modal -->
     <!-- 將外層的tempProduct傳到內層 內層：item 外層：tempProduct  -->
     <DelModal :item="tempProduct" ref="delModal" @del-item="delProduct"></DelModal>
-    <ProductModal :item="tempProduct" ref="productModal"></ProductModal>
+    <ProductModal :product="tempProduct" ref="productModal" :isNew="isNew" @update-product="updateProduct"></ProductModal>
   </div>
 </template>
 
@@ -71,12 +71,15 @@ import DelModal from '@/components/DelModal.vue'
 export default {
   data () {
     return {
-      status: false,
       pagination: {},
       products: [],
-      tempProduct: {
-        imagesUrl: []
-      }
+      isNew: false,
+      tempProduct: {},
+      modal: {
+        editModal: '',
+        delModal: ''
+      },
+      currentPage: 1
     }
   },
   components: {
@@ -105,23 +108,17 @@ export default {
           console.dir(error)
         })
     },
-    // modal的JS
-    // 參數的status  new edit delete
-    openModal (status, item) {
-      if (status === 'new') {
-        this.tempProduct = {
-          // 需要做清空的動作
-          imagesUrl: []
-        }
+    openModal (isNew, item) {
+      if (isNew) {
+        // 需要清空
+        this.tempProduct = {}
         // 改變status的狀態
-        this.status = true
-        // productmodal.show()
-      } else if (status === 'edit') {
+        this.isNew = true
+      } else {
         // 需要將產品資料帶上去，因此使用淺拷貝方式 目的是為了不要改變原始物件資料
         this.tempProduct = { ...item }
         // 因為非新增物件，因此狀態為false
-        this.status = false
-        // productmodal.show()
+        this.isNew = false
       }
       const productComponent = this.$refs.productModal
       productComponent.openModal()
@@ -133,6 +130,31 @@ export default {
       const delComponent = this.$refs.delModal
       delComponent.openModal()
     },
+    // 更新產品
+    updateProduct (item) {
+      this.tempProduct = item
+      let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
+      let method = 'post'
+      // 根據status來決定要串接post或是put api
+      // 編輯的狀態
+      if (!this.isNew) {
+        api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`
+        method = 'put'
+      }
+      const productComponent = this.$refs.productModal
+      // post和put需要代的參數相同，因此可以寫在一起
+      // [method]裡帶入httpmethods
+      this.$http[method](api, { data: this.tempProduct })
+        .then((response) => {
+          alert(response.data.message)
+          productComponent.hideModal()
+          this.getProducts(this.currentPage)
+        })
+        .catch((error) => {
+          alert(error.data.message)
+        })
+    },
+
     // 刪除產品
     delProduct () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`
