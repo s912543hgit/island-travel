@@ -4,6 +4,7 @@
     class="modal fade"
     tabindex="-1"
     aria-hidden="true"
+    ref="delmodal"
   >
     <div class="modal-dialog">
       <div class="modal-content border-0">
@@ -20,7 +21,7 @@
         </div>
         <div class="modal-body">
           是否刪除
-          <strong class="text-danger">twst</strong>
+          <strong class="text-danger">{{ item.title }}</strong>
           商品(刪除後將無法恢復)。
         </div>
         <div class="modal-footer">
@@ -34,7 +35,7 @@
           <button
             type="button"
             class="btn btn-danger"
-            @click="delProduct()"
+            @click="$emit('del-item')"
           >
             確認刪除
           </button>
@@ -61,7 +62,7 @@ export default {
     }
   },
   mounted () {
-    this.modal = new Modal(this.$refs.modal)
+    this.modal = new Modal(this.$refs.delmodal)
   }
 }
 </script>

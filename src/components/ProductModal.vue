@@ -213,4 +213,23 @@
 }
 </template>
 <script>
+import Modal from 'bootstrap/js/dist/modal'
+export default {
+  props: {
+    item: {}
+  },
+  data () {
+    return {
+      modal: ''
+    }
+  },
+  methods: {
+    openModal () {
+      this.modal.show()
+    }
+  },
+  mounted () {
+    this.modal = new Modal(this.$refs.productModal)
+  }
+}
 </script>

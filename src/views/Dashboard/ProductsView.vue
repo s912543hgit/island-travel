@@ -45,7 +45,7 @@
               <button
                 type="button"
                 class="btn btn-outline-danger btn-sm"
-                @click="openModal('delete', item)"
+                @click="openDelProductModal(item)"
               >
                 刪除
               </button>
@@ -55,17 +55,18 @@
       </tbody>
     </table>
     <!-- 內層:pages,外層:pagination -->
-    <!-- 內層 get-product  外層 getProducts -->
     <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
     <!-- del modal -->
-    <DeleteModal></DeleteModal>
+    <!-- 將外層的tempProduct傳到內層 內層：item 外層：tempProduct  -->
+    <DelModal :item="tempProduct" ref="delModal" @del-item="delProduct"></DelModal>
+    <ProductModal :item="tempProduct" ref="productModal"></ProductModal>
   </div>
 </template>
 
 <script>
 import Pagination from '@/components/PaginationView.vue'
-// import productModal from '@/components/ProductModal.vue'
-import DeleteModal from '@/components/DelModal.vue'
+import ProductModal from '@/components/ProductModal.vue'
+import DelModal from '@/components/DelModal.vue'
 
 export default {
   data () {
@@ -80,8 +81,8 @@ export default {
   },
   components: {
     Pagination,
-    DeleteModal
-    // productModal
+    DelModal,
+    ProductModal
   },
   methods: {
     // 取得產品列表
@@ -103,32 +104,50 @@ export default {
         .catch((error) => {
           console.dir(error)
         })
-    }
-    // closeDelModal () {
-    //   delProductModal.hide()
-    // }
+    },
     // modal的JS
     // 參數的status  new edit delete
-    // openModal (status, item) {
-    //   if (status === 'new') {
-    //     this.tempProduct = {
-    //       // 需要做清空的動作
-    //       imagesUrl: []
-    //     }
-    //     // 改變status的狀態
-    //     this.status = true
-    //     productmodal.show()
-    //   } else if (status === 'edit') {
-    //     // 需要將產品資料帶上去，因此使用淺拷貝方式 目的是為了不要改變原始物件資料
-    //     this.tempProduct = { ...item }
-    //     // 因為非新增物件，因此狀態為false
-    //     this.status = false
-    //     productmodal.show()
-    //   } else if (status === 'delete') {
-    //     this.tempProduct = { ...item }
-    //     delProductModal.show()
-    //   }
-    // }
+    openModal (status, item) {
+      if (status === 'new') {
+        this.tempProduct = {
+          // 需要做清空的動作
+          imagesUrl: []
+        }
+        // 改變status的狀態
+        this.status = true
+        // productmodal.show()
+      } else if (status === 'edit') {
+        // 需要將產品資料帶上去，因此使用淺拷貝方式 目的是為了不要改變原始物件資料
+        this.tempProduct = { ...item }
+        // 因為非新增物件，因此狀態為false
+        this.status = false
+        // productmodal.show()
+      }
+      const productComponent = this.$refs.productModal
+      productComponent.openModal()
+    },
+    openDelProductModal (item) {
+      // 將點擊的產品帶入
+      this.tempProduct = { ...item }
+      // 取得modal
+      const delComponent = this.$refs.delModal
+      delComponent.openModal()
+    },
+    // 刪除產品
+    delProduct () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`
+      this.$http
+        .delete(url, { data: this.tempProduct })
+        .then((response) => {
+          alert(response.data.message)
+          this.$emit('close-del')
+          // 重新取得產品列表
+          this.$emit('get-products')
+        })
+        .catch((error) => {
+          console.dir(error)
+        })
+    }
   },
   mounted () {
     this.getProducts()
