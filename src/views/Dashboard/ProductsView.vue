@@ -1,4 +1,5 @@
 <template>
+  <Loading :active="isLoading"></Loading>
   <div class="container">
     <div class="text-end mt-4">
       <button
@@ -56,7 +57,6 @@
     </table>
     <!-- 內層:pages,外層:pagination -->
     <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
-    <!-- del modal -->
     <!-- 將外層的tempProduct傳到內層 內層：item 外層：tempProduct  -->
     <DelModal :item="tempProduct" ref="delModal" @del-item="delProduct"></DelModal>
     <ProductModal :product="tempProduct" ref="productModal" :isNew="isNew" @update-product="updateProduct"></ProductModal>
@@ -67,6 +67,8 @@
 import Pagination from '@/components/PaginationView.vue'
 import ProductModal from '@/components/ProductModal.vue'
 import DelModal from '@/components/DelModal.vue'
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   data () {
@@ -75,6 +77,7 @@ export default {
       products: [],
       isNew: false,
       tempProduct: {},
+      isLoading: false,
       modal: {
         editModal: '',
         delModal: ''
@@ -88,26 +91,32 @@ export default {
   components: {
     Pagination,
     DelModal,
-    ProductModal
+    ProductModal,
+    Loading
   },
   methods: {
+    doAjax () {
+      this.isLoading = true
+      // simulate AJAX
+      setTimeout(() => {
+        this.isLoading = false
+      }, 5000)
+    },
     // 取得產品列表
     getProducts (page = 1) {
     // 參數預設值 不代入任何參數的情況下的預設
-    // 此處代表預設值為第一頁
-      this.$http
-        .get(
-        // query的特殊代法
-          `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
-        )
-        // 成功的結果
-        .then((res) => {
-          // 將產品列表帶入空陣列
-          this.products = res.data.products
-          this.pagination = res.data.pagination
-        })
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
+      // 此處代表預設值為第一頁
+      this.isLoading = true
+      this.$http.get(api).then((res) => {
+        // 將產品列表帶入空陣列
+        this.products = res.data.products
+        this.pagination = res.data.pagination
+        this.isLoading = false
+      })
         // 失敗的結果
         .catch((error) => {
+          this.isLoading = false
           console.dir(error)
         })
     },
@@ -138,6 +147,7 @@ export default {
       this.tempProduct = item
       let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
       let method = 'post'
+      this.isLoading = true
       // 根據status來決定要串接post或是put api
       // 編輯的狀態
       if (!this.isNew) {
@@ -149,11 +159,13 @@ export default {
       // [method]裡帶入httpmethods
       this.$http[method](api, { data: this.tempProduct })
         .then((response) => {
+          this.isLoading = false
           alert(response.data.message)
           productComponent.hideModal()
           this.getProducts()
         })
         .catch((error) => {
+          this.isLoading = false
           alert(error.data.message)
         })
     },
@@ -164,6 +176,7 @@ export default {
       this.$http
         .delete(url, { data: this.tempProduct })
         .then((response) => {
+          this.isLoading = true
           alert(response.data.message)
           // this.$emit('close-del')
           // 重新取得產品列表
@@ -172,6 +185,7 @@ export default {
           delComponent.hideModal()
         })
         .catch((error) => {
+          this.isLoading = false
           console.dir(error)
         })
     }
