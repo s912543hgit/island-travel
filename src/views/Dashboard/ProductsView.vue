@@ -79,6 +79,9 @@ export default {
         editModal: '',
         delModal: ''
       },
+      status: {
+        fileUploading: false
+      },
       currentPage: 1
     }
   },

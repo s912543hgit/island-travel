@@ -36,13 +36,12 @@
                       v-model="tempProduct.imageUrl"
                     />
                   </div>
-                  <!-- <div class="mb-3">
+                  <div class="mb-3">
                     <label for="customFile" class="form-label"
                       >或 上傳圖片
                       <i
-                        class="fas fa-spinner fa-spin"
-                        v-if="status.fileUploading"
-                      ></i>
+                        class="fas fa-spinner fa-spin" v-if="status.fileUploading">
+                      </i>
                     </label>
                     <input
                       type="file"
@@ -51,7 +50,7 @@
                       ref="fileInput"
                       @change="uploadFile"
                     />
-                  </div> -->
+                  </div>
                   <!-- 主圖 -->
                   <img class="img-fluid" :src="tempProduct.imageUrl" alt="" />
                   <h3>多圖設置</h3>
@@ -251,14 +250,14 @@ export default {
   emits: ['update-product'],
   watch: {
     product () {
-      // watch 監聽 props 的變化 進而對元件內部的資料即時更改
+      // watch 監聽 product的更新 的變化 去改變tempProduct的值
       this.tempProduct = this.product
-      // if (!this.tempProduct.imagesUrl) {
-      //   this.tempProduct.imagesUrl = []
-      // }
-      // if (!this.tempProduct.imageUrl) {
-      //   this.tempProduct.imageUrl = ''
-      // }
+      if (!this.tempProduct.imagesUrl) {
+        this.tempProduct.imagesUrl = []
+      }
+      if (!this.tempProduct.imageUrl) {
+        this.tempProduct.imageUrl = ''
+      }
     }
   },
   methods: {
@@ -267,6 +266,27 @@ export default {
     },
     hideModal () {
       this.modal.hide()
+    },
+    // 上傳圖片
+    uploadFile () {
+    // 取出上傳的檔案 為類陣列
+      const uploadFile = this.$refs.fileInput.files[0]
+      // 使用formdata格式 formData()物件可以產生表單格式
+      const formData = new FormData()
+      // 使用append方法將欄位夾帶進來 對應到file-to-upload 此欄位 後面對應到要上傳的檔案
+      formData.append('file-to-upload', uploadFile)
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload/`
+      this.status.fileUploading = true
+      this.$http.post(url, formData)
+        .then((response) => {
+          this.status.fileUploading = false
+          console.log(response)
+          this.tempProduct.imageUrl = response.data.imageUrl
+        })
+        .catch((error) => {
+          this.status.fileUploading = false
+          console.dir(error)
+        })
     }
   },
   mounted () {
