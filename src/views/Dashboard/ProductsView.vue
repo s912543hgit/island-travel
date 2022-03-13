@@ -148,7 +148,7 @@ export default {
         .then((response) => {
           alert(response.data.message)
           productComponent.hideModal()
-          this.getProducts(this.currentPage)
+          this.getProducts()
         })
         .catch((error) => {
           alert(error.data.message)
@@ -162,9 +162,11 @@ export default {
         .delete(url, { data: this.tempProduct })
         .then((response) => {
           alert(response.data.message)
-          this.$emit('close-del')
+          // this.$emit('close-del')
           // 重新取得產品列表
-          this.$emit('get-products')
+          this.getProducts()
+          const delComponent = this.$refs.delModal
+          delComponent.hideModal()
         })
         .catch((error) => {
           console.dir(error)

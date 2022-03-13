@@ -60,6 +60,9 @@ export default {
   methods: {
     openModal () {
       this.modal.show()
+    },
+    hideModal () {
+      this.modal.hide()
     }
   },
   mounted () {

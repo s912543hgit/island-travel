@@ -218,7 +218,7 @@
             <button
               type="button"
               class="btn btn-primary"
-              @click="updateProduct()"
+              @click="$emit('updateProduct',tempProduct)"
             >
               確認
             </button>
@@ -249,9 +249,24 @@ export default {
     }
   },
   emits: ['update-product'],
+  watch: {
+    product () {
+      // watch 監聽 props 的變化 進而對元件內部的資料即時更改
+      this.tempProduct = this.product
+      // if (!this.tempProduct.imagesUrl) {
+      //   this.tempProduct.imagesUrl = []
+      // }
+      // if (!this.tempProduct.imageUrl) {
+      //   this.tempProduct.imageUrl = ''
+      // }
+    }
+  },
   methods: {
     openModal () {
       this.modal.show()
+    },
+    hideModal () {
+      this.modal.hide()
     }
   },
   mounted () {
