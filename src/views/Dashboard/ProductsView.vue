@@ -95,13 +95,6 @@ export default {
     Loading
   },
   methods: {
-    doAjax () {
-      this.isLoading = true
-      // simulate AJAX
-      setTimeout(() => {
-        this.isLoading = false
-      }, 5000)
-    },
     // 取得產品列表
     getProducts (page = 1) {
     // 參數預設值 不代入任何參數的情況下的預設
@@ -169,7 +162,6 @@ export default {
           alert(error.data.message)
         })
     },
-
     // 刪除產品
     delProduct () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`
