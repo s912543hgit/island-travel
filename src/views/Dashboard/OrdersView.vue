@@ -33,7 +33,7 @@
                   type="checkbox"
                   :id="`paidSwitch${item.id}`"
                   v-model="item.is_paid"
-                  @change="updatePaid(item)"
+                  @change="updateOrder(item)"
                 />
                 <label class="form-check-label" :for="`paidSwitch${item.id}`">
                   <span v-if="item.is_paid">已付款</span>
@@ -65,6 +65,8 @@
     </table>
     <Pagination :pages="pagination" @emit-pages="getOrders"></Pagination>
     <DelModal :item="tempOrder" ref="delModal" @del-item="delOrder"></DelModal>
+    <!-- 將tempOrder傳入order -->
+    <OrderModal ref="orderModal" :order="tempOrder" @update-order="updateOrder"></OrderModal>
   </div>
 </template>
 
@@ -72,6 +74,7 @@
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
 import DelModal from '@/components/DelModal.vue'
+import OrderModal from '@/components/OrderModal.vue'
 import Pagination from '@/components/PaginationView.vue'
 
 export default {
@@ -88,11 +91,12 @@ export default {
   components: {
     Loading,
     DelModal,
-    Pagination
+    Pagination,
+    OrderModal
   },
   methods: {
     // 取得訂單列表
-    getOrders (page = 1) {
+    getOrders (Currentpage = 1) {
     // 參數預設值 不代入任何參數的情況下的預設
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders`
       // 此處代表預設值為第一頁
@@ -109,11 +113,38 @@ export default {
           console.dir(error)
         })
     },
+    openModal (item) {
+      this.tempOrder = { ...item }
+      this.isNew = false
+      const orderComponent = this.$refs.orderModal
+      orderComponent.openModal()
+    },
     openDelOrderModal (item) {
       // 將點擊的訂單帶入
       this.tempOrder = { ...item }
       const delComponent = this.$refs.delModal
       delComponent.openModal()
+    },
+    // 更新訂單
+    updateOrder (item) {
+      this.tempOrder = { ...item }
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
+      // 更新付款狀態
+      const paid = {
+        is_paid: this.is_paid
+      }
+      this.isLoading = true
+      const productComponent = this.$refs.productModal
+      this.$http.put(api, { data: paid })
+        .then((response) => {
+          this.isLoading = false
+          productComponent.hideModal()
+          this.getOrders(this.currentPage)
+        })
+        .catch((error) => {
+          this.isLoading = false
+          alert(error.data.message)
+        })
     },
     // 刪除訂單
     delOrder () {

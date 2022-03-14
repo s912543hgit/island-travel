@@ -92,18 +92,6 @@
                     </button>
                   </div>
                 </div>
-                <!-- <div>
-                  <button
-                    class="btn btn-outline-primary btn-sm d-block w-100"
-                  >
-                    新增圖片
-                  </button>
-                </div>
-                <div>
-                  <button class="btn btn-outline-danger btn-sm d-block w-100">
-                    刪除圖片
-                  </button>
-                </div> -->
               </div>
               <div class="col-sm-8">
                 <div class="mb-3">
@@ -217,7 +205,7 @@
             <button
               type="button"
               class="btn btn-primary"
-              @click="$emit('updateProduct',tempProduct)"
+              @click="$emit('update-product',tempProduct)"
             >
               確認
             </button>
@@ -252,12 +240,12 @@ export default {
     product () {
       // watch 監聽 product的更新 的變化 去改變tempProduct的值
       this.tempProduct = this.product
-      if (!this.tempProduct.imagesUrl) {
-        this.tempProduct.imagesUrl = []
-      }
-      if (!this.tempProduct.imageUrl) {
-        this.tempProduct.imageUrl = ''
-      }
+      // if (!this.tempProduct.imagesUrl) {
+      //   this.tempProduct.imagesUrl = []
+      // }
+      // if (!this.tempProduct.imageUrl) {
+      //   this.tempProduct.imageUrl = ''
+      // }
     }
   },
   methods: {
