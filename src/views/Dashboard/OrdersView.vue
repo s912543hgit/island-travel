@@ -134,11 +134,11 @@ export default {
         is_paid: this.is_paid
       }
       this.isLoading = true
-      const productComponent = this.$refs.productModal
-      this.$http.put(api, { data: paid })
+      const orderComponent = this.$refs.orderModal
+      this.$http.put(api, { data: this.tempOrder, paid })
         .then((response) => {
           this.isLoading = false
-          productComponent.hideModal()
+          orderComponent.hideModal()
           this.getOrders(this.currentPage)
         })
         .catch((error) => {
