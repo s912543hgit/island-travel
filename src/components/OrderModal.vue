@@ -56,12 +56,13 @@
                   </tr>
                   <tr>
                     <th>下單時間</th>
-                    <td></td>
+                    <td>{{ $filters.date(tempOrder.create_at) }}</td>
                   </tr>
                   <tr>
                     <th>付款時間</th>
                     <td>
                       <span v-if="tempOrder.paid_date">
+                        {{ $filters.date(tempOrder.paid_date) }}
                       </span>
                       <span v-else>時間不正確</span>
                     </td>
@@ -95,7 +96,7 @@
                     </th>
                     <td>{{ item.qty }} / {{ item.product.unit }}</td>
                     <td class="text-end">
-                      <!-- {{ $filters.currency(item.final_total) }} -->
+                      {{ tempOrder.final_total }}
                     </td>
                   </tr>
                 </tbody>
