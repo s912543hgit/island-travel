@@ -56,11 +56,9 @@
                   <h3>多圖設置</h3>
                   <!-- 判斷是否為陣列 -->
                   <div v-if="Array.isArray(tempProduct.imagesUrl)">
-                    <!-- 有陣列(圖片)的話就將它呈現出來 -->
-                    <!-- key是唯一值，加入數字讓他不重複 -->
                     <template
                       v-for="(img, key) in tempProduct.imagesUrl"
-                      :key="key + '77832'"
+                      :key="key"
                     >
                       <input
                         type="text"
@@ -240,12 +238,12 @@ export default {
     product () {
       // watch 監聽 product的更新 的變化 去改變tempProduct的值
       this.tempProduct = this.product
-      // if (!this.tempProduct.imagesUrl) {
-      //   this.tempProduct.imagesUrl = []
-      // }
-      // if (!this.tempProduct.imageUrl) {
-      //   this.tempProduct.imageUrl = ''
-      // }
+      if (!this.tempProduct.imagesUrl) {
+        this.tempProduct.imagesUrl = []
+      }
+      if (!this.tempProduct.imageUrl) {
+        this.tempProduct.imageUrl = ''
+      }
     }
   },
   methods: {
