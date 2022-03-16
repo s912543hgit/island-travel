@@ -1,5 +1,5 @@
   <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <router-link class="navbar-brand" to="/">島遊</router-link>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +29,41 @@
             <span class="badge rounded-pill bg-danger">{{ cartData?.carts?.length }}</span>
           </button>
         </div>
-      </nav>
+      </nav> -->
+      <div class="bg-white sticky-top">
+        <div class="container">
+          <nav class="navbar px-0 navbar-expand-lg navbar-light bg-white">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse bg-white custom-header-md-open" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <router-link class="nav-link" to="/">島遊</router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link class="nav-link" to="/products">產品列表</router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link class="nav-link" to="/cart">購物車</router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link class="nav-link" to="/admin">後台</router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link class="nav-link" to="/login">登入</router-link>
+                </li>
+              </ul>
+            </div>
+            <div class="d-flex">
+              <button type="button" class="btn btn-primary">
+                結帳
+                <span class="badge rounded-pill bg-danger">{{ cartData?.carts?.length }}</span>
+              </button>
+            </div>
+          </nav>
+        </div>
+      </div>
   </template>
 
 <script>

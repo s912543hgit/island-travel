@@ -1,3 +1,10 @@
+
+修改變數
+
+1.先將樣式套用在板上
+2.購物車
+
+
 # island-travel
 
 ## Project setup
