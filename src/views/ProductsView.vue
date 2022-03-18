@@ -82,11 +82,10 @@
                 </a>
                 <div class="card-body p-0">
                   <h4 class="mb-0 mt-3">
-                    {{ product.title }}
+                    <router-link :to="`/product/${product.id}`">{{ product.title }}</router-link>
                   </h4>
                   <p class="card-text mb-0">NT{{ product.origin_price }} <span class="text-muted "><del>NT{{ product.price }}</del></span></p>
-                  <p class="text-muted mt-3">{{ product.description }}</p>
-                  <router-link :to="`/product/${product.id}`" class="btn btn-primary">查看產品</router-link>
+                  <p class="text-muted mt-3" style="height: 4.5rem; overflow: hidden;">{{ product.description }}</p>
                 </div>
               </div>
             </div>

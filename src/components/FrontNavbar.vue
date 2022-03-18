@@ -55,11 +55,11 @@
                 </li>
               </ul>
             </div>
-            <div class="d-flex">
-              <button type="button" class="btn btn-primary">
-                結帳
-                <span class="badge rounded-pill bg-danger">{{ cartData?.carts?.length }}</span>
-              </button>
+            <div class="d-flex position-relative">
+              <i class="bi bi-cart fs-5"></i>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ cartData?.carts?.length }}
+              </span>
             </div>
           </nav>
         </div>
@@ -89,6 +89,7 @@ export default {
   },
   mounted () {
     this.getCart()
+    // 接收的部分 發起監聽
     emitter.on('get-cart', () => {
       this.getCart()
     })
