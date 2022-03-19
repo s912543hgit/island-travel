@@ -83,7 +83,8 @@
                   <p class="mb-0 h4 fw-bold">Total</p>
                   <p class="mb-0 h4 fw-bold">NT${{ cartData.total }}</p>
                 </div>
-                <a href="./checkout.html" class="btn btn-dark w-100 mt-4">確認訂單</a>
+                <!-- <a href="./checkout.html" class="btn btn-dark w-100 mt-4">確認訂單</a> -->
+                <router-link to="/confirm" class="btn btn-dark w-100 mt-4">確認訂單</router-link>
               </div>
             </div>
           </div>
