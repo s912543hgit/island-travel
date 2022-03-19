@@ -1,35 +1,4 @@
   <template>
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <router-link class="navbar-brand" to="/">島遊</router-link>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <router-link class="nav-link" to="/">首頁</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link class="nav-link" to="/products">產品列表</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link class="nav-link" to="/cart">購物車</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link class="nav-link" to="/admin">後台</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link class="nav-link" to="/login">登入</router-link>
-              </li>
-            </ul>
-          </div>
-          <button type="button" class="btn btn-primary">
-            結帳
-            <span class="badge rounded-pill bg-danger">{{ cartData?.carts?.length }}</span>
-          </button>
-        </div>
-      </nav> -->
       <div class="bg-white sticky-top">
         <div class="container">
           <nav class="navbar px-0 navbar-expand-lg navbar-light bg-white">
@@ -45,22 +14,23 @@
                   <router-link class="nav-link" to="/products">產品列表</router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link class="nav-link" to="/cart">購物車</router-link>
+                  <router-link class="nav-link" to="/about">關於我們</router-link>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <router-link class="nav-link" to="/admin">後台</router-link>
-                </li>
+                </li> -->
                 <li class="nav-item">
                   <router-link class="nav-link" to="/login">登入</router-link>
                 </li>
               </ul>
             </div>
-            <div class="d-flex position-relative">
-              <i class="bi bi-cart fs-5"></i>
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {{ cartData?.carts?.length }}
-              </span>
-            </div>
+            <!-- <div class="d-flex position-relative"> -->
+              <router-link to="/cart" class="d-flex position-relative">
+                <i class="bi bi-cart fs-5"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {{ cartData?.carts?.length }}
+                </span>
+              </router-link>
           </nav>
         </div>
       </div>

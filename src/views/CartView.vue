@@ -8,7 +8,7 @@
             <div class="col-md-8">
               <table class="table">
                 <thead>
-                  <tr v-for="item in cartData.carts" :key="item.id">
+                  <tr>
                     <th scope="col" class="border-0 ps-0">品名</th>
                     <th scope="col" class="border-0">數量</th>
                     <th scope="col" class="border-0">單價</th>
@@ -109,12 +109,6 @@ export default {
     Loading
   },
   methods: {
-    getProducts () {
-      this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`)
-        .then((res) => {
-          this.products = res.data.products
-        })
-    },
     getCart () {
       this.isLoading = true
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
@@ -124,24 +118,12 @@ export default {
           this.isLoading = false
         })
     },
-    addToCart (id, qty = 1) {
-      const data = {
-        product_id: id,
-        qty
-      }
-      this.isLoadingItem = id
-      this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`, { data })
-        .then((res) => {
-          this.isLoadingItem = ''
-          // 觸發navbar上的監聽行為
-          emitter.emit('get-cart')
-        })
-    },
     // 刪除產品
     removeCartItem (id) {
       this.$http.delete(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`)
         .then((res) => {
           this.getCart()
+          emitter.emit('get-cart')
           this.isLoadingItem = ''
         })
     },

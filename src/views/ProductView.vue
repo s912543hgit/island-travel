@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import emitter from '@/libs/emitter'
 export default {
   data () {
     return {
@@ -96,6 +97,8 @@ export default {
       this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`, { data })
         .then((res) => {
           console.log(res)
+          // 觸發設置的監聽
+          emitter.emit('get-cart')
         })
     }
   },
