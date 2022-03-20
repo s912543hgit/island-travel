@@ -3,27 +3,6 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-7">
-          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img :src="product.imageUrl" class="d-block w-100" alt="...">
-              </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-          <!-- <div class="my-4">
-            <img  v-for="image in product.imagesUrl" :key="image" :src="image" alt="">
-          </div> -->
-        </div>
-
-        <div class="col-md-5">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-white px-0 mb-0 py-3">
               <li class="breadcrumb-item"><a class="text-muted" href="./index.html">Home</a></li>
@@ -31,12 +10,30 @@
               <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
             </ol>
           </nav>
+          <swiper
+          class="container"
+          :slides-per-view="1"
+          :space-between="50"
+          :navigation="true"
+          :autoplay="{
+            delay: 3000,
+            disableOnInteraction: false,
+          }"
+          :modules="modules"
+        >
+          <swiper-slide v-for="image in product.imagesUrl" :key="image" :src="image">
+            <div :style="{backgroundImage: `url(${image})`}"
+            style="height: 500px; background-size: cover; background-position:center "></div>
+          </swiper-slide>
+        </swiper>
+        </div>
+        <div class="col-md-5">
           <h2 class="fw-bold h1 mb-1">{{ product.title }}</h2>
           <p class="mb-0 text-muted text-end"><del>NT{{ product.origin_price }}</del></p>
           <p class="h4 fw-bold text-end">NT${{ product.price }}</p>
           <div class="row align-items-center">
             <div class="col-6">
-              <div class="input-group my-3 bg-light rounded">
+              <!-- <div class="input-group my-3 bg-light rounded">
                 <div class="input-group-prepend">
                   <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1">
                     <i class="fas fa-minus"></i>
@@ -48,10 +45,16 @@
                     <i class="fas fa-plus"></i>
                   </button>
                 </div>
+              </div> -->
+              <div class="input-group mb-3">
+                <select  id="" class="form-select" v-model="product.qty" @change="updateCartItem(product)">
+                  <option value="" selected>請選擇人數</option>
+                  <option v-for="num in 20" :value="num" :selected="product.qty === num" :key="`${num}-${product.id}`" >{{ num }}</option>
+                </select>
               </div>
             </div>
             <div class="col-6">
-              <button type="button" class="text-nowrap btn btn-dark w-100 py-2" @click.prevent="addToCart">加入購物車</button>
+              <button type="button" class="text-nowrap btn btn-secondary w-100 py-2" @click.prevent="addToCart">加入購物車</button>
             </div>
           </div>
         </div>
@@ -78,11 +81,28 @@
 
 <script>
 import emitter from '@/libs/emitter'
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue'
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/navigation'
+
+import { Navigation } from 'swiper'
+
 export default {
   data () {
     return {
       product: [],
       id: ''
+    }
+  },
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  setup () {
+    return {
+      modules: [Navigation]
     }
   },
   methods: {
@@ -106,6 +126,17 @@ export default {
           // 觸發設置的監聽
           emitter.emit('get-cart')
         })
+    },
+    updateCartItem (item) {
+      const data = {
+        product_id: item.product.id,
+        qty: item.qty
+      }
+      this.isLoading = true
+      this.$http.put(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`, { data }).then((res) => {
+        this.getCart()
+        this.isLoading = false
+      })
     }
   },
   mounted () {

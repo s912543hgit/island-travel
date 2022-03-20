@@ -6,7 +6,9 @@
         <div class="col-md-4 text-center p-mainvisual__content p-3">
           <h2 class="text-white">島遊</h2>
           <p class="mb-3 text-white">尋找您的心之島向</p>
-          <button class="btn btn-dark rounded-0 mt-4 text-white">查看行程</button>
+          <button class="btn btn-dark rounded-0 mt-4" type="button">
+            <router-link to="/products" class="text-white">查看行程</router-link>
+          </button>
         </div>
       </div>
     </div>
@@ -43,7 +45,7 @@
       </div>
     </div>
   </div>
-  <!-- 推薦商品 -->
+  <!-- 島嶼風情 -->
   <h3 class="fs-4 text-center p-4">島嶼風情</h3>
   <swiper
   class="container"
@@ -75,7 +77,7 @@
         </div>
       </div>
     </router-link>
-   </swiper-slide>
+  </swiper-slide>
 </swiper>
 </template>
 
@@ -102,13 +104,6 @@ export default {
   setup () {
     return {
       modules: [Autoplay]
-      // swiperOption: {
-      //   breakpoints: {
-      //     768: {
-      //       slidesPerView: 1
-      //     }
-      //   }
-      // }
     }
   },
   methods: {
