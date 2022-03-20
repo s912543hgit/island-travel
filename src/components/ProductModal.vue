@@ -174,6 +174,52 @@
                   >
                   </textarea>
                 </div>
+                <div class="row">
+                  <div class="mb-3 col-md-6">
+                    <label for="placeOne" class="form-label">名勝標題1</label>
+                    <input
+                      id="placeOne"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入名勝標題1"
+                      v-model="tempProduct.placeOne"
+                    >
+                  </div>
+                  <div class="mb-3 col-md-6">
+                    <label for="placeTwo" class="form-label">名勝標題2</label>
+                    <input
+                      id="placeTwo"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入名勝標題1"
+                      v-model="tempProduct.placeTwo"
+                    >
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="mb-3">
+                    <label for="introOne" class="form-label">名勝介紹</label>
+                    <textarea
+                      id="introOne"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入名勝內容"
+                      v-model="tempProduct.introOne"
+                    >
+                    </textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="introTwo" class="form-label">名勝介紹2</label>
+                    <textarea
+                      id="introTwo"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入名勝內容"
+                      v-model="tempProduct.introTwo"
+                    >
+                    </textarea>
+                  </div>
+                </div>
                 <div class="mb-3">
                   <div class="form-check">
                     <input

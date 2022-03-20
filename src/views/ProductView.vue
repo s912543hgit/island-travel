@@ -8,12 +8,6 @@
               <div class="carousel-item active">
                 <img :src="product.imageUrl" class="d-block w-100" alt="...">
               </div>
-              <!-- <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1502743780242-f10d2ce370f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1916&q=80" class="d-block w-100" alt="...">
-              </div> -->
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -24,9 +18,9 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
-          <div class="my-4">
+          <!-- <div class="my-4">
             <img  v-for="image in product.imagesUrl" :key="image" :src="image" alt="">
-          </div>
+          </div> -->
         </div>
 
         <div class="col-md-5">
@@ -65,6 +59,18 @@
       <div class="row my-5">
         <div class="col-md-4">
           <p>{{ product.description }}</p>
+        </div>
+      </div>
+      <div class="row my-5">
+        <h2 class="fw-bold h1 mb-1">{{ product.placeOne }}</h2>
+        <div class="col-md-4">
+          <p>{{ product.introOne }}</p>
+        </div>
+      </div>
+      <div class="row my-5">
+        <h2 class="fw-bold h1 mb-1">{{ product.placeTwo }}</h2>
+        <div class="col-md-4">
+          <p>{{ product.introTwo }}</p>
         </div>
       </div>
     </div>
