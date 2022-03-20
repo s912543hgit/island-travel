@@ -1,0 +1,20 @@
+.p-mainvisual {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image:url(https://find47.jp/uploads/image_file/content/000/003/877/web_detail_thumb.jpg);
+    background-size:cover ;
+    background-position: center center;
+    background-size: cover;
+    opacity: 0.9;
+
+    &__container {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    &__content {
+        background-color: rgba(0,0,0,0.4)
+    }
+}

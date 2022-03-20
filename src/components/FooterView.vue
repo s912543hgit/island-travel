@@ -7,6 +7,7 @@
               <li><a href="#" class="text-white mx-3"><i class="fab fa-facebook"></i></a></li>
               <li><a href="#" class="text-white mx-3"><i class="fab fa-instagram"></i></a></li>
               <li><a href="#" class="text-white ms-3"><i class="fab fa-line"></i></a></li>
+              <li><router-link class="nav-link text-white ms-3" to="/admin">後台</router-link></li>
             </ul>
           </div>
           <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end align-items-start text-white">
