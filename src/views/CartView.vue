@@ -29,9 +29,10 @@
                         </div>
                           <div class="input-group input-group-sm">
                             <div class="input-group mb-3">
-                                <select  id="" class="form-select" v-model="item.qty" @change="updateCartItem(item)"
+                                <select id="" class="form-select" v-model="item.qty" @change="updateCartItem(item)"
                                 :disabled="isLoadingItem === item.id">
-                                  <option v-for="num in 20" :value="num" :selected="item.qty === num" :key="`${num}-${item.id}`" >{{ num }}</option>
+                                <option selected>請選擇人數</option>
+                                <option v-for="num in 20" :value="num" :selected="item.qty === num" :key="`${num}-${item.id}`" >{{ num }}</option>
                                 </select>
                               <span class="input-group-text" id="basic-addon2">{{ item.product.unit }}</span>
                             </div>

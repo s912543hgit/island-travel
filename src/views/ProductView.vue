@@ -54,7 +54,7 @@
               </div>
             </div>
             <div class="col-6">
-              <button type="button" class="text-nowrap btn btn-secondary w-100 py-2" @click.prevent="addToCart">加入購物車</button>
+              <button type="button" class="text-nowrap btn btn-primary w-100 py-2" @click.prevent="addToCart">加入購物車</button>
             </div>
           </div>
         </div>
