@@ -6,7 +6,7 @@
         <div class="col-md-4 text-center p-mainvisual__content p-3">
           <h2 class="text-white">島遊</h2>
           <p class="mb-3 text-white">尋找您的心之島向</p>
-          <button class="btn btn-dark rounded-0 mt-4" type="button">
+          <button class="btn btn-primary rounded-0 mt-4" type="button">
             <router-link to="/products" class="text-white">查看行程</router-link>
           </button>
         </div>
