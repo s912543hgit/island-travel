@@ -48,7 +48,7 @@
               </div> -->
               <div class="input-group mb-3">
                 <select  id="" class="form-select" v-model="product.qty" @change="updateCartItem(product)">
-                  <option value="" selected>請選擇人數</option>
+                  <option value="0" disabled selected>請選擇人數</option>
                   <option v-for="num in 20" :value="num" :selected="product.qty === num" :key="`${num}-${product.id}`" >{{ num }}</option>
                 </select>
               </div>
@@ -59,21 +59,27 @@
           </div>
         </div>
       </div>
+      <!-- 島嶼介紹 -->
       <div class="row my-5">
-        <div class="col-md-4">
+        <div class="col-md-10">
+          <h3 class="fs-4 text-center p-4 text-secondary">島嶼介紹</h3>
           <p>{{ product.description }}</p>
         </div>
       </div>
-      <div class="row my-5">
-        <h2 class="fw-bold h1 mb-1">{{ product.placeOne }}</h2>
-        <div class="col-md-4">
-          <p>{{ product.introOne }}</p>
-        </div>
-      </div>
-      <div class="row my-5">
-        <h2 class="fw-bold h1 mb-1">{{ product.placeTwo }}</h2>
-        <div class="col-md-4">
-          <p>{{ product.introTwo }}</p>
+      <!-- 精選景點 -->
+      <div class="row my-5" v-if="product.placeOne">
+        <div class="col-md-10">
+          <h3 class="fs-4 text-center p-4 text-secondary">精選景點</h3>
+            <ul class="list-unstyled">
+              <li>
+                <h4 class="fs-5">{{ product.placeOne }}</h4>
+                <p>{{ product.introOne }}</p>
+              </li>
+              <li v-if="product.placeTwo">
+                <h4 class="fs-5">{{ product.placeTwo }}</h4>
+                <p>{{ product.introTwo }}</p>
+              </li>
+            </ul>
         </div>
       </div>
     </div>
@@ -92,7 +98,9 @@ import { Navigation } from 'swiper'
 export default {
   data () {
     return {
-      product: [],
+      product: {
+        qty: 0
+      },
       id: ''
     }
   },
@@ -112,7 +120,20 @@ export default {
       const { id } = this.$route.params
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`)
         .then(res => {
-          this.product = res.data.product
+          // this.product = res.data.product
+          this.product = {
+            ...res.data.product,
+            qty: this.product.qty
+          }
+        })
+    },
+    getCart () {
+      this.isLoading = true
+      this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
+        .then((res) => {
+          // 購物車的資料有兩層data
+          this.cartData = res.data.data
+          this.isLoading = false
         })
     },
     addToCart () {
@@ -127,13 +148,13 @@ export default {
           emitter.emit('get-cart')
         })
     },
-    updateCartItem (item) {
+    updateCartItem (product) {
       const data = {
-        product_id: item.product.id,
-        qty: item.qty
+        product_id: product.id,
+        qty: product.qty
       }
       this.isLoading = true
-      this.$http.put(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`, { data }).then((res) => {
+      this.$http.put(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${product.id}`, { data }).then((res) => {
         this.getCart()
         this.isLoading = false
       })
