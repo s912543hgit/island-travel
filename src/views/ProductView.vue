@@ -102,8 +102,10 @@ import { Navigation } from 'swiper'
 export default {
   data () {
     return {
+      products: [],
       product: {
-        qty: 0
+        qty: 0,
+        category: ''
       },
       id: '',
       isNew: true
@@ -120,16 +122,26 @@ export default {
   },
   methods: {
     getProduct () {
-      console.log(this.$route)
+      // console.log(this.$route)
       // 找到產品id 並存起來
       const { id } = this.$route.params
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`)
         .then(res => {
-          // this.product = res.data.product
           this.product = {
             ...res.data.product,
             qty: this.product.qty
           }
+          this.category = this.product.category
+        })
+    },
+    // 取得相同類別的產品
+    getProducts () {
+      // const category = this.category
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products?category=${this.product.category}`
+      this.$http.get(url)
+        .then(res => {
+          this.products = res.data.products
+          console.log('類別', res)
         })
     },
     getCart () {
@@ -168,7 +180,7 @@ export default {
       }
       this.$http[method](api, { data }).then((res) => {
         // this.getCart()
-        console.log('成功了！！')
+        // console.log('成功了！！')
         emitter.emit('get-cart')
       })
     }
@@ -177,6 +189,7 @@ export default {
     // 找到產品id 並存起來
     this.id = this.$route.params.id
     this.getProduct()
+    this.getProducts()
   }
 }
 </script>

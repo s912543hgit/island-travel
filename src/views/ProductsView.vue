@@ -78,6 +78,7 @@ export default {
       this.$http.get(url)
         .then(res => {
           this.products = res.data.products
+          console.log('類別', res)
           this.pagination = res.data.pagination
           this.isLoading = false
         })
