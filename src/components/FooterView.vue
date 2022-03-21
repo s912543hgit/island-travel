@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-dark py-5">
+    <div class="bg-secondary py-5">
         <div class="container">
           <div class="d-flex align-items-center justify-content-between text-white mb-md-7 mb-4">
             <a class="text-white h4" href="./index.html">島遊</a>

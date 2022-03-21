@@ -6,7 +6,7 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-white px-0 mb-0 py-3">
               <li class="breadcrumb-item"><a class="text-muted" href="./index.html">Home</a></li>
-              <li class="breadcrumb-item"><a class="text-muted" href="./product.html">{{ product.category }}</a></li>
+              <li class="breadcrumb-item"><a class="text-muted" href="#">{{ product.category }}</a></li>
               <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
             </ol>
           </nav>
@@ -21,7 +21,11 @@
           }"
           :modules="modules"
         >
-          <swiper-slide v-for="image in product.imagesUrl" :key="image" :src="image">
+          <swiper-slide>
+          <div :style="{backgroundImage: `url(${product.imageUrl})`}"
+          style="height: 500px; background-size: cover; background-position:center "></div>
+          </swiper-slide>
+          <swiper-slide v-for="image in product.imagesUrl" :key="image">
             <div :style="{backgroundImage: `url(${image})`}"
             style="height: 500px; background-size: cover; background-position:center "></div>
           </swiper-slide>
@@ -47,14 +51,14 @@
                 </div>
               </div> -->
               <div class="input-group mb-3">
-                <select  id="" class="form-select" v-model="product.qty" @change="updateCartItem(product)">
+                <select  id="" class="form-select" v-model="product.qty">
                   <option value="0" disabled selected>請選擇人數</option>
                   <option v-for="num in 20" :value="num" :selected="product.qty === num" :key="`${num}-${product.id}`" >{{ num }}</option>
                 </select>
               </div>
             </div>
             <div class="col-6">
-              <button type="button" class="text-nowrap btn btn-primary w-100 py-2" @click.prevent="addToCart">加入購物車</button>
+              <button type="button" class="text-nowrap btn btn-primary w-100 py-2" @click.prevent="updateCartItem(product)">加入購物車</button>
             </div>
           </div>
         </div>
@@ -101,7 +105,8 @@ export default {
       product: {
         qty: 0
       },
-      id: ''
+      id: '',
+      isNew: true
     }
   },
   components: {
@@ -136,27 +141,35 @@ export default {
           this.isLoading = false
         })
     },
-    addToCart () {
-      const data = {
-        product_id: this.id,
-        qty: 1
-      }
-      this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`, { data })
-        .then((res) => {
-          console.log(res)
-          // 觸發設置的監聽
-          emitter.emit('get-cart')
-        })
-    },
+    // addToCart () {
+    //   const data = {
+    //     product_id: this.id,
+    //     qty: 1
+    //   }
+    //   this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`, { data })
+    //     .then((res) => {
+    //       console.log(res)
+    //       // 觸發設置的監聽
+    //       emitter.emit('get-cart')
+    //     })
+    // },
     updateCartItem (product) {
       const data = {
         product_id: product.id,
         qty: product.qty
       }
-      this.isLoading = true
-      this.$http.put(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${product.id}`, { data }).then((res) => {
-        this.getCart()
-        this.isLoading = false
+      // 如果商品尚未被加入 使用add購物車
+      let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      let method = 'post'
+      // 如果商品被加進購物車 使用update購物車
+      if (!this.isNew) {
+        api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${product.id}`
+        method = 'put'
+      }
+      this.$http[method](api, { data }).then((res) => {
+        // this.getCart()
+        console.log('成功了！！')
+        emitter.emit('get-cart')
       })
     }
   },

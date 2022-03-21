@@ -18,6 +18,6 @@ git commit -m 'deploy'
 
 
 # 部署到 https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:s912543hgit/island-project.git master:gh-pages
+git push -f git@github.com:s912543hgit/island-travel.git master:gh-pages
 
 cd -
