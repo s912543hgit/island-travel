@@ -1,0 +1,33 @@
+.p-steps {
+    display:flex;
+    justify-content:space-between;
+    li {
+        width:32%;
+        text-align:center;
+        padding:10px;
+        background:#bdbdbd;
+        p {
+            margin-bottom:0;
+        }
+    }
+    // li+li {
+    //     margin-left:1rem;
+    // } 
+    .is-active {
+        background:#4bacb8;
+        color:#fff;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .p-steps {
+        flex-direction:column;
+        li {
+            width:100%;
+        }
+        // li+li {
+        //     margin-left:0;
+        //     margin-bottom:10px;
+        // } 
+    }
+}

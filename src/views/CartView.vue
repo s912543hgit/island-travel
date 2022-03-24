@@ -1,11 +1,25 @@
 <template>
     <Loading :active="isLoading"></Loading>
     <div class="container">
-      <div class="mt-3">
-        <h3 class="mt-3 mb-4">購物車</h3>
+      <div class="mt-5">
+        <ul class="p-steps list-unstyled mb-5">
+          <li class="col-4 is-active mb-md-0 mb-3">
+            <small>STEP1</small>
+            <p>填寫資料</p>
+          </li>
+          <li class="col-4 mb-md-0 mb-3">
+            <small>STEP2</small>
+            <p>確認訂單</p>
+          </li>
+          <li class="col-4">
+            <small>STEP3</small>
+            <p>完成訂單</p>
+          </li>
+        </ul>
         <template v-if="cartData.carts">
-          <div class="row">
-            <div class="col-md-8">
+          <div class="row mb-5 justify-content-between">
+            <div class="col-md-5">
+              <h3 class="mb-3">確認訂單內容</h3>
               <table class="table">
                 <thead>
                   <tr>
@@ -55,40 +69,54 @@
                   </tr>
                 </tbody>
               </table>
-              <!-- <div class="input-group w-50 mb-3">
-                <input type="text" class="form-control rounded-0 border-bottom border-top-0 border-start-0 border-end-0 shadow-none" placeholder="Coupon Code" aria-label="Recipient's username" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-dark border-bottom border-top-0 border-start-0 border-end-0 rounded-0" type="button" id="button-addon2"><i class="fas fa-paper-plane"></i></button>
-                </div>
-              </div> -->
+              <div>
+                <p class="text-end border-0 px-0 pt-4">總計金額 NT${{ cartData.total }}</p>
+              </div>
               <div class="text-end">
                 <button class="btn btn-outline-danger" type="button" @click="clearCartItem">清空購物車</button>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="border p-4 mb-4">
-                <h4 class="fw-bold mb-4">Order Detail</h4>
-                <table class="table text-muted border-bottom">
-                  <tbody>
-                    <tr>
-                      <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">Subtotal</th>
-                      <td class="text-end border-0 px-0 pt-4">NT${{ cartData.total }}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="border-0 px-0 pt-0 pb-4 font-weight-normal">Payment</th>
-                      <td class="text-end border-0 px-0 pt-0 pb-4">ApplePay</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="d-flex justify-content-between mt-4">
-                  <p class="mb-0 h4 fw-bold">Total</p>
-                  <p class="mb-0 h4 fw-bold">NT${{ cartData.total }}</p>
+            <div class="col-md-5">
+              <h3 class="mb-3">填寫訂購資訊</h3>
+              <Form ref="form" class="col-md-10" v-slot="{ errors }">
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <Field id="email" name="email" type="email" class="form-control"
+                           :class="{ 'is-invalid': errors['email'] }" placeholder="請輸入 Email"  rules="email|required"
+                          v-model="form.user.email" ></Field>
+                  <error-message name="email" class="invalid-feedback"></error-message>
                 </div>
-                <!-- <a href="./checkout.html" class="btn btn-dark w-100 mt-4">確認訂單</a> -->
-                <router-link to="/confirm" class="btn btn-dark w-100 mt-4">確認訂單</router-link>
-              </div>
+                <div class="mb-3">
+                  <label for="name" class="form-label">收件人姓名</label>
+                  <Field id="name" name="姓名" type="text" class="form-control" :class="{ 'is-invalid': errors['姓名'] }"
+                           placeholder="請輸入姓名" rules="required" v-model="form.user.name"></Field>
+                  <error-message name="姓名" class="invalid-feedback"></error-message>
+                </div>
+                <div class="mb-3">
+                  <label for="tel" class="form-label">收件人電話</label>
+                  <Field id="tel" name="電話" type="text" class="form-control" :class="{ 'is-invalid': errors['電話'] }"
+                           placeholder="請輸入電話"  :rules="isPhone" v-model="form.user.tel"  ></Field>
+                  <error-message name="電話" class="invalid-feedback"></error-message>
+                </div>
+                <div class="mb-3">
+                  <label for="address" class="form-label">收件人地址</label>
+                  <Field id="address" name="地址" type="text" class="form-control" :class="{ 'is-invalid': errors['地址'] }"
+                           placeholder="請輸入地址" rules="required" v-model="form.user.address"  ></Field>
+                  <error-message name="地址" class="invalid-feedback"></error-message>
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label">留言</label>
+                  <textarea id="message" class="form-control" cols="30" rows="10" ></textarea>
+                </div>
+                <div class="text-end">
+                  <button type="submit" class="btn btn-primary">送出訂單</button>
+                </div>
+              </Form>
             </div>
           </div>
+        </template>
+        <template v-else>
+          沒有商品
         </template>
       </div>
     </div>
@@ -97,6 +125,8 @@
 <script>
 import emitter from '@/libs/emitter'
 import Loading from 'vue-loading-overlay'
+import { Field, Form } from 'vee-validate'
+
 export default {
   data () {
     return {
@@ -104,11 +134,22 @@ export default {
       products: [],
       productId: '',
       isLoadingItem: '',
-      isLoading: false
+      isLoading: false,
+      form: {
+        user: {
+          email: '',
+          name: '',
+          address: '',
+          phone: ''
+        },
+        message: ''
+      }
     }
   },
   components: {
-    Loading
+    Loading,
+    Field,
+    Form
   },
   methods: {
     getCart () {
@@ -136,6 +177,7 @@ export default {
         .then((res) => {
           this.getCart()
           this.isLoading = false
+          console.log(res)
         })
     },
     // 更新購物車
@@ -149,6 +191,14 @@ export default {
         this.getCart()
         this.isLoading = false
       })
+    },
+    // 驗證手機號碼
+    isPhone (value) {
+      const phoneNumber = /^(09)[0-9]{8}$/
+      return phoneNumber.test(value) ? true : '需要正確的電話號碼'
+    },
+    isRequired (value) {
+      return value ? true : 'This field is required'
     }
   },
   mounted () {

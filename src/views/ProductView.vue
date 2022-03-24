@@ -1,6 +1,6 @@
 <template>
     <Loading :active="isLoading"></Loading>
-    <div class="container">
+    <div class="container-md">
       <div class="row align-items-center">
         <div class="col-md-7">
           <nav aria-label="breadcrumb">
@@ -15,7 +15,7 @@
             </ol>
           </nav>
           <swiper
-          class="container"
+          class="container-md"
           :slides-per-view="1"
           :space-between="50"
           :navigation="true"
@@ -35,10 +35,18 @@
           </swiper-slide>
         </swiper>
         </div>
+        <!-- 產品說明 -->
         <div class="col-md-5">
-          <h2 class="fw-bold h1 mb-1">{{ product.title }}</h2>
-          <p class="mb-0 text-muted text-end"><del>NT{{ product.origin_price }}</del></p>
-          <p class="h4 fw-bold text-end">NT${{ product.price }}</p>
+          <h2 class="fw-bold h1 mb-3 mt-3 mt-md-0">{{ product.title }}</h2>
+          <div class="row align-items-center">
+            <p class="text-muted  col-6">原價<del>NT${{ product.origin_price }}</del></p>
+            <p class="text-end col-6">特價<span class="h4 fw-bold text-danger ms-2">NT${{ product.price }}</span></p>
+          </div>
+          <ul class="list-unstyled">
+            <li>費用已含機場稅、燃油費</li>
+            <li>三人即可成團</li>
+            <li>若需當地專業嚮導請洽客服電話</li>
+          </ul>
           <div class="row align-items-center">
             <div class="col-6">
               <div class="input-group">
@@ -78,7 +86,7 @@
         </div>
       </div>
   <!-- 相關商品 -->
-  <div class="container">
+  <div class="container-md">
     <h3 class="fs-4 text-center p-4 text-primary">相關商品</h3>
     <swiper :slides-per-view="1"
       :space-between="50"
@@ -90,8 +98,8 @@
       :modules="modules"
     >
       <swiper-slide v-for="(item) in products" :key="item.id">
-        <router-link :to="`/product/${item.id}`">
-          <div class="card border-0 mb-4">
+        <!-- <router-link :to="`/product/${item.id}`"> -->
+          <div class="card border-0 mb-4" @click="getProduct(item.id)">
             <div :style="{backgroundImage: `url(${item.imageUrl})`}"
             style="height: 300px; background-size: cover; background-position:center "></div>
             <div class="card-body text-left">
@@ -103,7 +111,7 @@
               </div>
             </div>
           </div>
-        </router-link>
+        <!-- </router-link> -->
       </swiper-slide>
     </swiper>
   </div>
@@ -145,14 +153,15 @@ export default {
     }
   },
   methods: {
-    getProduct () {
+    getProduct (paramsId) {
       // 找到產品id 並存起來
       const { id } = this.$route.params
       this.isLoading = true
-      this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`)
+      this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${paramsId !== undefined ? paramsId : id}`)
         .then(res => {
           this.product = {
             ...res.data.product,
+            // 帶入預設值
             qty: this.product.qty
           }
           this.isLoading = false

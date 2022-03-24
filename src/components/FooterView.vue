@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-primary py-5">
+    <footer class="bg-primary py-5 p-footer">
         <div class="container">
           <div class="d-flex align-items-center justify-content-between text-white mb-md-7 mb-4">
             <a class="text-white h4" href="./index.html">島遊</a>
@@ -18,5 +18,5 @@
             <p class="mb-0">© 2020 LOGO All Rights Reserved.</p>
           </div>
         </div>
-      </div>
+    </footer>
 </template>
