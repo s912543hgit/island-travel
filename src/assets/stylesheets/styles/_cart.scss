@@ -10,13 +10,19 @@
             margin-bottom:0;
         }
     }
-    // li+li {
-    //     margin-left:1rem;
-    // } 
     .is-active {
         background:#4bacb8;
         color:#fff;
     }
+}
+
+// 沒有商品時
+.p-product--none {
+    min-height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 @media only screen and (max-width: 768px) {
@@ -25,9 +31,5 @@
         li {
             width:100%;
         }
-        // li+li {
-        //     margin-left:0;
-        //     margin-bottom:10px;
-        // } 
     }
 }

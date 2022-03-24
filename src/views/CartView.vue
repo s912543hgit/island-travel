@@ -1,25 +1,24 @@
 <template>
     <Loading :active="isLoading"></Loading>
     <div class="container">
-      <div class="mt-5">
-        <ul class="p-steps list-unstyled mb-5">
-          <li class="col-4 is-active mb-md-0 mb-3">
-            <small>STEP1</small>
-            <p>填寫資料</p>
-          </li>
-          <li class="col-4 mb-md-0 mb-3">
-            <small>STEP2</small>
-            <p>確認訂單</p>
-          </li>
-          <li class="col-4">
-            <small>STEP3</small>
-            <p>完成訂單</p>
-          </li>
-        </ul>
-        <template v-if="cartData.carts">
+        <template v-if="cartData.carts.length">
+          <ul class="p-steps list-unstyled mb-5">
+            <li class="col-4 is-active mb-md-0 mb-3">
+              <small>STEP1</small>
+              <p>填寫資料</p>
+            </li>
+            <li class="col-4 mb-md-0 mb-3">
+              <small>STEP2</small>
+              <p>確認訂單</p>
+            </li>
+            <li class="col-4">
+              <small>STEP3</small>
+              <p>完成訂單</p>
+            </li>
+          </ul>
           <div class="row mb-5 justify-content-between">
             <div class="col-md-5">
-              <h3 class="mb-3">確認訂單內容</h3>
+              <h3 class="mb-3">購物車內容</h3>
               <table class="table">
                 <thead>
                   <tr>
@@ -78,7 +77,7 @@
             </div>
             <div class="col-md-5">
               <h3 class="mb-3">填寫訂購資訊</h3>
-              <Form ref="form" class="col-md-10" v-slot="{ errors }">
+              <Form ref="form" class="col-md-10" v-slot="{ errors }" @submit="toConfirm()">
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <Field id="email" name="email" type="email" class="form-control"
@@ -115,11 +114,11 @@
             </div>
           </div>
         </template>
-        <template v-else>
-          沒有商品
-        </template>
+        <div v-else class="p-product--none">
+          <p>購物車內沒有商品唷</p>
+          <router-link  to="/products" class="btn btn-primary">開始旅程</router-link>
+        </div>
       </div>
-    </div>
 </template>
 
 <script>
@@ -130,7 +129,9 @@ import { Field, Form } from 'vee-validate'
 export default {
   data () {
     return {
-      cartData: {},
+      cartData: {
+        carts: []
+      },
       products: [],
       productId: '',
       isLoadingItem: '',
@@ -177,7 +178,7 @@ export default {
         .then((res) => {
           this.getCart()
           this.isLoading = false
-          console.log(res)
+          emitter.emit('get-cart')
         })
     },
     // 更新購物車
@@ -191,6 +192,11 @@ export default {
         this.getCart()
         this.isLoading = false
       })
+    },
+    toConfirm () {
+      this.$router.push('/confirm')
+      // 送出表單內的資料
+      emitter.emit('formData', this.form)
     },
     // 驗證手機號碼
     isPhone (value) {
