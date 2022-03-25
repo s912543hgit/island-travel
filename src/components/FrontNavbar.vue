@@ -10,27 +10,26 @@
                 <li class="nav-item">
                   <router-link class="nav-link" to="/">島遊</router-link>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <router-link class="nav-link" to="/products">產品列表</router-link>
                 </li>
                 <li class="nav-item">
                   <router-link class="nav-link" to="/about">關於我們</router-link>
-                </li>
-                <!-- <li class="nav-item">
-                  <router-link class="nav-link" to="/admin">後台</router-link>
-                </li> -->
-                <!-- <li class="nav-item">
-                  <router-link class="nav-link" to="/login">登入</router-link>
                 </li> -->
               </ul>
             </div>
-            <!-- <div class="d-flex position-relative"> -->
-              <router-link to="/cart" class="d-flex position-relative">
-                <i class="bi bi-cart fs-5"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  {{ cartData?.carts?.length }}
-                </span>
-              </router-link>
+            <div class="nav-item">
+              <router-link class="nav-link text-dark" to="/products">產品列表</router-link>
+            </div>
+            <div class="nav-item">
+              <router-link class="nav-link text-dark" to="/about">關於我們</router-link>
+            </div>
+            <router-link to="/cart" class="d-flex position-relative text-dark">
+              <i class="bi bi-cart fs-5"></i>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ cartData?.carts?.length }}
+              </span>
+            </router-link>
           </nav>
         </div>
       </div>

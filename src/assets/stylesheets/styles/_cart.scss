@@ -19,10 +19,13 @@
 // 沒有商品時
 .p-product--none {
     min-height: 75vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+}
+.p-cart--complete {
+    min-height: 60vh;
 }
 
 @media only screen and (max-width: 768px) {

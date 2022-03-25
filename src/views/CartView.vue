@@ -114,7 +114,7 @@
             </div>
           </div>
         </template>
-        <div v-else class="p-product--none">
+        <div v-else class="p-product--none d-flex flex-column justify-content-center align-items-center">
           <p>購物車內沒有商品唷</p>
           <router-link  to="/products" class="btn btn-primary">開始旅程</router-link>
         </div>
