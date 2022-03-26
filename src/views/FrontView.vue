@@ -1,24 +1,28 @@
 <template>
   <FrontNavbar></FrontNavbar>
-  <router-view></router-view>
+  <router-view @emit-form="getData" :form-data="formData"></router-view>
   <FooterView></FooterView>
 </template>
 
 <script>
 import FrontNavbar from '@/components/FrontNavbar.vue'
 import FooterView from '@/components/FooterView.vue'
-import emitter from '@/libs/emitter'
 
 export default {
+  data () {
+    return {
+      formData: {}
+    }
+  },
   components: {
     FrontNavbar,
     FooterView
   },
-  mounted () {
-    emitter.on('formData', (data) => {
-      console.log('received', data)
-      this.form = data
-    })
+  methods: {
+    getData (form) {
+      this.formData = form
+      console.log(form)
+    }
   }
 }
 </script>

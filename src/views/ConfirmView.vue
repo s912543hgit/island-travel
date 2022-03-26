@@ -83,15 +83,16 @@ export default {
           email: '',
           name: '',
           address: '',
-          phone: ''
-        },
-        message: ''
+          phone: '',
+          message: ''
+        }
       }
     }
   },
   components: {
     Loading
   },
+  props: ['form-data'],
   methods: {
     getCart () {
       this.isLoading = true
@@ -115,15 +116,15 @@ export default {
         .catch((err) => {
           alert(err.data.message)
         })
-    },
-    // 驗證手機號碼
-    isPhone (value) {
-      const phoneNumber = /^(09)[0-9]{8}$/
-      return phoneNumber.test(value) ? true : '需要正確的電話號碼'
-    },
-    isRequired (value) {
-      return value ? true : 'This field is required'
     }
+    // 驗證手機號碼
+    // isPhone (value) {
+    //   const phoneNumber = /^(09)[0-9]{8}$/
+    //   return phoneNumber.test(value) ? true : '需要正確的電話號碼'
+    // },
+    // isRequired (value) {
+    //   return value ? true : 'This field is required'
+    // }
   },
   mounted () {
     this.getCart()

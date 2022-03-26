@@ -1,6 +1,6 @@
 <template>
     <Loading :active="isLoading"></Loading>
-    <div class="container">
+    <div class="container pt-5">
         <template v-if="cartData.carts.length">
           <ul class="p-steps list-unstyled mb-5">
             <li class="col-4 is-active mb-md-0 mb-3">
@@ -77,7 +77,7 @@
             </div>
             <div class="col-md-5">
               <h3 class="mb-3">填寫訂購資訊</h3>
-              <Form ref="form" class="col-md-10" v-slot="{ errors }" @submit="toConfirm()">
+              <Form ref="form" class="col-md-10" v-slot="{ errors }" @submit="SendData()">
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <Field id="email" name="email" type="email" class="form-control"
@@ -105,7 +105,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="message" class="form-label">留言</label>
-                  <textarea id="message" class="form-control" cols="30" rows="10" ></textarea>
+                  <textarea id="message" class="form-control" cols="30" rows="10"  v-model="form.user.message"></textarea>
                 </div>
                 <div class="text-end">
                   <button type="submit" class="btn btn-primary">送出訂單</button>
@@ -141,9 +141,9 @@ export default {
           email: '',
           name: '',
           address: '',
-          phone: ''
-        },
-        message: ''
+          phone: '',
+          message: ''
+        }
       }
     }
   },
@@ -152,6 +152,7 @@ export default {
     Field,
     Form
   },
+  emits: ['emit-form'],
   methods: {
     getCart () {
       this.isLoading = true
@@ -193,10 +194,13 @@ export default {
         this.isLoading = false
       })
     },
+    SendData () {
+      this.$router.push('/confirm')
+      // 送出表單內的資料給FrontView
+      this.$emit('emit-form', this.form)
+    },
     toConfirm () {
       this.$router.push('/confirm')
-      // 送出表單內的資料
-      emitter.emit('formData', this.form)
     },
     // 驗證手機號碼
     isPhone (value) {
