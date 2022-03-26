@@ -48,7 +48,7 @@
             </div>
           </div>
           <!-- 內層:pages,外層:pagination -->
-          <Pagination :pages="pagination" @emit-pages="getProducts" class="justify-content-center d-flex" ></Pagination>
+          <Pagination :pages="pagination" @emit-pages="getProducts" class="justify-content-center d-flex mt-5" ></Pagination>
         </div>
       </div>
     </div>

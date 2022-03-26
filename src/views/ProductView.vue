@@ -100,8 +100,6 @@
       <swiper-slide v-for="(item) in products" :key="item.id">
         <!-- <router-link :to="`/product/${item.id}`"> -->
           <div class="card border-0 mb-4 position-relative p-card" @click="getProduct(item.id)">
-            <!-- <div :style="{backgroundImage: `url(${item.imageUrl})`}"
-            style="height: 300px; background-size: cover; background-position:center "></div> -->
             <div class="p-card__image" :style="{backgroundImage: `url(${item.imageUrl})`}" style="height: 300px;">
               <div class="hover-area">
                 <a class="btn btn-outline-primary px-5" @click="getProduct(item.id)">查看商品</a>

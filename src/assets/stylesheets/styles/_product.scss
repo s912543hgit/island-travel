@@ -9,6 +9,12 @@
         position: relative;
         cursor: pointer;
     }
+    &:hover {
+        .hover-area {
+            opacity: 1;
+            padding-top: 10px;
+        }
+    }
 }
 
 .hover-area {
@@ -24,10 +30,4 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-/*ホバーエフェクト*/
-.p-card:hover .hover-area {
-    opacity: 1;
-    padding-top: 10px;
 }
