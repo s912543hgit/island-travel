@@ -71,7 +71,7 @@
               </li>
               <li class="d-flex">
                 <h3>留言</h3>
-                <p>{{ formData.user.message }}</p>
+                <p>{{ formData.message }}</p>
               </li>
             </ul>
             <button class="btn btn-outline-danger" type="button" @click="putOrder">信用卡付款</button>
@@ -95,9 +95,9 @@ export default {
           email: '',
           name: '',
           address: '',
-          phone: '',
-          message: ''
-        }
+          phone: ''
+        },
+        message: ''
       }
       // FormData: {}
     }
