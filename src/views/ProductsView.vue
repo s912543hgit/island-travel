@@ -13,13 +13,10 @@
           <a @click="getProducts" class="px-3 px-md-4 py-1" href="#" @click.prevent="getProducts(1,'日本')"> 日本</a>
         </li>
         <li class="btn btn-outline-primary p-0" :class="{ active: isCheck }">
-          <a class="px-3 px-md-4 py-1" href="#" @click.prevent="getProducts(1,'大洋洲')"> 大洋洲</a>
-        </li>
-        <li class="btn btn-outline-primary p-0" :class="{ active: isCheck }">
           <a class="px-3 px-md-4 py-1"  href="#"  @click.prevent="getProducts(1,'太平洋')"> 太平洋</a>
         </li>
         <li class="btn btn-outline-primary p-0" :class="{ active: isCheck }">
-          <a class="px-3 px-md-4 py-1" href="#"  @click.prevent="getProducts(1,'南亞')"> 其他</a>
+          <a class="px-3 px-md-4 py-1" href="#"  @click.prevent="getProducts(1,'其他')"> 其他</a>
         </li>
       </ul>
       <div class="row">
@@ -81,7 +78,6 @@ export default {
         url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products?category=${category}`
       }
       this.isLoading = true
-      // this.isCheck = !this.isCheck
       this.$http.get(url)
         .then(res => {
           this.products = res.data.products

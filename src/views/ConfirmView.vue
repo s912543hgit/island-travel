@@ -21,10 +21,10 @@
             <h3 class="fw-bold mb-4 text-left">確認訂單</h3>
           </div>
         </div>
-        <div class="row  justify-content-between pb-5">
+        <div class="row justify-content-between pb-5">
           <template v-if="cartData.carts">
               <div class="col-md-6">
-                  <div class="border p-4 mb-4">
+                  <div class="p-4 mb-4">
                     <div class="d-flex"  v-for="item in cartData.carts" :key="item.id">
                       <img :src="item.product.imageUrl" alt="" class="me-2" style="width: 48px; height: 48px; object-fit: cover">
                       <div class="w-100">
@@ -38,13 +38,9 @@
                     <table class="table mt-4 border-top border-bottom text-muted">
                       <tbody>
                         <tr>
-                          <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">總價</th>
+                          <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">總金額</th>
                           <td class="text-end border-0 px-0 pt-4">NT${{ cartData.total }}</td>
                         </tr>
-                        <!-- <tr>
-                          <th scope="row" class="border-0 px-0 pt-0 pb-4 font-weight-normal">Payment</th>
-                          <td class="text-end border-0 px-0 pt-0 pb-4">ApplePay</td>
-                        </tr> -->
                       </tbody>
                     </table>
                     <div class="d-flex justify-content-between mt-4">
@@ -55,26 +51,29 @@
                 </div>
           </template>
           <div class="col-md-6">
-            <h2>訂購人資訊</h2>
-            <ul class="list-unstyled">
-              <li class="d-flex">
-                <h3>收件人姓名</h3>
-                <p>{{ formData.user.name }}</p>
-              </li>
-              <li class="d-flex">
-                <h3>收件人電話</h3>
-                <p>{{ formData.user.name }}</p>
-              </li>
-              <li class="d-flex">
-                <h3>收件人Email</h3>
-                <p>{{ formData.user.name }}</p>
-              </li>
-              <li class="d-flex">
-                <h3>留言</h3>
-                <p>{{ formData.message }}</p>
-              </li>
-            </ul>
-            <button class="btn btn-outline-danger" type="button" @click="putOrder">信用卡付款</button>
+            <!-- <h2>訂購人資訊</h2> -->
+            <div class="border p-5 background-white">
+              <p class="text-center h4 mb-3">訂購資訊</p>
+              <ul class="list-unstyled p-confirmForm te">
+                <li class="d-flex mb-3">
+                  <p class="col-4">收件人姓名</p>
+                  <p>{{ formData.user.name }}</p>
+                </li>
+                <li class="d-flex mb-3">
+                  <p class="col-4">收件人電話</p>
+                  <p>{{ formData.user.name }}</p>
+                </li>
+                <li class="d-flex mb-3">
+                  <p class="col-4">收件人Email</p>
+                  <p>{{ formData.user.name }}</p>
+                </li>
+                <li class="d-flex mb-3">
+                  <p class="col-4">留言</p>
+                  <p>{{ formData.message }}</p>
+                </li>
+              </ul>
+              <button class="btn btn-primary w-100 py-3 mt-4" type="button" @click="putOrder">立即付款</button>
+            </div>
           </div>
         </div>
       </div>
@@ -117,7 +116,7 @@ export default {
         })
     },
     putOrder (formData) {
-      this.form = formData
+      this.form = this.formData
       this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`, { data: this.form })
         .then((res) => {
           console.log(res)

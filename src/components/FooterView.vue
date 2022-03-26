@@ -1,22 +1,18 @@
 <template>
     <footer class="bg-primary py-5 p-footer">
-        <div class="container">
-          <div class="d-flex align-items-center justify-content-between text-white mb-md-7 mb-4">
-            <a class="text-white h4" href="./index.html">島遊</a>
+        <div class="container d-flex justify-content-center text-white flex-column text-center">
+          <a class="h4 text-white" href="./index.html">島遊</a>
+          <router-link class="text-white mb-3" to="/admin">登入後台</router-link>
+          <p>島遊 © 2022 COPYRIGHT</p>
+          <p>本網站僅供個人練習使用，無商業行為</p>
+          <!-- <div class="text-white mb-md-7 mb-4">
             <ul class="d-flex list-unstyled mb-0 h4">
               <li><a href="#" class="text-white mx-3"><i class="fab fa-facebook"></i></a></li>
               <li><a href="#" class="text-white mx-3"><i class="fab fa-instagram"></i></a></li>
               <li><a href="#" class="text-white ms-3"><i class="fab fa-line"></i></a></li>
               <li><router-link class="nav-link text-white ms-3" to="/admin">後台</router-link></li>
             </ul>
-          </div>
-          <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end align-items-start text-white">
-            <div class="mb-md-0 mb-1">
-              <p class="mb-0">02-3456-7890</p>
-              <p class="mb-0">service@mail.com</p>
-            </div>
-            <p class="mb-0">© 2020 LOGO All Rights Reserved.</p>
-          </div>
+          </div> -->
         </div>
     </footer>
 </template>
