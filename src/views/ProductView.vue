@@ -4,7 +4,7 @@
       <div class="row align-items-center">
         <div class="col-md-7">
           <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-white px-0 mb-0 py-3">
+            <ol class="breadcrumb px-0 mb-0 py-3 mt-3">
               <li class="breadcrumb-item">
                 <router-link class="text-muted" to="/">島遊</router-link>
               </li>
@@ -99,13 +99,18 @@
     >
       <swiper-slide v-for="(item) in products" :key="item.id">
         <!-- <router-link :to="`/product/${item.id}`"> -->
-          <div class="card border-0 mb-4" @click="getProduct(item.id)">
-            <div :style="{backgroundImage: `url(${item.imageUrl})`}"
-            style="height: 300px; background-size: cover; background-position:center "></div>
+          <div class="card border-0 mb-4 position-relative p-card" @click="getProduct(item.id)">
+            <!-- <div :style="{backgroundImage: `url(${item.imageUrl})`}"
+            style="height: 300px; background-size: cover; background-position:center "></div> -->
+            <div class="p-card__image" :style="{backgroundImage: `url(${item.imageUrl})`}" style="height: 300px;">
+              <div class="hover-area">
+                <a class="btn btn-outline-primary px-5" @click="getProduct(item.id)">查看商品</a>
+              </div>
+            </div>
             <div class="card-body text-left">
               <h4>{{ item.title }}</h4>
               <div class="d-flex justify-content-between">
-                <p class="card-text text-muted mb-0">
+                <p class="card-text text-muted mb-0" style="height: 4.5rem; overflow: hidden;">
                   {{ item.description }}
                 </p>
               </div>

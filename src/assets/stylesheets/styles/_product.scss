@@ -1,0 +1,33 @@
+// p-card 
+.p-card {
+    overflow: hidden;
+    &__image {
+        height: 400px;
+        background-size: cover;
+        background-position:center;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+    }
+}
+
+.hover-area {
+    position:	absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: #fff;
+    background-color:	rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: .3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*ホバーエフェクト*/
+.p-card:hover .hover-area {
+    opacity: 1;
+    padding-top: 10px;
+}

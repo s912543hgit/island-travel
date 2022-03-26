@@ -6,20 +6,20 @@
     </div>
     <div class="container mt-md-5 mt-3 mb-5">
       <ul class="list-unstyled d-flex justify-content-center mt-3 gap-2 mb-5 p-category">
-        <li class="btn btn-outline-primary p-0">
+        <li class="btn btn-outline-primary p-0" :class="{ active: isCheck }">
           <a class="px-3 px-md-4 py-1" href="" @click.prevent="getProducts(1)"> 全部</a>
         </li>
-        <li class="btn btn-outline-primary p-0">
-          <a @click="getProducts" class="px-3 px-md-4 py-1" href="" @click.prevent="getProducts(1,'日本')"> 日本</a>
+        <li class="btn btn-outline-primary p-0" :class="{ active: isCheck }">
+          <a @click="getProducts" class="px-3 px-md-4 py-1" href="#" @click.prevent="getProducts(1,'日本')"> 日本</a>
+        </li>
+        <li class="btn btn-outline-primary p-0" :class="{ active: isCheck }">
+          <a class="px-3 px-md-4 py-1" href="#" @click.prevent="getProducts(1,'大洋洲')"> 大洋洲</a>
         </li>
         <li class="btn btn-outline-primary p-0">
-          <a class="px-3 px-md-4 py-1" href=""  @click.prevent="getProducts(1,'大洋洲')"> 大洋洲</a>
+          <a class="px-3 px-md-4 py-1"  href="#"  @click.prevent="getProducts(1,'太平洋')"> 太平洋</a>
         </li>
         <li class="btn btn-outline-primary p-0">
-          <a class="px-3 px-md-4 py-1" href=""  @click.prevent="getProducts(1,'太平洋')"> 太平洋</a>
-        </li>
-        <li class="btn btn-outline-primary p-0">
-          <a class="px-3 px-md-4 py-1" href=""  @click.prevent="getProducts(1,'南亞')"> 其他</a>
+          <a class="px-3 px-md-4 py-1" href="#"  @click.prevent="getProducts(1,'南亞')"> 其他</a>
         </li>
       </ul>
       <div class="row">
@@ -29,22 +29,22 @@
           <div class="row row-cols-1 row-cols-md-2">
             <div class="col" v-for="product in products" :key="product.id">
               <!-- products card -->
-              <!-- <router-link :to="`/product/${product.id}`"> -->
-                <div class="card border-0 mb-4 position-relative position-relative p-card">
-                  <div :style="{backgroundImage: `url(${product.imageUrl})`}"
-                     style="height: 400px; background-size: cover; background-position:center "></div>
-                  <a href="#" class="text-dark">
-                    <i class="far fa-heart position-absolute" style="right: 16px; top: 16px"></i>
-                  </a>
-                  <div class="card-body p-0 bg-light">
+                <div class="card border-0 mb-4 position-relative p-card">
+                  <div class="p-card__image" :style="{backgroundImage: `url(${product.imageUrl})`}">
+                    <div class="hover-area">
+                      <router-link class="btn btn-outline-primary px-5 me-2" :to="`/product/${product.id}`">查看商品</router-link>
+                      <a class="btn btn-outline-primary px-5" @click="addToCart(product.id)">加入購物車</a>
+                    </div>
+                  </div>
+                  <div class="card-body p-4 bg-white">
                     <h4 class="mb-0 mt-3 text-left">{{ product.title }}</h4>
-                    <p class="card-text mb-0 text-left">NT{{ product.origin_price }} <span class="text-muted text-center"><del>NT{{ product.price }}</del></span></p>
+                    <div class="row align-items-center">
+                      <p class="text-muted  col-6">原價<del>NT${{ product.origin_price }}</del></p>
+                      <p class="text-end col-6">特價<span class="h4 fw-bold text-danger ms-2">NT${{ product.price }}</span></p>
+                    </div>
                     <p class="text-muted mt-3 text-left" style="height: 4.5rem; overflow: hidden;">{{ product.description }}</p>
                   </div>
                 </div>
-                <a class="btn btn-primary mt-4 px-5" @click="addToCart(product.id)">加入購物車</a>
-                <router-link class="btn btn-primary mt-4 px-5" :to="`/product/${product.id}`">查看商品</router-link>
-              <!-- </router-link> -->
             </div>
           </div>
           <!-- 內層:pages,外層:pagination -->
@@ -66,7 +66,8 @@ export default {
       currentPage: 1,
       isLoading: false,
       id: '',
-      productId: ''
+      productId: '',
+      isCheck: false
     }
   },
   components: {
@@ -80,6 +81,8 @@ export default {
         url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products?category=${category}`
       }
       this.isLoading = true
+      // this.isCheck = true
+      // this.isCheck = !this.isCheck
       this.$http.get(url)
         .then(res => {
           this.products = res.data.products

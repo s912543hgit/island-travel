@@ -70,7 +70,7 @@
         <div class="card-body text-left">
           <h4>{{ item.title }}</h4>
           <div class="d-flex justify-content-between">
-            <p class="card-text text-muted mb-0">
+            <p class="card-text text-muted mb-0" style="height: 4.5rem; overflow: hidden;">
               {{ item.description }}
             </p>
           </div>
