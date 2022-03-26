@@ -58,10 +58,23 @@
             <h2>訂購人資訊</h2>
             <ul class="list-unstyled">
               <li class="d-flex">
-                <h3>聯絡人姓名</h3>
-                <p>{{ form.user.name }}</p>
+                <h3>收件人姓名</h3>
+                <p>{{ formData.user.name }}</p>
+              </li>
+              <li class="d-flex">
+                <h3>收件人電話</h3>
+                <p>{{ formData.user.name }}</p>
+              </li>
+              <li class="d-flex">
+                <h3>收件人Email</h3>
+                <p>{{ formData.user.name }}</p>
+              </li>
+              <li class="d-flex">
+                <h3>留言</h3>
+                <p>{{ formData.user.message }}</p>
               </li>
             </ul>
+            <button class="btn btn-outline-danger" type="button" @click="putOrder">信用卡付款</button>
           </div>
         </div>
       </div>
@@ -71,7 +84,6 @@
 <script>
 import emitter from '@/libs/emitter'
 import Loading from 'vue-loading-overlay'
-// import { Field, Form } from 'vee-validate'
 
 export default {
   data () {
@@ -87,6 +99,7 @@ export default {
           message: ''
         }
       }
+      // FormData: {}
     }
   },
   components: {
@@ -103,7 +116,8 @@ export default {
           this.isLoading = false
         })
     },
-    putOrder (data) {
+    putOrder (formData) {
+      this.form = formData
       this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`, { data: this.form })
         .then((res) => {
           console.log(res)
@@ -111,28 +125,14 @@ export default {
           emitter.emit('get-cart')
           this.isLoading = true
           this.$router.push('/complete')
-        //   this.$refs.form.resetForm()
         })
-        .catch((err) => {
-          alert(err.data.message)
+        .catch((error) => {
+          alert(error.data.message)
         })
     }
-    // 驗證手機號碼
-    // isPhone (value) {
-    //   const phoneNumber = /^(09)[0-9]{8}$/
-    //   return phoneNumber.test(value) ? true : '需要正確的電話號碼'
-    // },
-    // isRequired (value) {
-    //   return value ? true : 'This field is required'
-    // }
   },
   mounted () {
     this.getCart()
-    // 接收表單資料
-    emitter.on('formData', (data) => {
-      console.log('received', data)
-      this.form = data
-    })
   }
 }
 </script>
