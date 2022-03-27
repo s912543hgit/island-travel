@@ -5,7 +5,7 @@
         <a href="#" class="page-link" aria-label="Previous" @click.prevent="emitPages(pages.current_page - 1)">Previous</a>
       </li>
       <li class="page-item" :class="{ active : page === pages.current_page }" v-for="page in pages.total_pages" :key="page" >
-        <a class="page-link" href="#" @click.prevent="emitPages(pages.current_page)">{{ page }}</a>
+        <a class="page-link" href="#" @click.prevent="emitPages(page)">{{ page }}</a>
       </li>
       <li class="page-item" :class="{ disabled: !pages.has_next }">
         <a class="page-link" aria-label="Next" href="#" @click.prevent="emitPages(pages.current_page + 1)">Next</a>
