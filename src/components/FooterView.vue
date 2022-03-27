@@ -1,5 +1,5 @@
 <template>
-    <footer class="bg-primary py-5 p-footer">
+    <footer class="bg-primary py-5 p-footer mt-5">
         <div class="container d-flex justify-content-center text-white flex-column text-center">
           <a class="h4 text-white" href="./index.html">島遊</a>
           <router-link class="text-white mb-3" to="/admin">登入後台</router-link>

@@ -1,8 +1,8 @@
 <template>
     <Loading :active="isLoading"></Loading>
-    <div class="container pt-5">
+    <div class="container pt-5 mb-5">
         <template v-if="cartData.carts.length">
-          <ul class="p-steps list-unstyled mb-5">
+          <ul class="p-steps list-unstyled mt-5">
             <li class="col-4 is-active mb-md-0 mb-3">
               <small>STEP1</small>
               <p>填寫資料</p>
@@ -34,7 +34,7 @@
                       <p class="mb-0 fw-bold ms-3 d-inline-block">{{ item.product.title }}</p>
                     </th>
                     <td class="border-0 align-middle" style="max-width: 160px;">
-                      <div class="input-group pe-5">
+                      <div class="input-group pe-0 pe-sm-5">
                         <div class="input-group-prepend">
                           <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1">
                             <i class="fas fa-minus"></i>
@@ -75,7 +75,7 @@
                 <button class="btn btn-outline-danger" type="button" @click="clearCartItem">清空購物車</button>
               </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5 mt-5 mt-md-0">
               <h3 class="mb-3">填寫訂購資訊</h3>
               <Form ref="form" class="col-md-10" v-slot="{ errors }" @submit="SendData()">
                 <div class="mb-3">

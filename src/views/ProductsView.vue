@@ -36,7 +36,7 @@
                   <div class="card-body p-4 bg-white">
                     <h4 class="mb-0 mt-3 text-left">{{ product.title }}</h4>
                     <div class="row align-items-center">
-                      <p class="text-muted  col-6">原價<del>NT${{ product.origin_price }}</del></p>
+                      <p class="text-muted col-6">原價<del>NT${{ product.origin_price }}</del></p>
                       <p class="text-end col-6">特價<span class="h4 fw-bold text-danger ms-2">NT${{ product.price }}</span></p>
                     </div>
                     <p class="text-muted mt-3 text-left" style="height: 4.5rem; overflow: hidden;">{{ product.description }}</p>

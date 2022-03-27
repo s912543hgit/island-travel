@@ -1,0 +1,15 @@
+//PC最小幅とSP最大幅を変数に入れる
+$media-pc: 768px;
+$media-sp: 768px;
+
+//スタイルだけでなくメディアクエリの処理ごと@includeで渡したいので中身に@contentをつけておく
+@mixin pc {
+  @media only screen and (min-width: $media-pc ) {
+    @content;  
+  }
+}
+@mixin sp {
+  @media only screen and (max-width: $media-sp) {
+    @content;
+  }
+}

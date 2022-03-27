@@ -23,6 +23,11 @@
 .p-cart--complete {
     min-height: 60vh;
 }
+
+//購物車內容
+.form-select {
+    padding-right: 0.25rem;
+}
  
 @media only screen and (max-width: 768px) {
     .p-steps {

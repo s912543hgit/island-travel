@@ -1,5 +1,5 @@
   <template>
-      <div class="bg-white sticky-top">
+      <!-- <div class="bg-white sticky-top">
         <div class="container">
           <nav class="navbar px-0 navbar-expand-lg navbar-light bg-white">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,12 +18,6 @@
                 </li>
               </ul>
             </div>
-            <!-- <div class="nav-item">
-              <router-link class="nav-link text-dark" to="/products">產品列表</router-link>
-            </div>
-            <div class="nav-item">
-              <router-link class="nav-link text-dark" to="/about">關於我們</router-link>
-            </div> -->
             <router-link to="/cart" class="d-flex position-relative text-dark">
               <i class="bi bi-cart fs-5"></i>
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -32,7 +26,38 @@
             </router-link>
           </nav>
         </div>
-      </div>
+      </div> -->
+      <header class="header">
+        <div class="header__inner container">
+          <h1 class="header__title header-title">
+            <a href="#">島遊</a>
+          </h1>
+          <nav class="header__nav nav" :class="{active: isClicked}">
+            <ul class="nav-list list-unstyled">
+              <li class="nav-list__item">
+                <router-link class="nav-link" to="/products">產品列表</router-link>
+              </li>
+              <li class="nav-list__item">
+                <router-link to="/cart" class="d-md-flex position-relative text-dark d-none d-md-block">
+                  <i class="bi bi-cart fs-5"></i>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ cartData?.carts?.length }}
+                  </span>
+                </router-link>
+                <router-link to="/cart" class="d-md-flex position-relative text-dark d-md-none">
+                    購物車
+                </router-link>
+              </li>
+            </ul>
+          </nav>
+          <button class="header__hamburger hamburger" :class="{active: isClicked}" @click="isClicked = !isClicked">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </header>
+      <!-- <h1>he</h1> -->
   </template>
 
 <script>
@@ -43,7 +68,8 @@ export default {
     return {
       cartData: {
         carts: {}
-      }
+      },
+      isClicked: false
     }
   },
   methods: {

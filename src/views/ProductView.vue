@@ -1,6 +1,6 @@
 <template>
     <Loading :active="isLoading"></Loading>
-    <div class="container-md">
+    <div class="container-md mt-5">
       <div class="row align-items-center">
         <div class="col-md-7">
           <nav aria-label="breadcrumb">
