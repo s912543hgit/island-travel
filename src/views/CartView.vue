@@ -2,7 +2,7 @@
     <Loading :active="isLoading"></Loading>
     <div class="container pt-5 mb-5">
         <template v-if="cartData.carts.length">
-          <ul class="p-steps list-unstyled mt-5">
+          <ul class="p-steps list-unstyled mt-5 mb-5">
             <li class="col-4 is-active mb-md-0 mb-3">
               <small>STEP1</small>
               <p>填寫資料</p>
