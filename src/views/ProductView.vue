@@ -213,6 +213,7 @@ export default {
       this.$http[method](api, { data }).then((res) => {
         emitter.emit('get-cart')
       })
+      this.isLoadingItem = ''
     }
   },
   mounted () {

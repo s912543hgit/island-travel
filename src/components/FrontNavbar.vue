@@ -1,32 +1,4 @@
   <template>
-      <!-- <div class="bg-white sticky-top">
-        <div class="container">
-          <nav class="navbar px-0 navbar-expand-lg navbar-light bg-white">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse bg-white custom-header-md-open" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <router-link class="nav-link" to="/">島遊</router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link class="nav-link" to="/products">產品列表</router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link class="nav-link" to="/about">關於我們</router-link>
-                </li>
-              </ul>
-            </div>
-            <router-link to="/cart" class="d-flex position-relative text-dark">
-              <i class="bi bi-cart fs-5"></i>
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {{ cartData?.carts?.length }}
-              </span>
-            </router-link>
-          </nav>
-        </div>
-      </div> -->
       <header class="header">
         <div class="header__inner container">
           <h1 class="header__title header-title">
@@ -35,7 +7,7 @@
           <nav class="header__nav nav" :class="{active: isClicked}">
             <ul class="nav-list list-unstyled">
               <li class="nav-list__item">
-                <router-link class="nav-link" to="/products">產品列表</router-link>
+                <router-link class="nav-link" to="/products" @click="isClicked = !isClicked">產品列表</router-link>
               </li>
               <li class="nav-list__item">
                 <router-link to="/cart" class="d-md-flex position-relative text-dark d-none d-md-block">
@@ -44,7 +16,7 @@
                     {{ cartData?.carts?.length }}
                   </span>
                 </router-link>
-                <router-link to="/cart" class="d-md-flex position-relative text-dark d-md-none">
+                <router-link to="/cart" class="d-md-flex position-relative text-dark d-md-none" @click="isClicked = !isClicked">
                     購物車
                 </router-link>
               </li>
@@ -57,11 +29,15 @@
           </button>
         </div>
       </header>
-      <!-- <h1>he</h1> -->
   </template>
 
 <script>
 import emitter from '@/libs/emitter'
+
+window.addEventListener('scroll', function () {
+  const header = document.querySelector('.header')
+  header.classList.toggle('menu-scroll', window.scrollY > 100)
+})
 
 export default {
   data () {

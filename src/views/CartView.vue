@@ -213,6 +213,7 @@ export default {
   },
   mounted () {
     this.getCart()
+    this.isClicked = false
   }
 }
 </script>

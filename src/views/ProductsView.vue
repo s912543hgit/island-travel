@@ -30,7 +30,11 @@
                   <div class="p-card__image" :style="{backgroundImage: `url(${product.imageUrl})`}">
                     <div class="hover-area">
                       <router-link class="btn btn-outline-primary px-5 me-2" :to="`/product/${product.id}`">查看商品</router-link>
-                      <a class="btn btn-outline-primary px-5" @click="addToCart(product.id)">加入購物車</a>
+                      <!-- <a class="btn btn-outline-primary px-5" @click="addToCart(product.id)">加入購物車</a> -->
+                      <button type="button" class="btn btn-outline-primary px-5" @click="addToCart(product.id)">
+                        <!-- <i class="fas fa-spinner fa-pulse" v-show="isLoadingItem === product.id"></i> -->
+                        加到購物車
+                      </button>
                     </div>
                   </div>
                   <div class="card-body p-4 bg-white">
@@ -64,7 +68,8 @@ export default {
       isLoading: false,
       id: '',
       productId: '',
-      isCheck: false
+      isCheck: false,
+      isLoadingItem: ''
     }
   },
   components: {

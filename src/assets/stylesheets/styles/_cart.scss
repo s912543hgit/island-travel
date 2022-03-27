@@ -1,11 +1,17 @@
 .p-steps {
     display:flex;
     justify-content:space-between;
+    @include sp {
+        flex-direction:column;
+    }
     li {
         width:32%;
         text-align:center;
         padding:10px;
         background:#bdbdbd;
+        @include sp {
+            width: 100%;
+        }
         p {
             margin-bottom:0;
         }
@@ -27,13 +33,4 @@
 //購物車內容
 .form-select {
     padding-right: 0.25rem;
-}
- 
-@media only screen and (max-width: 768px) {
-    .p-steps {
-        flex-direction:column;
-        li {
-            width:100%;
-        }
-    }
 }
