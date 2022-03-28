@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap');
+
 /* ヘッダー */
 .header {
     // background-color: #fff;
@@ -26,6 +28,7 @@
         margin-bottom: 0;
         a {
             color: #333;
+            font-family: 'Zen Kurenaido', sans-serif;
         }
         @include sp {
             width: 120px;
