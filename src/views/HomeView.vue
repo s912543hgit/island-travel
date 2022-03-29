@@ -4,7 +4,7 @@
     <div class="container d-flex flex-column" style="min-height: 100vh;">
       <div class="row justify-content-start my-auto p-mainvisual__container">
         <div class="col-md-4 text-center p-mainvisual__content p-3">
-          <h2 class="text-white">島遊</h2>
+          <h2 class="text-white logo">島遊</h2>
           <p class="mb-3 text-white">尋找您的心之島向</p>
           <button class="btn btn-primary rounded-0 mt-4" type="button">
             <router-link to="/products" class="text-white">查看行程</router-link>
@@ -20,8 +20,8 @@
   <div class="container my-5">
     <h3 class="fs-4 text-center p-4">地區精選</h3>
     <div class="row">
-      <div class="col-md-6 p-zoomIn">
-        <div class="p-zoomIn__inner">
+      <div class="col-md-6 zoomIn">
+        <div class="zoomIn__inner">
           <img src="https://images.unsplash.com/photo-1542028378254-8e17303266ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="" class="img-fluid">
         </div>
       </div>
@@ -35,8 +35,8 @@
       </div>
     </div>
     <div class="row flex-row-reverse justify-content-between my-4">
-      <div class="col-md-6 p-zoomIn">
-        <div class="p-zoomIn__inner">
+      <div class="col-md-6 zoomIn">
+        <div class="zoomIn__inner">
           <img src="https://images.unsplash.com/photo-1553901753-215db344677a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="" class="img-fluid">
         </div>
         <!-- <img src="https://images.unsplash.com/photo-1553901753-215db344677a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="" class="img-fluid"> -->
@@ -50,8 +50,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6 p-zoomIn">
-        <div class="p-zoomIn__inner">
+      <div class="col-md-6 zoomIn">
+        <div class="zoomIn__inner">
           <img src="https://images.unsplash.com/photo-1593958866187-37e5c3b98278?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="" class="img-fluid">
         </div>
       </div>
@@ -63,6 +63,12 @@
         </div>
       </div>
     </div>
+  </div>
+  <!-- 關於我們 -->
+  <div class="section--about position-relative d-flex align-items-center justify-content-center flex-column" style="min-height: 400px;">
+    <div class="position-absolute background-image--about"></div>
+    <p class="fw-bold" style="z-index: 2;">一群愛島人，期望給您最深刻的島嶼記憶。</p>
+    <router-link to="/about" class="btn btn-outline-primary px-5 row justify-content-center" style="width: 200px; z-index: 2;">關於我們</router-link>
   </div>
   <!-- 島嶼風情 -->
   <h3 class="fs-4 text-center p-4">島嶼風情</h3>
@@ -103,9 +109,11 @@
     </router-link>
   </swiper-slide>
 </swiper>
+<PageTop></PageTop>
 </template>
 
 <script>
+import PageTop from '@/components/PageTop.vue'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
@@ -123,7 +131,8 @@ export default {
   },
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    PageTop
   },
   setup () {
     return {
