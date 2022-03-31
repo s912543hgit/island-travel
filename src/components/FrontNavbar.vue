@@ -15,13 +15,13 @@
               <li class="nav-list__item">
                 <router-link class="nav-link" to="/products" @click="isClicked = !isClicked">產品列表</router-link>
               </li>
-              <li class="nav-list__item">
-                <router-link to="/cart" class="d-md-flex position-relative text-dark d-none d-md-block">
+              <li class="nav-list__item" @click="isOpen = !isOpen" >
+                <div class="d-md-flex position-relative text-dark d-none d-md-block">
                   <i class="bi bi-cart fs-5"></i>
                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     {{ cartData?.carts?.length }}
                   </span>
-                </router-link>
+                </div>
                 <router-link to="/cart" class="d-md-flex position-relative text-dark d-md-none" @click="isClicked = !isClicked">
                     購物車
                 </router-link>
@@ -35,10 +35,11 @@
           </button>
         </div>
       </header>
+      <CartNav></CartNav>
   </template>
-
 <script>
 import emitter from '@/libs/emitter'
+import CartNav from '@/components/CartNav.vue'
 
 window.addEventListener('scroll', function () {
   const header = document.querySelector('.header')
@@ -51,15 +52,18 @@ export default {
       cartData: {
         carts: {}
       },
-      isClicked: false
+      isClicked: false,
+      isOpen: false
     }
+  },
+  components: {
+    CartNav
   },
   methods: {
     // 取得購物車內容
     getCart () {
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
         .then((res) => {
-          // console.log('cart:', res)
           this.cartData = res.data.data
         })
     }

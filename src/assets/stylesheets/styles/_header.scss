@@ -9,7 +9,7 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 999;
+    z-index: 50;
     &__inner {
         display: flex;
         align-items: center;
@@ -42,7 +42,7 @@
         top: 0;
         width: 100%;
         height: 100vh;
-        transform: translateX(100%);
+        transform: translateX(120%);
         background-color: #fff;
         transition: ease .4s;
         @include pc {

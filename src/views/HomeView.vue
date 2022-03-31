@@ -109,11 +109,9 @@
     </router-link>
   </swiper-slide>
 </swiper>
-<PageTop></PageTop>
 </template>
 
 <script>
-import PageTop from '@/components/PageTop.vue'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
@@ -131,8 +129,7 @@ export default {
   },
   components: {
     Swiper,
-    SwiperSlide,
-    PageTop
+    SwiperSlide
   },
   setup () {
     return {
