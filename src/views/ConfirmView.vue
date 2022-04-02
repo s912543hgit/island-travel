@@ -119,7 +119,7 @@ export default {
       this.form = this.formData
       this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`, { data: this.form })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.getCart()
           emitter.emit('get-cart')
           this.isLoading = true

@@ -61,8 +61,9 @@
                     <td class="border-0 align-middle"><p class="mb-0 ms-auto">NT{{ item.product.price }}</p></td>
                     <td class="border-0 align-middle">
                       <button type="button" class="btn btn-outline-danger btn-sm" @click="removeCartItem(item.id)">
-                      <i class="fas fa-spinner fa-pulse" v-show="isLoadingItem === item.id"></i>
-                      x
+                      <!-- <i class="fas fa-spinner fa-pulse" v-show="isLoadingItem === item.id"></i>
+                      x -->
+                      <i class="bi bi-x-circle"></i>
                       </button>
                     </td>
                   </tr>

@@ -76,6 +76,7 @@ export default {
     Pagination,
     Loading
   },
+  inject: ['emitter'],
   methods: {
     getProducts (page = 1, category) {
       let url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/?page=${page}`
@@ -96,8 +97,13 @@ export default {
         qty
       }
       this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`, { data })
-        .then((res) => {
-          console.log(res)
+        .then((response) => {
+          // console.log(res)
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: '購物提示',
+            content: response.data.message
+          })
           // 觸發設置的監聽
           emitter.emit('get-cart')
         })

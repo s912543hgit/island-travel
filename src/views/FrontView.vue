@@ -26,7 +26,7 @@ export default {
   methods: {
     getData (form) {
       this.formData = form
-      console.log(form)
+      // console.log(form)
     }
   }
 }

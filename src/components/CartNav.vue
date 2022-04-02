@@ -76,7 +76,7 @@ export default {
       this.isLoading = true
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           // 購物車的資料有兩層data
           this.cartData = res.data.data
           this.isLoading = false

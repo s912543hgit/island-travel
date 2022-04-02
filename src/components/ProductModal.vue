@@ -280,6 +280,7 @@ export default {
     }
   },
   emits: ['update-product'],
+  inject: ['emitter'],
   watch: {
     product () {
       // watch 監聽 product的更新 的變化 去改變tempProduct的值
@@ -312,8 +313,22 @@ export default {
       this.$http.post(url, formData)
         .then((response) => {
           this.status.fileUploading = false
-          console.log(response)
-          this.tempProduct.imageUrl = response.data.imageUrl
+          if (response.data.success) {
+            this.tempProduct.imageUrl = response.data.imageUrl
+            this.$refs.fileInput.value = ''
+            this.emitter.emit('push-message', {
+              style: 'success',
+              title: '圖片上傳成功',
+              content: response.data.message
+            })
+          } else {
+            this.$refs.fileInput.value = ''
+            this.emitter.emit('push-message', {
+              style: 'danger',
+              title: '圖片上傳結果',
+              content: response.data.message
+            })
+          }
         })
         .catch((error) => {
           this.status.fileUploading = false
