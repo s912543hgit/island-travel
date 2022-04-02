@@ -27,7 +27,7 @@
         font-size: 1.3em;
         margin-bottom: 0;
         a {
-            color: #333;
+            color: #fff;
             font-family: 'Zen Kurenaido', sans-serif;
         }
         @include sp {
@@ -64,6 +64,16 @@
 
 .header.menu-scroll {
     background: #fff;
+    .nav-list {
+        a {
+            color: #333;
+        }
+    }
+    .header__title {
+        a {
+            color: #333;
+        }
+    }
 }
   
 .nav-list {
@@ -85,7 +95,7 @@
         margin-bottom: 0;
     }
     a {
-        color: #333;
+        color: #fff;
         width: 100%;
         display: block;
         text-align: center;

@@ -1,7 +1,39 @@
 <template>
   <div class="position-relative">
-    <div class="position-absolute p-mainvisual"></div>
-    <div class="container d-flex flex-column" style="min-height: 100vh;">
+    <swiper
+    :spaceBetween="30"
+    :effect="'fade'"
+    :modules="modules"
+    :speed="2000"
+    :autoplay="{
+      delay: 3000,
+      disableOnInteraction: false,
+    }"
+    class="p-mainvisual d-none d-md-block"
+    >
+      <swiper-slide
+        ><img
+          src="https://find47.jp/uploads/image_file/content/000/003/877/web_detail_thumb.jpg"/></swiper-slide
+      >
+      <swiper-slide>
+        <img src="https://images.unsplash.com/photo-1529686342540-1b43aec0df75?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" />
+      </swiper-slide>
+      <swiper-slide
+        ><img
+          src="https://images.unsplash.com/photo-1468082547792-d37c6c74003e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1476&q=80"/></swiper-slide
+      >
+      <div class="row justify-content-start p-mainvisual__container">
+        <div class="col-md-4 text-center p-mainvisual__content p-3">
+          <h2 class="text-white logo">島遊</h2>
+          <p class="mb-3 text-white">尋找您的心之島向</p>
+          <button class="btn btn-primary rounded-0 mt-4" type="button">
+            <router-link to="/products" class="text-white">查看行程</router-link>
+          </button>
+        </div>
+      </div>
+    </swiper>
+  <div class="position-absolute p-mainvisual--sp d-md-none"></div>
+   <div class="container d-flex flex-column d-md-none" style="min-height: 100vh;">
       <div class="row justify-content-start my-auto p-mainvisual__container">
         <div class="col-md-4 text-center p-mainvisual__content p-3">
           <h2 class="text-white logo">島遊</h2>
@@ -118,8 +150,9 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/autoplay'
+import 'swiper/css/effect-fade'
 
-import { Autoplay } from 'swiper'
+import { EffectFade, Autoplay } from 'swiper'
 
 export default {
   data () {
@@ -133,7 +166,7 @@ export default {
   },
   setup () {
     return {
-      modules: [Autoplay]
+      modules: [EffectFade, Autoplay]
     }
   },
   methods: {
