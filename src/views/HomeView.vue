@@ -98,7 +98,7 @@
   </div>
   <!-- 關於我們 -->
   <div class="section--about position-relative d-flex align-items-center justify-content-center flex-column" style="min-height: 400px;">
-    <div class="position-absolute background-image--about"></div>
+    <div class="position-absolute background-image--introduction background-image"></div>
     <p class="fw-bold" style="z-index: 2;">一群愛島人，期望給您最深刻的島嶼記憶。</p>
     <router-link to="/about" class="btn btn-outline-primary px-5 row justify-content-center" style="width: 200px; z-index: 2;">關於我們</router-link>
   </div>

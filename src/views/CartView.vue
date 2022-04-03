@@ -1,6 +1,10 @@
 <template>
     <Loading :active="isLoading"></Loading>
-    <div class="container pt-5 mb-5">
+    <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
+      <div class="position-absolute background-image background-image--cart"></div>
+      <h2 class="fw-bold" style="z-index: 2;">填寫資料</h2>
+    </div>
+    <div class="container  mb-5">
         <template v-if="cartData.carts.length">
           <ul class="p-steps list-unstyled mt-5 mb-5">
             <li class="col-4 is-active mb-md-0 mb-3">
@@ -61,8 +65,7 @@
                     <td class="border-0 align-middle"><p class="mb-0 ms-auto">NT{{ item.product.price }}</p></td>
                     <td class="border-0 align-middle">
                       <button type="button" class="btn btn-outline-danger btn-sm" @click="removeCartItem(item.id)">
-                      <!-- <i class="fas fa-spinner fa-pulse" v-show="isLoadingItem === item.id"></i>
-                      x -->
+                      <span class="spinner-border spinner-border-sm" role="status" v-show="isLoadingItem === item.id"></span>
                       <i class="bi bi-x-circle"></i>
                       </button>
                     </td>
@@ -73,7 +76,9 @@
                 <p class="text-end border-0 px-0 pt-4">總計金額 NT${{ cartData.total }}</p>
               </div>
               <div class="text-end">
-                <button class="btn btn-outline-danger" type="button" @click="clearCartItem">清空購物車</button>
+                <button class="btn btn-outline-danger" type="button" @click="clearCartItem">
+                  清空購物車
+                </button>
               </div>
             </div>
             <div class="col-md-5 mt-5 mt-md-0">
@@ -167,6 +172,7 @@ export default {
     },
     // 刪除產品
     removeCartItem (id) {
+      this.isLoading = true
       this.$http.delete(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`)
         .then((response) => {
           this.getCart()
@@ -176,7 +182,7 @@ export default {
             content: response.data.message
           })
           emitter.emit('get-cart')
-          this.isLoadingItem = ''
+          this.isLoading = false
         })
     },
     // 清空購物車

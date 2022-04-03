@@ -1,21 +1,12 @@
 <template>
+  <div class="background-image--product" :style="{backgroundImage: `url(${product.imageUrl})`}">
+  </div>
     <Loading :active="isLoading"></Loading>
-    <div class="container-md mt-5">
+    <div class="container-md">
       <div class="row align-items-center">
         <div class="col-md-7">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb px-0 mb-0 py-3 mt-3">
-              <li class="breadcrumb-item">
-                <router-link class="text-muted" to="/">島遊</router-link>
-              </li>
-              <li class="breadcrumb-item">
-                <router-link class="text-muted" to="/products">{{ product.category }}</router-link>
-              </li>
-              <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
-            </ol>
-          </nav>
           <swiper
-          class="container-md"
+          class="container-md slider--product"
           :slides-per-view="1"
           :space-between="50"
           :navigation="true"
@@ -37,6 +28,17 @@
         </div>
         <!-- 產品說明 -->
         <div class="col-md-5">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb px-0 mb-0 py-3 mt-3">
+              <li class="breadcrumb-item">
+                <router-link class="text-muted" to="/">島遊</router-link>
+              </li>
+              <li class="breadcrumb-item">
+                <router-link class="text-muted" to="/products">{{ product.category }}</router-link>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
+            </ol>
+          </nav>
           <h2 class="fw-bold h1 mb-3 mt-3 mt-md-0">{{ product.title }}</h2>
           <div class="row align-items-center">
             <p class="text-muted  col-6">原價<del>NT${{ product.origin_price }}</del></p>
@@ -57,7 +59,10 @@
               </div>
             </div>
             <div class="col-6">
-              <button type="button" class="text-nowrap btn btn-primary w-100 py-2" @click.prevent="updateCartItem(product)">加入購物車</button>
+              <button type="button" class="text-nowrap btn btn-primary w-100 py-2" @click.prevent="updateCartItem(product)" :disabled="isLoadingItem === product.id">
+                <span class="spinner-border spinner-border-sm" role="status" v-show="isLoadingItem === product.id"></span>
+                加入購物車
+              </button>
             </div>
           </div>
         </div>
@@ -142,7 +147,8 @@ export default {
       },
       id: '',
       isNew: true,
-      isLoading: false
+      isLoading: false,
+      isLoadingItem: ''
     }
   },
   components: {
@@ -191,6 +197,7 @@ export default {
         product_id: product.id,
         qty: product.qty
       }
+      this.isLoadingItem = product.id
       // 如果商品尚未被加入 使用add購物車
       let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       let method = 'post'
@@ -205,6 +212,7 @@ export default {
           title: '購物提示',
           content: response.data.message
         })
+        this.isLoadingItem = ''
         emitter.emit('get-cart')
       })
       this.isLoadingItem = ''

@@ -1,4 +1,5 @@
 <template>
+  <Loading :active="isLoading"></Loading>
     <div :class="{open: isOpen}">
         <nav class="cartNav">
           <div class="cartNav__inner">
@@ -37,11 +38,12 @@
               </table>
               <div class="text-center">
                 <router-link to="/cart" class="text-white" @click="isOpen = !isOpen">
-                  <button class="btn btn-primary rounded mt-4 w-100 py-3" type="button">
+                  <button class="btn btn-primary mt-4 w-100 py-3" type="button">
                     前往購物車
                   </button>
                 </router-link>
-                <button @click="clearCartItem" class="btn btn-outline-danger rounded mt-3 py-2" type="button">
+                <button @click="clearCartItem" class="btn btn-outline-danger mt-3 py-2" type="button">
+                  <span class="spinner-border spinner-border-sm" role="status" v-show="isDisabled === 'clear'"></span>
                   清空購物車
                 </button>
               </div>
@@ -60,24 +62,27 @@
 </template>
 <script>
 import emitter from '@/libs/emitter'
+import Loading from 'vue-loading-overlay'
 export default {
   data () {
     return {
       cartData: {
         carts: {}
       },
-      isOpen: false
+      isOpen: false,
+      isLoading: false,
+      isDisabled: ''
     }
+  },
+  component: {
+    Loading
   },
   methods: {
     getCart () {
-      this.isLoading = true
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
         .then((res) => {
-          // console.log(res)
           // 購物車的資料有兩層data
           this.cartData = res.data.data
-          this.isLoading = false
         })
     },
     // 刪除產品
@@ -86,16 +91,16 @@ export default {
         .then((res) => {
           this.getCart()
           emitter.emit('get-cart')
-          this.isLoadingItem = ''
         })
     },
     // 清空購物車
     clearCartItem () {
+      this.isDisabled = 'clear'
       this.isLoading = true
       this.$http.delete(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts/`)
         .then((res) => {
           this.getCart()
-          this.isLoading = false
+          this.isDisabled = ''
           emitter.emit('get-cart')
         })
     }

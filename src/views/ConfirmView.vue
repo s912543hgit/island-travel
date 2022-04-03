@@ -1,5 +1,9 @@
 <template>
     <Loading :active="isLoading"></Loading>
+    <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
+      <div class="position-absolute background-image background-image--cart"></div>
+      <h2 class="fw-bold" style="z-index: 2;">確認訂單</h2>
+    </div>
     <div class="container">
       <div class="mt-5">
         <ul class="p-steps list-unstyled mb-5">

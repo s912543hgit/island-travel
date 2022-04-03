@@ -1,9 +1,8 @@
 <template>
-    <div class="toast-container position-fixed pe-3 end-0 toast-message bg-light" style="z-index: 1500;">
+    <div class="toast-container position-fixed toast-message bg-light" style="z-index: 1500;">
         <div v-for="(msg, key) in messages" :key="key" :class="`toast${key}`" role="alert"
         class="toast show" aria-live="assertive" aria-atomic="true">
           <div class="toast-header">
-            <!-- <span :class="`bg-${msg.style}`" class="p-2 rounded me-2 d-inline-block"></span> -->
             <strong class="me-auto">{{ msg.title }}</strong>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" @click="clearToast(key)"></button>
           </div>

@@ -1,8 +1,8 @@
 <template>
     <Loading :active="isLoading"></Loading>
     <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
-      <div class="position-absolute" style="top:0; bottom: 0; left: 0; right: 0; background-image: url(https://images.unsplash.com/photo-1542028378254-8e17303266ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80); background-position: center center; opacity: 0.5;"></div>
-      <h2 class="fw-bold">產品列表</h2>
+      <div class="position-absolute background-image background-image--products"></div>
+      <h2 class="fw-bold" style="z-index: 2;">產品列表</h2>
     </div>
     <div class="container mt-md-5 mt-3 mb-5">
       <ul class="list-unstyled d-flex justify-content-center mt-3 gap-2 mb-5 p-category">
@@ -30,7 +30,8 @@
                   <div class="p-card__image" :style="{backgroundImage: `url(${product.imageUrl})`}">
                     <div class="hover-area">
                       <router-link class="btn btn-outline-primary px-5 me-2" :to="`/product/${product.id}`">查看商品</router-link>
-                      <button type="button" class="btn btn-outline-primary px-5" @click="addToCart(product.id)">
+                      <button type="button" class="btn btn-outline-primary px-5" @click="addToCart(product.id)" :disabled="isLoadingItem === product.id">
+                        <span class="spinner-border spinner-border-sm" role="status" v-show="isLoadingItem === product.id"></span>
                         加到購物車
                       </button>
                     </div>
@@ -94,6 +95,7 @@ export default {
         product_id: id,
         qty
       }
+      this.isLoadingItem = id
       this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`, { data })
         .then((response) => {
           this.emitter.emit('push-message', {
@@ -101,6 +103,7 @@ export default {
             title: '購物提示',
             content: response.data.message
           })
+          this.isLoadingItem = ''
           // 觸發設置的監聽
           emitter.emit('get-cart')
         })
