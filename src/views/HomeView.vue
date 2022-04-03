@@ -1,10 +1,10 @@
 <template>
   <div class="position-relative">
     <swiper
-    :spaceBetween="30"
     :effect="'fade'"
     :modules="modules"
     :speed="2000"
+    :loop="true"
     :autoplay="{
       delay: 3000,
       disableOnInteraction: false,

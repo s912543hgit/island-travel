@@ -22,16 +22,6 @@
               <router-link class="btn btn-primary mt-4 px-5" to="/">回到首頁</router-link>
           </div>
         </div>
-
-        <!-- <div class="row my-auto pb-7">
-          <div class="col-md-4 d-flex flex-column">
-            <div class="my-auto">
-              <h2>訂單完成</h2>
-              <p>感謝購買！</p>
-              <router-link class="btn btn-dark mt-4 px-5" to="/">回到首頁</router-link>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
 </template>

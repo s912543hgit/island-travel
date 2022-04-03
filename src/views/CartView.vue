@@ -154,6 +154,7 @@ export default {
     Form
   },
   emits: ['emit-form'],
+  inject: ['emitter'],
   methods: {
     getCart () {
       this.isLoading = true
@@ -167,8 +168,13 @@ export default {
     // 刪除產品
     removeCartItem (id) {
       this.$http.delete(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`)
-        .then((res) => {
+        .then((response) => {
           this.getCart()
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: '購物提示',
+            content: response.data.message
+          })
           emitter.emit('get-cart')
           this.isLoadingItem = ''
         })

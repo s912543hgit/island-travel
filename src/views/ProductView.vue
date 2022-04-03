@@ -155,6 +155,7 @@ export default {
       modules: [Navigation]
     }
   },
+  inject: ['emitter'],
   methods: {
     getProduct (paramsId) {
       // 找到產品id 並存起來
@@ -185,18 +186,6 @@ export default {
           this.isLoading = false
         })
     },
-    // addToCart () {
-    //   const data = {
-    //     product_id: this.id,
-    //     qty: 1
-    //   }
-    //   this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`, { data })
-    //     .then((res) => {
-    //       console.log(res)
-    //       // 觸發設置的監聽
-    //       emitter.emit('get-cart')
-    //     })
-    // },
     updateCartItem (product) {
       const data = {
         product_id: product.id,
@@ -210,7 +199,12 @@ export default {
         api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${product.id}`
         method = 'put'
       }
-      this.$http[method](api, { data }).then((res) => {
+      this.$http[method](api, { data }).then((response) => {
+        this.emitter.emit('push-message', {
+          style: 'success',
+          title: '購物提示',
+          content: response.data.message
+        })
         emitter.emit('get-cart')
       })
       this.isLoadingItem = ''

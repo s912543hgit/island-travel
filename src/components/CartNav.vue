@@ -41,11 +41,9 @@
                     前往購物車
                   </button>
                 </router-link>
-                <router-link to="/cart" class="text-white" @click="isOpen = !isOpen">
-                  <button @click="clearCartItem" class="btn btn-outline-danger rounded mt-3 py-2" type="button">
-                    清空購物車
-                  </button>
-                </router-link>
+                <button @click="clearCartItem" class="btn btn-outline-danger rounded mt-3 py-2" type="button">
+                  清空購物車
+                </button>
               </div>
             </template>
             <div v-else class="p-product--none d-flex flex-column justify-content-center align-items-center">
