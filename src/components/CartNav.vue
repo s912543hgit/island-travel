@@ -1,5 +1,4 @@
 <template>
-  <Loading :active="isLoading"></Loading>
     <div :class="{open: isOpen}">
         <nav class="cartNav">
           <div class="cartNav__inner">
@@ -62,7 +61,6 @@
 </template>
 <script>
 import emitter from '@/libs/emitter'
-import Loading from 'vue-loading-overlay'
 export default {
   data () {
     return {
@@ -73,9 +71,6 @@ export default {
       isLoading: false,
       isDisabled: ''
     }
-  },
-  component: {
-    Loading
   },
   methods: {
     getCart () {

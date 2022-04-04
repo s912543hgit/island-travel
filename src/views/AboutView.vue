@@ -1,5 +1,4 @@
 <template>
-    <Loading :active="isLoading"></Loading>
     <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
       <div class="position-absolute background-image--about background-image"></div>
       <h2 class="fw-bold" style="z-index: 2;">關於我們</h2>

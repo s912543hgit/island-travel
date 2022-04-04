@@ -49,6 +49,10 @@
             <li>三人即可成團</li>
             <li>若需當地專業嚮導請洽客服電話</li>
           </ul>
+          <button type="button" @click="toggleFavorite(product.id)">
+            <i class="bi bi-suit-heart"></i>
+            加到我的最愛
+          </button>
           <div class="row align-items-center">
             <div class="col-6">
               <div class="input-group">

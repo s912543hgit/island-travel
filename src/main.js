@@ -28,6 +28,7 @@ configure({
 setLocale('zh_TW')
 
 const app = createApp(App)
+app.component('VueLoading', VueLoading)
 
 app.config.globalProperties.$filters = {
   date,

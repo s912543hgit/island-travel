@@ -13,6 +13,9 @@
                 <router-link class="nav-link" to="/about" @click="isClicked = !isClicked">關於我們</router-link>
               </li>
               <li class="nav-list__item">
+                <router-link class="nav-link" to="/favorite" @click="isClicked = !isClicked">我的最愛</router-link>
+              </li>
+              <li class="nav-list__item">
                 <router-link class="nav-link" to="/products" @click="isClicked = !isClicked">產品列表</router-link>
               </li>
               <li class="nav-list__item" @click="isOpen = !isOpen" >

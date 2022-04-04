@@ -1,5 +1,5 @@
 <template>
-    <Loading :active="isLoading"></Loading>
+    <VueLoading :active="isLoading"></VueLoading>
     <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
       <div class="position-absolute background-image background-image--cart"></div>
       <h2 class="fw-bold" style="z-index: 2;">填寫資料</h2>
@@ -129,7 +129,7 @@
 
 <script>
 import emitter from '@/libs/emitter'
-import Loading from 'vue-loading-overlay'
+// import Loading from 'vue-loading-overlay'
 import { Field, Form } from 'vee-validate'
 
 export default {
@@ -154,7 +154,6 @@ export default {
     }
   },
   components: {
-    Loading,
     Field,
     Form
   },
