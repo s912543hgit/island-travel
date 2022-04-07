@@ -53,6 +53,7 @@
             <i class="bi bi-suit-heart"></i>
             加到我的最愛
           </button>
+          <span v-if="favorite.includes(product.id)"><i class="bi bi-suit-heart"></i></span>
           <div class="row align-items-center">
             <div class="col-6">
               <div class="input-group">
@@ -133,9 +134,7 @@
 <script>
 import emitter from '@/libs/emitter'
 import Loading from 'vue-loading-overlay'
-// Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
-// Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/navigation'
 
@@ -152,7 +151,8 @@ export default {
       id: '',
       isNew: true,
       isLoading: false,
-      isLoadingItem: ''
+      isLoadingItem: '',
+      favorite: JSON.parse(localStorage.getItem('favorite')) || []
     }
   },
   components: {
@@ -220,6 +220,30 @@ export default {
         emitter.emit('get-cart')
       })
       this.isLoadingItem = ''
+    },
+    toggleFavorite (id) {
+      console.log(id)
+      // 查詢資料裡面是否有id
+      // findIndex 尋找陣列中符合對象並返回index 若沒有合適的會回傳-1
+      const favoriteIndex = this.favorite.findIndex((item) => item === id)
+      // 第一次點擊時結果會是-1
+      if (favoriteIndex === -1) {
+        this.favorite.push(id)
+      } else {
+        this.favorite.splice(favoriteIndex, 1)
+      }
+      console.log(this.favorite)
+    }
+  },
+  // localstorage寫入
+  watch: {
+    favorite: {
+      handler () {
+        // LocalStorage 自訂欄位
+        // 當資料有變動時就進行寫入
+        localStorage.setItem('favorite', JSON.stringify(this.favorite))
+      },
+      deep: true
     }
   },
   mounted () {

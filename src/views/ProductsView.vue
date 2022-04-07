@@ -80,7 +80,6 @@ export default {
   components: {
     Pagination
   },
-  emits: ['emit-favorite'],
   inject: ['emitter'],
   methods: {
     getProducts (page = 1, category) {
