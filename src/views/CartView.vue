@@ -2,7 +2,9 @@
     <VueLoading :active="isLoading"></VueLoading>
     <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
       <div class="position-absolute background-image background-image--cart"></div>
-      <h2 class="fw-bold" style="z-index: 2;">填寫資料</h2>
+      <div class="background-title">
+        <h2 class="fw-bold">填寫資料</h2>
+      </div>
     </div>
     <div class="container  mb-5">
         <template v-if="cartData.carts.length">
@@ -147,7 +149,7 @@ export default {
           email: '',
           name: '',
           address: '',
-          phone: ''
+          tel: ''
         },
         message: ''
       }

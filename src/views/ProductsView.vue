@@ -2,7 +2,9 @@
     <VueLoading :active="isLoading"></VueLoading>
     <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
       <div class="position-absolute background-image background-image--products"></div>
-      <h2 class="fw-bold" style="z-index: 2;">產品列表</h2>
+      <div class="background-title">
+        <h2 class="fw-bold">產品列表</h2>
+      </div>
     </div>
     <div class="container mt-md-5 mt-3 mb-5">
       <ul class="list-unstyled d-flex justify-content-center mt-3 gap-2 mb-5 p-category">
@@ -27,20 +29,20 @@
             <div class="col" v-for="product in products" :key="product.id">
               <!-- products card -->
                 <div class="card border-0 mb-4 position-relative p-card">
-                  <button type="button" @click="toggleFavorite(product.id)">
-                    <i class="bi bi-suit-heart"></i>
-                    加到我的最愛
-                  </button>
                   <div class="p-card__image" :style="{backgroundImage: `url(${product.imageUrl})`}">
                     <div class="hover-area">
-                      <router-link class="btn btn-outline-primary px-5 me-2" :to="`/product/${product.id}`">查看商品</router-link>
-                      <button type="button" class="btn btn-outline-primary px-5" @click="addToCart(product.id)" :disabled="isLoadingItem === product.id">
-                        <span class="spinner-border spinner-border-sm" role="status" v-show="isLoadingItem === product.id"></span>
-                        加到購物車
-                      </button>
+                      <router-link class="btn btn-primary px-5 me-2" :to="`/product/${product.id}`">查看商品</router-link>
                     </div>
                   </div>
                   <div class="card-body p-4 bg-white">
+                    <div>
+                      <a href="#" class="border rounded-circle p-2 me-4" @click.prevent="toggleFavorite(product.id)">
+                        <i class="bi bi-suit-heart"></i>
+                      </a>
+                      <a href="#" class="border rounded-circle p-2 me-4" @click.prevent="addToCart(product.id)" :disabled="isLoadingItem === product.id">
+                        <i class="bi bi-cart2"></i>
+                      </a>
+                    </div>
                     <h4 class="mb-0 mt-3 text-left">{{ product.title }}</h4>
                     <span v-if="favorite.includes(product.id)"><i class="bi bi-suit-heart"></i></span>
                     <div class="row align-items-center">

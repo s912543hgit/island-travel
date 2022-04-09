@@ -2,7 +2,9 @@
     <Loading :active="isLoading"></Loading>
     <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
       <div class="position-absolute background-image background-image--cart"></div>
-      <h2 class="fw-bold" style="z-index: 2;">確認訂單</h2>
+      <div class="background-title">
+        <h2 class="fw-bold">確認訂單</h2>
+      </div>
     </div>
     <div class="container">
       <div class="mt-5">
@@ -65,11 +67,11 @@
                 </li>
                 <li class="d-flex mb-3">
                   <p class="col-4">收件人電話</p>
-                  <p>{{ formData.user.name }}</p>
+                  <p>{{ formData.user.tel }}</p>
                 </li>
                 <li class="d-flex mb-3">
                   <p class="col-4">收件人Email</p>
-                  <p>{{ formData.user.name }}</p>
+                  <p>{{ formData.user.email }}</p>
                 </li>
                 <li class="d-flex mb-3">
                   <p class="col-4">留言</p>

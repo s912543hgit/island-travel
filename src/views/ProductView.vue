@@ -44,15 +44,14 @@
             <p class="text-muted  col-6">原價<del>NT${{ product.origin_price }}</del></p>
             <p class="text-end col-6">特價<span class="h4 fw-bold text-danger ms-2">NT${{ product.price }}</span></p>
           </div>
-          <ul class="list-unstyled">
+          <a href="#" class="border rounded-circle p-2" @click.prevent="toggleFavorite(product.id)">
+            <i class="bi bi-suit-heart"></i>
+          </a>
+          <ul class="list-unstyled mt-3">
             <li>費用已含機場稅、燃油費</li>
             <li>三人即可成團</li>
             <li>若需當地專業嚮導請洽客服電話</li>
           </ul>
-          <button type="button" @click="toggleFavorite(product.id)">
-            <i class="bi bi-suit-heart"></i>
-            加到我的最愛
-          </button>
           <span v-if="favorite.includes(product.id)"><i class="bi bi-suit-heart"></i></span>
           <div class="row align-items-center">
             <div class="col-6">

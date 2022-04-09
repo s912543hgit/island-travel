@@ -1,7 +1,9 @@
 <template>
     <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
       <div class="position-absolute background-image background-image--cart"></div>
-      <h2 class="fw-bold" style="z-index: 2;">完成訂單</h2>
+      <div class="background-title">
+        <h2 class="fw-bold">完成訂單</h2>
+      </div>
     </div>
     <div class="position-relative d-flex">
       <div class="container d-flex flex-column" style="min-height: 60vh;">

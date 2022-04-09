@@ -1,7 +1,9 @@
 <template>
     <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
       <div class="position-absolute background-image--about background-image"></div>
-      <h2 class="fw-bold" style="z-index: 2;">關於我們</h2>
+      <div class="background-title">
+        <h2 class="fw-bold">產品列表</h2>
+      </div>
     </div>
     <div class="container mt-md-5 mt-3 mb-5">
         <h3 class="fs-4 text-center p-4 text-primary">關於島遊</h3>
