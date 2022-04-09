@@ -60,7 +60,6 @@ export default {
           // 將token儲存在cookie裡面
           // expire設置有效時間
           document.cookie = `hexToken=${token}; expires=${new Date(expired)};`
-          // 登入成功後跳轉到商品頁面
           this.$router.push('/admin/products')
         })
         // 失敗的結果
@@ -68,9 +67,6 @@ export default {
           alert(error.data.message)
         })
     }
-  },
-  mounted () {
-
   }
 }
 </script>

@@ -49,7 +49,7 @@ const routes = [
   // 後台
   {
     path: '/admin',
-    component: () => import('../views/DashboardView.vue'),
+    component: () => import('../views/Dashboard/DashboardView.vue'),
     children: [
       {
         path: 'products',

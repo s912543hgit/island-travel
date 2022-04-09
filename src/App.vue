@@ -1,5 +1,5 @@
 <template>
-  <router-view/>
+  <RouterView/>
   <ToastMessages></ToastMessages>
 </template>
 
@@ -9,6 +9,7 @@
 <script>
 import emitter from '@/libs/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
+
 export default {
   components: {
     ToastMessages

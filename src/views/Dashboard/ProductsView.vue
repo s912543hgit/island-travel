@@ -1,5 +1,5 @@
 <template>
-  <Loading :active="isLoading"></Loading>
+  <VueLoading :active="isLoading"></VueLoading>
   <div class="container">
     <div class="text-end mt-4">
       <button
@@ -55,20 +55,16 @@
         </tr>
       </tbody>
     </table>
-    <!-- 內層:pages,外層:pagination -->
-    <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
-    <!-- 將外層的tempProduct傳到內層 內層：item 外層：tempProduct  -->
+    <PaginationView :pages="pagination" @emit-pages="getProducts"></PaginationView>
     <DelModal :item="tempProduct" ref="delModal" @del-item="delProduct"></DelModal>
     <ProductModal :product="tempProduct" ref="productModal" :isNew="isNew" @update-product="updateProduct"></ProductModal>
   </div>
 </template>
 
 <script>
-import Pagination from '@/components/PaginationView.vue'
+import PaginationView from '@/components/PaginationView.vue'
 import ProductModal from '@/components/ProductModal.vue'
 import DelModal from '@/components/DelModal.vue'
-import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/vue-loading.css'
 
 export default {
   data () {
@@ -89,25 +85,19 @@ export default {
     }
   },
   components: {
-    Pagination,
+    PaginationView,
     DelModal,
-    ProductModal,
-    Loading
+    ProductModal
   },
   methods: {
-    // 取得產品列表
     getProducts (page = 1) {
-    // 參數預設值 不代入任何參數的情況下的預設
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
-      // 此處代表預設值為第一頁
       this.isLoading = true
       this.$http.get(api).then((res) => {
-        // 將產品列表帶入空陣列
         this.products = res.data.products
         this.pagination = res.data.pagination
         this.isLoading = false
       })
-        // 失敗的結果
         .catch((error) => {
           this.isLoading = false
           console.dir(error)
@@ -117,12 +107,10 @@ export default {
       if (isNew) {
         // 需要清空
         this.tempProduct = {}
-        // 改變status的狀態
         this.isNew = true
       } else {
         // 需要將產品資料帶上去，因此使用淺拷貝方式 目的是為了不要改變原始物件資料
         this.tempProduct = { ...item }
-        // 因為非新增物件，因此狀態為false
         this.isNew = false
       }
       const productComponent = this.$refs.productModal
@@ -131,25 +119,21 @@ export default {
     openDelProductModal (item) {
       // 將點擊的產品帶入
       this.tempProduct = { ...item }
-      // 取得modal
       const delComponent = this.$refs.delModal
       delComponent.openModal()
     },
-    // 更新產品
     updateProduct (item) {
       this.tempProduct = item
       let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
       let method = 'post'
       this.isLoading = true
       // 根據status來決定要串接post或是put api
-      // 編輯的狀態
       if (!this.isNew) {
         api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`
         method = 'put'
       }
       const productComponent = this.$refs.productModal
       // post和put需要代的參數相同，因此可以寫在一起
-      // [method]裡帶入httpmethods
       this.$http[method](api, { data: this.tempProduct })
         .then((response) => {
           this.isLoading = false
@@ -162,7 +146,6 @@ export default {
           alert(error.data.message)
         })
     },
-    // 刪除產品
     delProduct () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`
       this.$http
@@ -170,8 +153,6 @@ export default {
         .then((response) => {
           this.isLoading = true
           alert(response.data.message)
-          // this.$emit('close-del')
-          // 重新取得產品列表
           this.getProducts()
           const delComponent = this.$refs.delModal
           delComponent.hideModal()

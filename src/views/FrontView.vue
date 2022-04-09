@@ -1,7 +1,7 @@
 <template>
   <FrontNavbar></FrontNavbar>
-  <router-view @emit-form="getData" @emit-favorite="getFavorite"
-  :form-data="formData"></router-view>
+  <RouterView @emit-form="getData" @emit-favorite="getFavorite"
+  :form-data="formData"/>
   <FooterView></FooterView>
   <PageTop></PageTop>
 </template>

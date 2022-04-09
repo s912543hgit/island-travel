@@ -5,7 +5,7 @@
           <div class="d-flex flex-column p-cart--complete justify-content-center align-items-center">
               <h1>404 NOT FOUND</h1>
               <p>Oops！這個頁面不存在唷！</p>
-              <router-link class="btn btn-primary mt-4 px-5" to="/">回到首頁</router-link>
+              <RouterLink class="btn btn-primary mt-4 px-5" to="/">回到首頁</RouterLink>
           </div>
         </div>
       </div>

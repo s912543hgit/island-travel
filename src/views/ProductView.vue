@@ -1,7 +1,7 @@
 <template>
   <div class="background-image--product" :style="{backgroundImage: `url(${product.imageUrl})`}">
   </div>
-    <Loading :active="isLoading"></Loading>
+    <VueLoading :active="isLoading"></VueLoading>
     <div class="container-md">
       <div class="row align-items-center">
         <div class="col-md-7">
@@ -31,10 +31,10 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb px-0 mb-0 py-3 mt-3">
               <li class="breadcrumb-item">
-                <router-link class="text-muted" to="/">島遊</router-link>
+                <RouterLink class="text-muted" to="/">島遊</RouterLink>
               </li>
               <li class="breadcrumb-item">
-                <router-link class="text-muted" to="/products">{{ product.category }}</router-link>
+                <RouterLink class="text-muted" to="/products">{{ product.category }}</RouterLink>
               </li>
               <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
             </ol>
@@ -56,15 +56,15 @@
           <div class="row align-items-center">
             <div class="col-6">
               <div class="input-group">
-                <select  id="" class="form-select" v-model="product.qty">
+                <select class="form-select" v-model="product.qty">
                   <option value="0" disabled selected>請選擇人數</option>
                   <option v-for="num in 20" :value="num" :selected="product.qty === num" :key="`${num}-${product.id}`" >{{ num }}</option>
                 </select>
               </div>
             </div>
             <div class="col-6">
-              <button type="button" class="text-nowrap btn btn-primary w-100 py-2" @click.prevent="updateCartItem(product)" :disabled="isLoadingItem === product.id">
-                <span class="spinner-border spinner-border-sm" role="status" v-show="isLoadingItem === product.id"></span>
+              <button type="button" class="text-nowrap btn btn-primary w-100 py-2" @click.prevent="updateCartItem(product)" :disabled="isDisabled === 'add'">
+                <span class="spinner-border spinner-border-sm" role="status" v-show="isDisabled === 'add'"></span>
                 加入購物車
               </button>
             </div>
@@ -107,7 +107,6 @@
       :modules="modules"
     >
       <swiper-slide v-for="(item) in products" :key="item.id">
-        <!-- <router-link :to="`/product/${item.id}`"> -->
           <div class="card border-0 mb-4 position-relative p-card" @click="getProduct(item.id)">
             <div class="p-card__image" :style="{backgroundImage: `url(${item.imageUrl})`}" style="height: 300px;">
               <div class="hover-area">
@@ -123,7 +122,6 @@
               </div>
             </div>
           </div>
-        <!-- </router-link> -->
       </swiper-slide>
     </swiper>
   </div>
@@ -132,11 +130,9 @@
 
 <script>
 import emitter from '@/libs/emitter'
-import Loading from 'vue-loading-overlay'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import 'swiper/css/navigation'
-
 import { Navigation } from 'swiper'
 
 export default {
@@ -151,13 +147,13 @@ export default {
       isNew: true,
       isLoading: false,
       isLoadingItem: '',
+      isDisabled: '',
       favorite: JSON.parse(localStorage.getItem('favorite')) || []
     }
   },
   components: {
     Swiper,
-    SwiperSlide,
-    Loading
+    SwiperSlide
   },
   setup () {
     return {
@@ -167,19 +163,16 @@ export default {
   inject: ['emitter'],
   methods: {
     getProduct (paramsId) {
-      // 找到產品id 並存起來
       const { id } = this.$route.params
       this.isLoading = true
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${paramsId !== undefined ? paramsId : id}`)
         .then(res => {
           this.product = {
             ...res.data.product,
-            // 帶入預設值
             qty: this.product.qty
           }
           this.isLoading = false
           const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products?category=${this.product.category}`
-          // 取得同一分類的產品
           this.$http.get(url)
             .then(res => {
               this.products = res.data.products
@@ -190,7 +183,6 @@ export default {
       this.isLoading = true
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
         .then((res) => {
-          // 購物車的資料有兩層data
           this.cartData = res.data.data
           this.isLoading = false
         })
@@ -200,7 +192,7 @@ export default {
         product_id: product.id,
         qty: product.qty
       }
-      this.isLoadingItem = product.id
+      this.isDisabled = 'add'
       // 如果商品尚未被加入 使用add購物車
       let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       let method = 'post'
@@ -215,14 +207,11 @@ export default {
           title: '購物提示',
           content: response.data.message
         })
-        this.isLoadingItem = ''
+        this.isDisabled = ''
         emitter.emit('get-cart')
       })
-      this.isLoadingItem = ''
     },
     toggleFavorite (id) {
-      console.log(id)
-      // 查詢資料裡面是否有id
       // findIndex 尋找陣列中符合對象並返回index 若沒有合適的會回傳-1
       const favoriteIndex = this.favorite.findIndex((item) => item === id)
       // 第一次點擊時結果會是-1
@@ -231,14 +220,11 @@ export default {
       } else {
         this.favorite.splice(favoriteIndex, 1)
       }
-      console.log(this.favorite)
     }
   },
-  // localstorage寫入
   watch: {
     favorite: {
       handler () {
-        // LocalStorage 自訂欄位
         // 當資料有變動時就進行寫入
         localStorage.setItem('favorite', JSON.stringify(this.favorite))
       },

@@ -1,7 +1,7 @@
 .slider--product {
-    margin-top: -40px;
-    @include sp {
-        height: 300px;
-        margin-top: -70px;
-    }
+  margin-top: -40px;
+  @include sp {
+    height: 300px;
+    margin-top: -70px;
+  }
 }

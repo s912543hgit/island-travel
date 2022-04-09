@@ -1,146 +1,158 @@
 .p-steps {
-    display:flex;
-    justify-content:space-between;
+  display: flex;
+  justify-content: space-between;
+
+  @include sp {
+    flex-direction: column;
+  }
+
+  li {
+    width: 32%;
+    text-align: center;
+    padding: 10px;
+    background: #bdbdbd;
+
     @include sp {
-        flex-direction:column;
+      width: 100%;
     }
-    li {
-        width:32%;
-        text-align:center;
-        padding:10px;
-        background:#bdbdbd;
-        @include sp {
-            width: 100%;
-        }
-        p {
-            margin-bottom:0;
-        }
+
+    p {
+      margin-bottom: 0;
     }
-    .is-active {
-        background:#4bacb8;
-        color:#fff;
-    }
+  }
+
+  .is-active {
+    background: #4bacb8;
+    color: #fff;
+  }
 }
 
 // 沒有商品時
 .p-product--none {
-    min-height: 75vh;
+  min-height: 75vh;
 }
+
 .p-cart--complete {
-    min-height: 60vh;
+  min-height: 60vh;
 }
 
 //購物車內容
 .form-select {
-    padding-right: 0.25rem;
+  padding-right: 0.25rem;
 }
 
-
-// nav
-
 /*============
-nav
-=============*/
+  nav
+  =============*/
+
 .cartNav {
-    display: block;
-    position: fixed;
-    top: 0;
-    right: -500px;
-    bottom: 0;
-    width: 500px;
-    background: #fafafa;
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    transition: all .5s;
-    z-index: 52;
-    opacity: 0;
-    &__inner {
-        padding: 30px;
+  display: block;
+  position: fixed;
+  top: 0;
+  right: -500px;
+  bottom: 0;
+  width: 500px;
+  background: #fafafa;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transition: all 0.5s;
+  z-index: 52;
+  opacity: 0;
+
+  &__inner {
+    padding: 30px;
+  }
+
+  @include sp {
+    // left: -220px;
+    width: 100%;
+    transform: translateX(100%);
+  }
+
+  &__mask {
+    display: none;
+    transition: all 0.5s;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+
+    p {
+      margin: 0;
     }
+  }
+
+  &__close {
+    cursor: pointer;
+  }
+}
+
+.open {
+  .cartNav {
+    right: 0;
+    opacity: 1;
+
     @include sp {
-        // left: -220px;
-        width: 100%;
-        transform: translateX(100%);
+      transform: translateX(0);
     }
 
     &__mask {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      opacity: 0.6;
+      z-index: 51;
+      cursor: pointer;
+
+      @include sp {
         display: none;
-        transition: all .5s;
-    }
-
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 20px;
-        // border-bottom: 1px solid #ebebeb;
-        p {
-            margin: 0;
-        }
-    }
-
-    &__close {
-        cursor: pointer;
+      }
     }
   }
-  .open  {
-    .cartNav {
-        right: 0;
-        opacity: 1;
-        @include sp {
-            transform: translateX(0);
-        }
-        &__mask {
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            opacity: .6;
-            z-index: 51;
-            cursor: pointer;
-            @include sp {
-                display: none;
-            }
-        }
-    }
-  }
+}
 
 .toggle_btn {
-    display: block;
-    position: fixed;
-    top: 80px;
-    right: 30px;
-    width: 30px;
-    height: 30px;
-    transition: all .5s;
-    cursor: pointer;
-    z-index: 3;
+  display: block;
+  position: fixed;
+  top: 80px;
+  right: 30px;
+  width: 30px;
+  height: 30px;
+  transition: all 0.5s;
+  cursor: pointer;
+  z-index: 3;
 }
 
 .icon--close {
-    display: block;
-    position: relative;
-    width: 30px;
-    height: 30px;
-    &::before,
-    &::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 3px; /* 棒の幅（太さ） */
-        height: 20px; /* 棒の高さ */
-        background: #333;
-    }
-    &::before {
-        transform: translate(-50%,-50%) rotate(45deg);
-    }
+  display: block;
+  position: relative;
+  width: 30px;
+  height: 30px;
 
-    &::after {
-        transform: translate(-50%,-50%) rotate(-45deg);
-    }
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3px;
+    height: 20px;
+    background: #333;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
 }

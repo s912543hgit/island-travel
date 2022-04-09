@@ -1,5 +1,5 @@
 <template>
-    <Loading :active="isLoading"></Loading>
+    <VueLoading :active="isLoading"></VueLoading>
     <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
       <div class="position-absolute background-image background-image--cart"></div>
       <div class="background-title">
@@ -57,10 +57,9 @@
                 </div>
           </template>
           <div class="col-md-6">
-            <!-- <h2>訂購人資訊</h2> -->
             <div class="border p-5 background-white">
               <p class="text-center h4 mb-3">訂購資訊</p>
-              <ul class="list-unstyled p-confirmForm te">
+              <ul class="list-unstyled p-confirmForm">
                 <li class="d-flex mb-3">
                   <p class="col-4">收件人姓名</p>
                   <p>{{ formData.user.name }}</p>
@@ -88,7 +87,6 @@
 
 <script>
 import emitter from '@/libs/emitter'
-import Loading from 'vue-loading-overlay'
 
 export default {
   data () {
@@ -106,16 +104,12 @@ export default {
       }
     }
   },
-  components: {
-    Loading
-  },
   props: ['form-data'],
   methods: {
     getCart () {
       this.isLoading = true
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
         .then((res) => {
-          // 購物車的資料有兩層data
           this.cartData = res.data.data
           this.isLoading = false
         })
@@ -124,7 +118,6 @@ export default {
       this.form = this.formData
       this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`, { data: this.form })
         .then((res) => {
-          // console.log(res)
           this.getCart()
           emitter.emit('get-cart')
           this.isLoading = true

@@ -21,21 +21,20 @@
           <tbody>
             <tr v-for="item in favoritesList" :key="item.id" class="border-bottom border-top">
               <th scope="row" class="border-0 px-0 font-weight-normal py-4">
-                <router-link  :to="`/product/${item.id}`">
-                  <img :src="item.imageUrl" alt="" style="width: 80px; height: 80px; object-fit: cover;">
+                <RouterLink :to="`/product/${item.id}`">
+                  <img class="favorite__thumbnail" :src="item.imageUrl" alt="{{ item.title }}" style="width: 80px; height: 80px; object-fit: cover;">
                   <p class="mb-0 fw-bold ms-3 d-inline-block">{{ item.title }}</p>
-                </router-link>
+                </RouterLink>
               </th>
               <td class="border-0 align-middle" style="max-width: 160px;">
                   <p class="">NT{{ item.price }}</p>
               </td>
               <td class="border-0 align-middle">
-                <button class="btn-primary btn" type="button" @click="addToCart(item.id)" :disabled="isLoadingItem === item.id">
-                  <span class="spinner-border spinner-border-sm" role="status" v-show="isLoadingItem === item.id"></span>
+                <button class="btn-primary btn" type="button" @click="addToCart(item.id)" :disabled="isDisabled === 'add'">
+                  <span class="spinner-border spinner-border-sm" role="status" v-show="isDisabled === 'add'"></span>
                   加入購物車
                 </button>
               </td>
-              <!-- 刪除按鈕 -->
               <td class="border-0 align-middle">
                 <button type="button" class="btn btn-outline-danger btn-sm" @click="removeFavorite(item.id)">
                 x
@@ -47,18 +46,19 @@
       </div>
       <div v-else class="d-flex flex-column justify-content-center align-items-center" style="min-height: 60vh;">
         <h3 class="text-center">目前還沒有收藏行程唷！快去逛逛吧！</h3>
-        <router-link  to="/products" class="btn btn-primary mt-5" @click="isOpen = !isOpen">開始旅程</router-link>
+        <RouterLink to="/products" class="btn btn-primary mt-5" @click="isOpen = !isOpen">開始旅程</RouterLink>
       </div>
     </div>
 </template>
 <script>
 import emitter from '@/libs/emitter'
+
 export default {
   data () {
     return {
       products: [],
       favoritesList: [],
-      isLoadingItem: '',
+      isDisabled: '',
       isLoading: false,
       favorite: JSON.parse(localStorage.getItem('favorite')) || []
     }
@@ -90,7 +90,7 @@ export default {
         product_id: id,
         qty
       }
-      this.isLoadingItem = id
+      this.isDisabled = 'add'
       this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`, { data })
         .then((response) => {
           this.emitter.emit('push-message', {
@@ -98,7 +98,7 @@ export default {
             title: '購物提示',
             content: response.data.message
           })
-          this.isLoadingItem = ''
+          this.isDisabled = ''
           // 觸發設置的監聽
           emitter.emit('get-cart')
         })

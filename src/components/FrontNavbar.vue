@@ -7,16 +7,13 @@
           <nav class="header__nav nav" :class="{active: isClicked}">
             <ul class="nav-list list-unstyled">
               <li class="nav-list__item">
-                <router-link class="nav-link" to="/" @click="isClicked = !isClicked">首頁</router-link>
+                <RouterLink class="nav-link" to="/" @click="isClicked = !isClicked">首頁</RouterLink>
               </li>
               <li class="nav-list__item">
-                <router-link class="nav-link" to="/about" @click="isClicked = !isClicked">關於我們</router-link>
+                <RouterLink class="nav-link" to="/about" @click="isClicked = !isClicked">關於我們</RouterLink>
               </li>
-              <!-- <li class="nav-list__item">
-                <router-link class="nav-link" to="/favorite" @click="isClicked = !isClicked">我的最愛</router-link>
-              </li> -->
               <li class="nav-list__item">
-                <router-link class="nav-link" to="/products" @click="isClicked = !isClicked">產品列表</router-link>
+                <RouterLink class="nav-link" to="/products" @click="isClicked = !isClicked">產品列表</RouterLink>
               </li>
               <li class="nav-list__item" @click="isOpen = !isOpen" >
                 <div class="d-md-flex position-relative text-dark d-none d-md-block">
@@ -25,14 +22,13 @@
                     {{ cartData?.carts?.length }}
                   </span>
                 </div>
-                <router-link to="/cart" class="d-md-flex position-relative text-dark d-md-none" @click="isClicked = !isClicked">
-                    購物車
-                </router-link>
+                <RouterLink class="d-md-flex position-relative text-dark d-md-none"
+                to="/cart" @click="isClicked = !isClicked">購物車</RouterLink>
               </li>
               <li class="nav-list__item">
-                <router-link class="nav-link" to="/favorite" @click="isClicked = !isClicked">
+                <RouterLink class="nav-link" to="/favorite" @click="isClicked = !isClicked">
                   <i class="bi bi-suit-heart"></i>
-                </router-link>
+                </RouterLink>
               </li>
             </ul>
           </nav>

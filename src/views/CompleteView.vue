@@ -25,7 +25,7 @@
           <div class="d-flex flex-column p-cart--complete justify-content-center align-items-center">
               <h2>完成訂單</h2>
               <p>感謝您的光臨，我們期待與您一起啟程！</p>
-              <router-link class="btn btn-primary mt-4 px-5" to="/">回到首頁</router-link>
+              <RouterLink class="btn btn-primary mt-4 px-5" to="/">回到首頁</RouterLink>
           </div>
         </div>
       </div>

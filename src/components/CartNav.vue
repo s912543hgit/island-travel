@@ -36,12 +36,12 @@
                 </tr>
               </table>
               <div class="text-center">
-                <router-link to="/cart" class="text-white" @click="isOpen = !isOpen">
+                <RouterLink to="/cart" class="text-white" @click="isOpen = !isOpen">
                   <button class="btn btn-primary mt-4 w-100 py-3" type="button">
                     前往購物車
                   </button>
-                </router-link>
-                <button @click="clearCartItem" class="btn btn-outline-danger mt-3 py-2" type="button">
+                </RouterLink>
+                <button @click="clearCartItem" class="btn btn-outline-danger mt-3 py-2" type="button" :disabled="isDisabled === 'clear'">
                   <span class="spinner-border spinner-border-sm" role="status" v-show="isDisabled === 'clear'"></span>
                   清空購物車
                 </button>
@@ -49,7 +49,7 @@
             </template>
             <div v-else class="p-product--none d-flex flex-column justify-content-center align-items-center">
               <p>購物車內沒有商品唷</p>
-              <router-link  to="/products" class="btn btn-primary" @click="isOpen = !isOpen">開始旅程</router-link>
+              <RouterLink  to="/products" class="btn btn-primary" @click="isOpen = !isOpen">開始旅程</RouterLink>
             </div>
           </div>
         </nav>
@@ -91,7 +91,6 @@ export default {
     // 清空購物車
     clearCartItem () {
       this.isDisabled = 'clear'
-      this.isLoading = true
       this.$http.delete(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts/`)
         .then((res) => {
           this.getCart()

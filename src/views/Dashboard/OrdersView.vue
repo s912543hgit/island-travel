@@ -1,5 +1,5 @@
 <template>
-  <Loading :active="isLoading"></Loading>
+  <VueLoading :active="isLoading"></VueLoading>
   <div class="container">
     <table class="table mt-4">
       <thead>
@@ -63,7 +63,7 @@
         </template>
       </tbody>
     </table>
-    <Pagination :pages="pagination" @emit-pages="getOrders"></Pagination>
+    <PaginationView :pages="pagination" @emit-pages="getOrders"></PaginationView>
     <DelModal :item="tempOrder" ref="delModal" @del-item="delOrder"></DelModal>
     <!-- 將tempOrder傳入order -->
     <OrderModal ref="orderModal" :order="tempOrder" @update-order="updateOrder"></OrderModal>
@@ -71,11 +71,9 @@
 </template>
 
 <script>
-import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/vue-loading.css'
 import DelModal from '@/components/DelModal.vue'
 import OrderModal from '@/components/OrderModal.vue'
-import Pagination from '@/components/PaginationView.vue'
+import PaginationView from '@/components/PaginationView.vue'
 
 export default {
   data () {
@@ -89,25 +87,19 @@ export default {
     }
   },
   components: {
-    Loading,
     DelModal,
-    Pagination,
+    PaginationView,
     OrderModal
   },
   methods: {
-    // 取得訂單列表
     getOrders (Currentpage = 1) {
-    // 參數預設值 不代入任何參數的情況下的預設
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders`
-      // 此處代表預設值為第一頁
       this.isLoading = true
       this.$http.get(api).then((res) => {
-        // 將產品列表帶入空陣列
         this.orders = res.data.orders
         this.pagination = res.data.pagination
         this.isLoading = false
       })
-        // 失敗的結果
         .catch((error) => {
           this.isLoading = false
           console.dir(error)
@@ -120,12 +112,10 @@ export default {
       orderComponent.openModal()
     },
     openDelOrderModal (item) {
-      // 將點擊的訂單帶入
       this.tempOrder = { ...item }
       const delComponent = this.$refs.delModal
       delComponent.openModal()
     },
-    // 更新訂單
     updateOrder (item) {
       this.tempOrder = { ...item }
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
@@ -146,13 +136,11 @@ export default {
           alert(error.data.message)
         })
     },
-    // 刪除訂單
     delOrder () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
       this.isLoading = true
       this.$http.delete(url).then((response) => {
         alert(response.data.message)
-        // 重新取得訂單列表
         this.getOrders()
         const delComponent = this.$refs.delModal
         delComponent.hideModal()
