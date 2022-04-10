@@ -9,7 +9,7 @@
           class="container-md slider--product"
           :slides-per-view="1"
           :space-between="50"
-          :navigation="true"
+          :pagination="true"
           :autoplay="{
             delay: 3000,
             disableOnInteraction: false,
@@ -132,8 +132,9 @@
 import emitter from '@/libs/emitter'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
-import 'swiper/css/navigation'
-import { Navigation } from 'swiper'
+// import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import { Pagination } from 'swiper'
 
 export default {
   data () {
@@ -157,7 +158,7 @@ export default {
   },
   setup () {
     return {
-      modules: [Navigation]
+      modules: [Pagination]
     }
   },
   inject: ['emitter'],

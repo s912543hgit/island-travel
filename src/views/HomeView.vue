@@ -22,7 +22,7 @@
         ><img
           src="https://images.unsplash.com/photo-1468082547792-d37c6c74003e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1476&q=80" alt="island picture"/></swiper-slide
       >
-      <div class="row justify-content-start p-mainvisual__container">
+      <div class="p-mainvisual__container">
         <div class="col-md-4 text-center p-mainvisual__content p-3">
           <h2 class="text-white logo">島遊</h2>
           <p class="mb-3 text-white">尋找您的心之島向</p>

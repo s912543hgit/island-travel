@@ -17,10 +17,12 @@
               </li>
               <li class="nav-list__item" @click="isOpen = !isOpen" >
                 <div class="d-md-flex position-relative text-dark d-none d-md-block">
-                  <i class="bi bi-cart fs-5"></i>
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{ cartData?.carts?.length }}
-                  </span>
+                  <a href="#">
+                    <i class="bi bi-cart fs-5"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" v-show="cartData.carts.length">
+                      {{ cartData?.carts?.length }}
+                    </span>
+                  </a>
                 </div>
                 <RouterLink class="d-md-flex position-relative text-dark d-md-none"
                 to="/cart" @click="isClicked = !isClicked">購物車</RouterLink>

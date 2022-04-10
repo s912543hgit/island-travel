@@ -7,33 +7,39 @@
       </div>
     </div>
     <div class="container mt-md-5 mt-3 mb-5">
-      <ul class="list-unstyled d-flex justify-content-center mt-3 gap-2 mb-5 p-category">
-        <li class="btn btn-outline-primary p-0" :class="{ active: isCheck }">
-          <a class="px-3 px-md-4 py-1" href="#" @click.prevent="getProducts(1)"> 全部</a>
-        </li>
-        <li class="btn btn-outline-primary p-0" :class="{ active: isCheck }">
-          <a @click="getProducts" class="px-3 px-md-4 py-1" href="#" @click.prevent="getProducts(1,'日本')"> 日本</a>
-        </li>
-        <li class="btn btn-outline-primary p-0" :class="{ active: isCheck }">
-          <a class="px-3 px-md-4 py-1"  href="#"  @click.prevent="getProducts(1,'太平洋')"> 太平洋</a>
-        </li>
-        <li class="btn btn-outline-primary p-0" :class="{ active: isCheck }">
-          <a class="px-3 px-md-4 py-1" href="#"  @click.prevent="getProducts(1,'其他')"> 其他</a>
-        </li>
-      </ul>
       <div class="row">
+        <div class="col-md-3 position-relative">
+          <ul class="p-category">
+            <li class="list-group-item list-group-item-action" :class="{ active: isActive === 'all' }">
+              <a class="px-3 px-md-4 py-1" href="#"
+              @click.prevent="getProducts(1)"> 全部</a>
+            </li>
+            <li class="list-group-item list-group-item-action" :class="{ active: isActive === '日本' }">
+              <a class="px-3 px-md-4 py-1" href="#"
+              @click.prevent="getProducts(1,'日本')"> 日本</a>
+            </li>
+            <li class="list-group-item list-group-item-action" :class="{ active: isActive === '太平洋' }">
+              <a class="px-3 px-md-4 py-1"  href="#"
+              @click.prevent="getProducts(1,'太平洋')"> 太平洋</a>
+            </li>
+            <li class="list-group-item list-group-item-action" :class="{ active: isActive === '其他' }">
+              <a class="px-3 px-md-4 py-1" href="#"
+              @click.prevent="getProducts(1,'其他')"> 其他</a>
+            </li>
+          </ul>
+        </div>
         <!-- products list -->
-        <div class="col-md-12">
+        <div class="col-md-9">
           <div class="row row-cols-1 row-cols-md-2">
             <div class="col" v-for="product in products" :key="product.id">
               <!-- products card -->
                 <div class="card border-0 mb-4 position-relative p-card">
                   <div class="p-card__image" :style="{backgroundImage: `url(${product.imageUrl})`}">
-                    <div class="hover-area">
-                      <RouterLink class="btn btn-primary px-5 me-2" :to="`/product/${product.id}`">查看商品</RouterLink>
-                    </div>
+                    <RouterLink :to="`/product/${product.id}`" class="hover-area">
+                      <button class="btn btn-primary px-5 me-2">查看商品</button>
+                    </RouterLink>
                   </div>
-                  <div class="card-body p-4 bg-white">
+                  <RouterLink :to="`/product/${product.id}`" class="card-body p-4 bg-white">
                     <div>
                       <a href="#" class="border rounded-circle p-2 me-4"
                         @click.prevent="toggleFavorite(product.id)">
@@ -51,7 +57,7 @@
                       <p class="text-end col-6">特價<span class="h4 fw-bold text-danger ms-2">NT${{ product.price }}</span></p>
                     </div>
                     <p class="text-muted mt-3 text-left" style="height: 4.5rem; overflow: hidden;">{{ product.description }}</p>
-                  </div>
+                  </RouterLink>
                 </div>
             </div>
           </div>
@@ -74,8 +80,8 @@ export default {
       isLoading: false,
       id: '',
       productId: '',
-      isCheck: false,
       isLoadingItem: '',
+      isActive: '',
       // 從localStorage中取出的資料 必須給予預設值
       favorite: JSON.parse(localStorage.getItem('favorite')) || []
     }
@@ -86,9 +92,12 @@ export default {
   inject: ['emitter'],
   methods: {
     getProducts (page = 1, category) {
+      this.isActive = category
       let url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/?page=${page}`
       if (category) {
         url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products?category=${category}`
+      } else {
+        this.isActive = 'all'
       }
       this.isLoading = true
       this.$http.get(url)
@@ -136,6 +145,7 @@ export default {
   },
   mounted () {
     this.getProducts()
+    this.isActive = 'all'
   }
 }
 </script>
