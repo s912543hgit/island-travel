@@ -43,25 +43,31 @@
                     <div>
                       <a href="#" class="border rounded-circle p-2 me-4"
                         @click.prevent="toggleFavorite(product.id)">
-                        <i class="bi bi-suit-heart"></i>
-                      </a>
-                      <a href="#" class="border rounded-circle p-2 me-4"
-                        @click.prevent="addToCart(product.id)" :disabled="isLoadingItem === product.id">
-                        <i class="bi bi-cart2"></i>
+                        <span v-if="favorite.includes(product.id)">
+                          <i  v-if="favorite.includes(product.id)" class="bi bi-suit-heart-fill"></i>
+                        </span>
+                        <i v-else class="bi bi-suit-heart"></i>
                       </a>
                     </div>
                     <h4 class="mb-0 mt-3 text-left">{{ product.title }}</h4>
-                    <span v-if="favorite.includes(product.id)"><i class="bi bi-suit-heart"></i></span>
                     <div class="row align-items-center">
                       <p class="text-muted col-6">原價<del>NT${{ product.origin_price }}</del></p>
                       <p class="text-end col-6">特價<span class="h4 fw-bold text-danger ms-2">NT${{ product.price }}</span></p>
                     </div>
-                    <p class="text-muted mt-3 text-left" style="height: 4.5rem; overflow: hidden;">{{ product.description }}</p>
+                    <button class="btn btn-primary w-100"
+                    @click.prevent="addToCart(product.id)"
+                    :disabled="isLoadingItem === product.id">
+                    <span class="spinner-border spinner-border-sm"
+                    role="status" v-show="isLoadingItem === product.id"></span>
+                    加入購物車
+                  </button>
                   </RouterLink>
                 </div>
             </div>
           </div>
-          <PaginationView :pages="pagination" @emit-pages="getProducts" class="justify-content-center d-flex mt-5" ></PaginationView>
+          <PaginationView :pages="pagination"
+          @emit-pages="getProducts"
+          class="justify-content-center d-flex mt-5" ></PaginationView>
         </div>
       </div>
     </div>
@@ -129,8 +135,16 @@ export default {
       const favoriteIndex = this.favorite.findIndex((item) => item === id)
       if (favoriteIndex === -1) {
         this.favorite.push(id)
+        this.emitter.emit('push-message', {
+          style: 'success',
+          title: '已加入收藏'
+        })
       } else {
         this.favorite.splice(favoriteIndex, 1)
+        this.emitter.emit('push-message', {
+          style: 'success',
+          title: '已移除收藏'
+        })
       }
     }
   },

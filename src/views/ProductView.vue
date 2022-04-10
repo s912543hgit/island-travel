@@ -2,7 +2,7 @@
   <div class="background-image--product" :style="{backgroundImage: `url(${product.imageUrl})`}">
   </div>
     <VueLoading :active="isLoading"></VueLoading>
-    <div class="container-md">
+    <div class="container">
       <div class="row align-items-center">
         <div class="col-md-7">
           <swiper
@@ -10,11 +10,8 @@
           :slides-per-view="1"
           :space-between="50"
           :pagination="true"
-          :autoplay="{
-            delay: 3000,
-            disableOnInteraction: false,
-          }"
           :modules="modules"
+          :navigation="true"
         >
           <swiper-slide>
           <div :style="{backgroundImage: `url(${product.imageUrl})`}"
@@ -98,7 +95,13 @@
   <div class="container-md">
     <h3 class="fs-4 text-center p-4 text-primary">相關商品</h3>
     <swiper :slides-per-view="1"
+      :loop="true"
       :space-between="50"
+      :autoplay="{
+        delay: 3000,
+        disableOnInteraction: false,
+      }"
+      :speed="1000"
       :breakpoints="{
         '768': {
           slidesPerView: 3,
@@ -107,20 +110,20 @@
       :modules="modules"
     >
       <swiper-slide v-for="(item) in products" :key="item.id">
-          <div class="card border-0 mb-4 position-relative p-card" @click="getProduct(item.id)">
+          <div class="card border-0 mb-4 position-relative p-card">
             <div class="p-card__image" :style="{backgroundImage: `url(${item.imageUrl})`}" style="height: 300px;">
-              <div class="hover-area">
-                <a class="btn btn-outline-primary px-5" @click="getProduct(item.id)">查看商品</a>
-              </div>
+              <RouterLink :to="`/product/${item.id}`" class="hover-area">
+                <div class="btn btn-primary px-5">查看商品</div>
+              </RouterLink>
             </div>
-            <div class="card-body text-left">
+            <RouterLink  :to="`/product/${item.id}`" class="card-body text-left">
               <h4>{{ item.title }}</h4>
               <div class="d-flex justify-content-between">
                 <p class="card-text text-muted mb-0" style="height: 4.5rem; overflow: hidden;">
                   {{ item.description }}
                 </p>
               </div>
-            </div>
+            </RouterLink>
           </div>
       </swiper-slide>
     </swiper>
@@ -132,9 +135,10 @@
 import emitter from '@/libs/emitter'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
-// import 'swiper/css/navigation'
+import 'swiper/css/autoplay'
+import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import { Pagination } from 'swiper'
+import { Navigation, Pagination, Autoplay } from 'swiper'
 
 export default {
   data () {
@@ -158,15 +162,15 @@ export default {
   },
   setup () {
     return {
-      modules: [Pagination]
+      modules: [Navigation, Pagination, Autoplay]
     }
   },
   inject: ['emitter'],
   methods: {
-    getProduct (paramsId) {
+    getProduct () {
       const { id } = this.$route.params
       this.isLoading = true
-      this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${paramsId !== undefined ? paramsId : id}`)
+      this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`)
         .then(res => {
           this.product = {
             ...res.data.product,
@@ -230,6 +234,11 @@ export default {
         localStorage.setItem('favorite', JSON.stringify(this.favorite))
       },
       deep: true
+    },
+    // watch 偵測到網址的 id 有變，將新的 id 帶入到 data 的 id
+    $route (to) {
+      this.id = to.params.id
+      this.getProduct()
     }
   },
   mounted () {

@@ -27,11 +27,12 @@
                 </RouterLink>
               </th>
               <td class="border-0 align-middle" style="max-width: 160px;">
-                  <p class="">NT{{ item.price }}</p>
+                  <p class="">NT{{ item.price }} / {{ item.unit }}</p>
               </td>
               <td class="border-0 align-middle">
-                <button class="btn-primary btn" type="button" @click="addToCart(item.id)" :disabled="isDisabled === 'add'">
-                  <span class="spinner-border spinner-border-sm" role="status" v-show="isDisabled === 'add'"></span>
+                <button class="btn-primary btn" type="button"
+                @click="addToCart(item.id)" :disabled="isLoadingItem === item.id">
+                  <span class="spinner-border spinner-border-sm" role="status" v-show="isLoadingItem === item.id"></span>
                   加入購物車
                 </button>
               </td>
@@ -90,7 +91,7 @@ export default {
         product_id: id,
         qty
       }
-      this.isDisabled = 'add'
+      this.isLoading = true
       this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`, { data })
         .then((response) => {
           this.emitter.emit('push-message', {
@@ -98,6 +99,7 @@ export default {
             title: '購物提示',
             content: response.data.message
           })
+          this.isLoading = false
           this.isDisabled = ''
           // 觸發設置的監聽
           emitter.emit('get-cart')

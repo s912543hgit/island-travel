@@ -133,16 +133,21 @@
               </VueForm>
             </div>
           </div>
+          <button type="button" class="btn btn-primary" data-bs-toggle="cautionModal" @click="openModal()">
+            開啟modal
+          </button>
         </template>
         <div v-else class="p-product--none d-flex flex-column justify-content-center align-items-center">
           <p>購物車內沒有商品唷</p>
           <RouterLink class="btn btn-primary" to="/products" @click="isClicked = !isClicked">開始旅程</RouterLink>
         </div>
       </div>
+      <CautionModal ref="cautionModal"></CautionModal>
 </template>
 
 <script>
 import emitter from '@/libs/emitter'
+import CautionModal from '@/components/CautionModal.vue'
 
 export default {
   data () {
@@ -163,8 +168,14 @@ export default {
           tel: ''
         },
         message: ''
+      },
+      modal: {
+        cautionModal: ''
       }
     }
+  },
+  component: {
+    CautionModal
   },
   emits: ['emit-form'],
   inject: ['emitter'],
@@ -190,6 +201,13 @@ export default {
           emitter.emit('get-cart')
           this.isLoading = false
         })
+    },
+    showAlert () {
+      // Use sweetalert2
+      this.$swal({
+        text: 'Something went wrong!',
+        footer: '<button class="btn btn-primary" @click="clearCartItem">清空購物車</button>'
+      })
     },
     clearCartItem () {
       this.isDisabled = 'clear'
@@ -223,6 +241,10 @@ export default {
     },
     isRequired (value) {
       return value ? true : 'This field is required'
+    },
+    openModal () {
+      const cautionModal = this.$refs.cautionModal
+      cautionModal.openModal()
     }
   },
   mounted () {

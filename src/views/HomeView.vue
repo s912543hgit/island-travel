@@ -100,6 +100,8 @@
   <!-- 島嶼風情 -->
   <h3 class="fs-4 text-center p-4">島嶼風情</h3>
   <swiper
+  :loop="true"
+  :speed="1000"
   class="container"
   :slides-per-view="1"
   :space-between="50"
