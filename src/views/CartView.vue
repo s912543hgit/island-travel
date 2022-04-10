@@ -168,10 +168,10 @@ export default {
           tel: ''
         },
         message: ''
-      },
-      modal: {
-        cautionModal: ''
       }
+      // modal: {
+      //   cautionModal: ''
+      // }
     }
   },
   component: {

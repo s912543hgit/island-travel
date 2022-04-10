@@ -15,7 +15,7 @@
               <li class="nav-list__item">
                 <RouterLink class="nav-link" to="/products" @click="isClicked = !isClicked">產品列表</RouterLink>
               </li>
-              <li class="nav-list__item" @click="isOpen = !isOpen" >
+              <li class="nav-list__item"  @click="openNav">
                 <div class="d-md-flex position-relative text-dark d-none d-md-block">
                   <a href="#">
                     <i class="bi bi-cart fs-5"></i>
@@ -72,6 +72,9 @@ export default {
         .then((res) => {
           this.cartData = res.data.data
         })
+    },
+    openNav () {
+      emitter.emit('toggle-cart', true)
     }
   },
   mounted () {

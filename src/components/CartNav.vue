@@ -1,10 +1,10 @@
 <template>
-    <div :class="{open: isOpen}">
+    <div :class="toggleCart ? 'open' : ''">
         <nav class="cartNav">
           <div class="cartNav__inner">
             <div class="cartNav__header">
               <p>購物車</p>
-              <span class="icon--close cartNav__close" @click="isOpen = !isOpen"></span>
+              <span class="icon--close cartNav__close" @click="closeCart"></span>
             </div>
             <template v-if="cartData.carts.length">
               <table class="table">
@@ -36,7 +36,7 @@
                 </tr>
               </table>
               <div class="text-center">
-                <RouterLink to="/cart" class="text-white" @click="isOpen = !isOpen">
+                <RouterLink to="/cart" class="text-white" @click="closeCart">
                   <button class="btn btn-primary mt-4 w-100 py-3" type="button">
                     前往購物車
                   </button>
@@ -49,30 +49,35 @@
             </template>
             <div v-else class="p-product--none d-flex flex-column justify-content-center align-items-center">
               <p>購物車內沒有商品唷</p>
-              <RouterLink  to="/products" class="btn btn-primary" @click="isOpen = !isOpen">開始旅程</RouterLink>
+              <RouterLink  to="/products" class="btn btn-primary" @click="closeCart">開始旅程</RouterLink>
             </div>
           </div>
         </nav>
-        <div class="cartNav__mask" @click="isOpen = !isOpen"></div>
-        <div class="toggle_btn" @click="isOpen = !isOpen">
-            <button>click</button>
-        </div>
+        <div class="cartNav__mask" :class="toggleCart ? 'open' : ''" @click="closeCart"></div>
     </div>
 </template>
 <script>
 import emitter from '@/libs/emitter'
+
 export default {
   data () {
     return {
       cartData: {
         carts: {}
       },
-      isOpen: false,
       isLoading: false,
-      isDisabled: ''
+      isDisabled: '',
+      toggleCart: false
     }
   },
   methods: {
+    openCart () {
+      this.toggleCart = true
+    },
+    closeCart () {
+      this.toggleCart = false
+      // this.$emitter.emit('toggle-overlay', false)
+    },
     getCart () {
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
         .then((res) => {
@@ -103,6 +108,13 @@ export default {
     this.getCart()
     emitter.on('get-cart', () => {
       this.getCart()
+    })
+    emitter.on('toggle-cart', (val) => {
+      if (val) {
+        this.toggleCart = true
+      } else {
+        this.toggleCart = false
+      }
     })
   }
 }
