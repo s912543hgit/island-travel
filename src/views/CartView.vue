@@ -174,7 +174,7 @@ export default {
       // }
     }
   },
-  component: {
+  components: {
     CautionModal
   },
   emits: ['emit-form'],
