@@ -39,7 +39,7 @@
                 </button>
               </td>
               <td class="border-0 align-middle">
-                <span class="icon--close cartNav__close" @click="removeCartItem(item.id)"></span>
+                <i class="bi bi-trash-fill fs-5" role="button" @click="removeFavorite(item.id)"></i>
               </td>
             </tr>
           </tbody>
@@ -77,13 +77,11 @@ export default {
         this.getFavorites()
         this.isLoading = false
       })
-      // 失敗的結果
         .catch((error) => {
           console.dir(error)
         })
     },
     getFavorites () {
-      // 取得我的最愛
       this.favoritesList = this.products.filter(
         (item) => this.favorite.indexOf(item.id) > -1
       )

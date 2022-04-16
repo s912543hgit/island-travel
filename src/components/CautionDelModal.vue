@@ -7,11 +7,21 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p>您確定要移除購物車裡面的商品嗎？</p>
+              <p>您確定要移除此商品嗎？</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-danger" @click="$emit('del-product')">確定移除</button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal">
+                取消
+            </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                @click="$emit('del-product')"
+              >
+              確定移除</button>
             </div>
           </div>
         </div>
@@ -26,6 +36,9 @@ export default {
     return {
       modal: ''
     }
+  },
+  props: {
+    item: {}
   },
   emits: ['del-product'],
   methods: {

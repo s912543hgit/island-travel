@@ -45,7 +45,7 @@
                       <img :src="item.product.imageUrl" class="cart__image" :alt="item.product.title">
                     </th>
                     <td class="border-0 align-middle">
-                      <p class="mb-0 fw-bold ms-3 d-inline-block">{{ item.product.title }}</p>
+                      <p class="mb-0 fw-bold ms-3 d-inline-block">{{ item?.product?.title }}</p>
                     </td>
                     <td class="border-0 align-middle">
                       <div class="input-group cart__count">
@@ -64,16 +64,16 @@
                                   {{ num }}
                                 </option>
                                 </select>
-                              <span class="input-group-text">{{ item.product.unit }}</span>
+                              <span class="input-group-text">{{ item?.product?.unit }}</span>
                             </div>
                           </div>
                       </div>
                     </td>
                     <td class="border-0 align-middle">
-                      <p class="mb-0 ms-auto">NT {{ item.product.price }}</p>
+                      <p class="mb-0 ms-auto">NT {{ item?.product?.price }}</p>
                     </td>
                     <td class="border-0 align-middle">
-                      <span class="icon--close cartNav__close" @click="removeCartItem(item.id)"></span>
+                      <i class="bi bi-trash-fill fs-5" role="button" @click="openDelModal(item)"></i>
                     </td>
                   </tr>
                 </tbody>
@@ -85,7 +85,7 @@
                   v-for="item in cartData.carts"
                   :key="item.id">
                   <div class="d-flex justify-content-between">
-                    <span class="icon--close icon-close--sp cartNav__close" @click="removeCartItem(item.id)"></span>
+                    <span class="icon--close icon-close--sp cartNav__close" @click="openDelModal(item)"></span>
                     <img :src="item.product.imageUrl" class="cart__image" :alt="item.product.title">
                     <div class="cart__card__content">
                       {{ item.product.title }}
@@ -105,11 +105,11 @@
                                   {{ num }}
                                 </option>
                                 </select>
-                              <span class="input-group-text">{{ item.product.unit }}</span>
+                              <span class="input-group-text">{{ item?.product?.unit }}</span>
                             </div>
                           </div>
                       </div>
-                      <p class="mb-0 ms-auto">小計: NT {{ item.product.price }}</p>
+                      <p class="mb-0 ms-auto">小計: NT {{ item?.product?.price }}</p>
                     </div>
                   </div>
                 </li>
@@ -133,7 +133,7 @@
                   <table class="cart__info__form">
                     <tr>
                       <th>預計旅程: </th>
-                      <td><span>{{ cartData.carts.length }}</span>套</td>
+                      <td><span class="me-2">{{ cartData?.carts?.length }}</span>套</td>
                     </tr>
                     <tr>
                       <th>金額總計: </th>
@@ -206,7 +206,7 @@
         </div>
       </div>
       <CautionModal ref="cautionModal" @clear-item="clearCartItem"></CautionModal>
-      <CautionDelModal ref="cautionDelModal" @del-product="removeCartItem"></CautionDelModal>
+      <CautionDelModal :item="tempProduct" ref="cautionDelModal" @del-product="removeCartItem"></CautionDelModal>
 </template>
 
 <script>
@@ -225,6 +225,7 @@ export default {
       isLoadingItem: '',
       isLoading: false,
       isDisabled: '',
+      tempProduct: {},
       form: {
         user: {
           email: '',
@@ -253,7 +254,8 @@ export default {
     },
     removeCartItem (id) {
       this.isLoading = true
-      this.$http.delete(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`)
+      const cautionDelModal = this.$refs.cautionDelModal
+      this.$http.delete(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${this.tempProduct.id}`)
         .then((response) => {
           this.getCart()
           this.emitter.emit('push-message', {
@@ -262,6 +264,7 @@ export default {
             content: response.data.message
           })
           emitter.emit('get-cart')
+          cautionDelModal.hideModal()
           this.isLoading = false
         })
     },
@@ -272,6 +275,9 @@ export default {
         .then((res) => {
           this.getCart()
           this.isLoading = false
+          this.emitter.emit('push-message', {
+            title: '已清空購物車'
+          })
           cautionModal.hideModal()
           emitter.emit('get-cart')
         })
@@ -304,7 +310,8 @@ export default {
       const cautionModal = this.$refs.cautionModal
       cautionModal.openModal()
     },
-    openDelModal () {
+    openDelModal (item) {
+      this.tempProduct = { ...item }
       const cautionDelModal = this.$refs.cautionDelModal
       cautionDelModal.openModal()
     }

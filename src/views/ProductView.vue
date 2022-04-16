@@ -39,8 +39,10 @@
             <p class="text-muted  col-6">原價<del>NT${{ product.origin_price }}</del></p>
             <p class="text-end col-6">特價<span class="h4 fw-bold text-danger ms-2">NT${{ product.price }}</span></p>
           </div>
-          <a href="#" class="border rounded-circle p-2 me-4"
-          @click.prevent="toggleFavorite(product.id)">
+          <a
+            href="#"
+            class="border rounded-circle p-2 me-4"
+            @click.prevent="toggleFavorite(product.id)">
             <span v-if="favorite.includes(product.id)">
               <i  v-if="favorite.includes(product.id)" class="bi bi-suit-heart-fill"></i>
             </span>
@@ -55,7 +57,7 @@
             <div class="col-6">
               <div class="input-group">
                 <select class="form-select" v-model="product.qty">
-                  <option value="0" disabled selected>請選擇人數</option>
+                  <option value="0" disabled>請選擇人數</option>
                   <option v-for="num in 20" :value="num"
                   :selected="product.qty === num"
                   :key="`${num}-${product.id}`" >{{ num }}</option>
@@ -63,12 +65,15 @@
               </div>
             </div>
             <div class="col-6">
-              <button type="button" class="text-nowrap btn btn-primary w-100 py-2"
-              @click.prevent="updateCartItem(product)"
-              :disabled="isDisabled === 'add'">
-                <span class="spinner-border spinner-border-sm"
-                role="status"
-                v-show="isDisabled === 'add'"></span>
+              <button
+                type="button"
+                class="text-nowrap btn btn-primary w-100 py-2"
+                @click.prevent="updateCartItem(product)"
+                :disabled="isDisabled === 'add'">
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  v-show="isDisabled === 'add'"></span>
                 加入購物車
               </button>
             </div>

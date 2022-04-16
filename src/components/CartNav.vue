@@ -7,31 +7,22 @@
               <span class="icon--close cartNav__close" @click="closeCart"></span>
             </div>
             <template v-if="cartData.carts.length">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col" class="border-0 ps-0">品名</th>
-                    <th scope="col" class="border-0">數量</th>
-                    <th scope="col" class="border-0">單價</th>
-                  </tr>
-                </thead>
-                <tr v-for="item in cartData.carts" :key="item.id" class="border-bottom border-top">
-                  <th scope="row" class="border-0 px-0 font-weight-normal py-4">
-                    <img :src="item.product.imageUrl" alt="" class="cart__image">
-                    <p class="mb-0 fw-bold ms-3 d-inline-block">{{ item.product.title }}</p>
-                  </th>
-                  <td class="border-0 align-middle" style="max-width: 160px;">
-                    <div class="input-group pe-0 pe-sm-5">
-                      {{ item.qty }}
-                      <span>{{ item.product.unit }}</span>
+              <ul class="cart__list">
+                <li
+                  class="card cart__card"
+                  v-for="item in cartData.carts"
+                  :key="item.id">
+                  <div class="d-flex">
+                    <span class="icon--close icon-close--sp cartNav__close" @click="openDelModal(item)"></span>
+                    <img :src="item.product.imageUrl" class="cart__image me-3" :alt="item.product.title">
+                    <div class="cart__card__content lh-lg">
+                      {{ item.product.title }}
+                      <div>{{ item.qty }}<span>{{ item?.product?.unit }}</span></div>
+                      <p class="mb-0 ms-auto">小計: NT {{ item?.product?.price }}</p>
                     </div>
-                  </td>
-                  <td class="border-0 align-middle"><p class="mb-0 ms-auto">NT{{ item.product.price }}</p></td>
-                  <td class="border-0 align-middle">
-                      <span class="icon--close cartNav__close" @click="removeCartItem(item.id)"></span>
-                  </td>
-                </tr>
-              </table>
+                  </div>
+                </li>
+              </ul>
               <div class="text-center">
                 <RouterLink to="/cart" class="text-white" @click="closeCart">
                   <button class="btn btn-primary mt-4 w-100 py-3" type="button">
@@ -39,14 +30,16 @@
                   </button>
                 </RouterLink>
                 <button
-                  @click="clearCartItem"
                   class="btn btn-outline-danger mt-3 py-2"
                   type="button"
-                  :disabled="isDisabled === 'clear'">
+                  :disabled="isDisabled === 'clear'"
+                  @click="openModal()"
+                  >
                   <span
                     class="spinner-border spinner-border-sm"
                     role="status"
-                    v-show="isDisabled === 'clear'"></span>
+                    v-show="isDisabled === 'clear'"
+                    ></span>
                   清空購物車
                 </button>
               </div>
@@ -59,9 +52,13 @@
         </nav>
         <div class="cartNav__mask" :class="toggleCart ? 'open' : ''" @click="closeCart"></div>
     </div>
+    <CautionModal ref="cautionModal" @clear-item="clearCartItem"></CautionModal>
+    <CautionDelModal :item="tempProduct" ref="cautionDelModal" @del-product="removeCartItem"></CautionDelModal>
 </template>
 <script>
 import emitter from '@/libs/emitter'
+import CautionModal from '@/components/CautionModal.vue'
+import CautionDelModal from '@/components/CautionDelModal.vue'
 
 export default {
   data () {
@@ -69,11 +66,17 @@ export default {
       cartData: {
         carts: {}
       },
+      tempProduct: {},
       isLoading: false,
       isDisabled: '',
       toggleCart: false
     }
   },
+  components: {
+    CautionModal,
+    CautionDelModal
+  },
+  inject: ['emitter'],
   methods: {
     openCart () {
       this.toggleCart = true
@@ -84,27 +87,47 @@ export default {
     getCart () {
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
         .then((res) => {
-          // 購物車的資料有兩層data
           this.cartData = res.data.data
         })
     },
-    // 刪除產品
     removeCartItem (id) {
-      this.$http.delete(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`)
-        .then((res) => {
+      this.isLoading = true
+      const cautionDelModal = this.$refs.cautionDelModal
+      this.$http.delete(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${this.tempProduct.id}`)
+        .then((response) => {
           this.getCart()
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: '購物提示',
+            content: response.data.message
+          })
           emitter.emit('get-cart')
+          cautionDelModal.hideModal()
+          this.isLoading = false
         })
     },
-    // 清空購物車
     clearCartItem () {
-      this.isDisabled = 'clear'
+      this.isLoading = true
+      const cautionModal = this.$refs.cautionModal
       this.$http.delete(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts/`)
-        .then((res) => {
+        .then((response) => {
           this.getCart()
-          this.isDisabled = ''
+          this.emitter.emit('push-message', {
+            title: '已清空購物車'
+          })
           emitter.emit('get-cart')
+          cautionModal.hideModal()
+          this.isLoading = false
         })
+    },
+    openModal () {
+      const cautionModal = this.$refs.cautionModal
+      cautionModal.openModal()
+    },
+    openDelModal (item) {
+      this.tempProduct = { ...item }
+      const cautionDelModal = this.$refs.cautionDelModal
+      cautionDelModal.openModal()
     }
   },
   mounted () {
