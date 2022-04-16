@@ -6,7 +6,7 @@
         <h2 class="fw-bold">填寫資料</h2>
       </div>
     </div>
-    <div class="container  mb-5">
+    <div class="container mb-5">
         <template v-if="cartData.carts.length">
           <ul class="p-steps list-unstyled mt-5 mb-5">
             <li class="col-4 is-active mb-md-0 mb-3">
@@ -22,30 +22,33 @@
               <p>完成訂單</p>
             </li>
           </ul>
-          <div class="row mb-5 justify-content-between">
-            <div class="col-md-5">
-              <h3 class="mb-3">購物車內容</h3>
-              <table class="table">
+          <div>
+            <div>
+              <h4 class="mb-3">購物車</h4>
+              <!-- pc -->
+              <table class="table cart__table">
                 <thead>
                   <tr>
-                    <th scope="col" class="border-0 ps-0">品名</th>
+                    <th scope="col" class="border-0">商品圖片</th>
+                    <th scope="col" class="border-0">商品名稱</th>
                     <th scope="col" class="border-0">數量</th>
                     <th scope="col" class="border-0">單價</th>
+                    <th scope="col" class="border-0">刪除</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="item in cartData.carts" :key="item.id" class="border-bottom border-top">
-                    <th scope="row" class="border-0 px-0 font-weight-normal py-4">
-                      <img :src="item.product.imageUrl" class="cart__image" alt="">
-                      <p class="mb-0 fw-bold ms-3 d-inline-block">{{ item.product.title }}</p>
+                  <tr
+                    v-for="item in cartData.carts"
+                    :key="item.id"
+                    class="border-bottom border-top">
+                    <th scope="row" class="border-0  font-weight-normal py-4">
+                      <img :src="item.product.imageUrl" class="cart__image" :alt="item.product.title">
                     </th>
-                    <td class="border-0 align-middle" style="max-width: 160px;">
-                      <div class="input-group pe-0 pe-sm-5">
-                        <div class="input-group-prepend">
-                          <button class="btn btn-outline-dark border-0 py-2" type="button">
-                            <i class="fas fa-minus"></i>
-                          </button>
-                        </div>
+                    <td class="border-0 align-middle">
+                      <p class="mb-0 fw-bold ms-3 d-inline-block">{{ item.product.title }}</p>
+                    </td>
+                    <td class="border-0 align-middle">
+                      <div class="input-group cart__count">
                           <div class="input-group input-group-sm">
                             <div class="input-group mb-3">
                                 <select
@@ -64,15 +67,10 @@
                               <span class="input-group-text">{{ item.product.unit }}</span>
                             </div>
                           </div>
-                        <div class="input-group-append">
-                          <button class="btn btn-outline-dark border-0 py-2" type="button">
-                            <i class="fas fa-plus"></i>
-                          </button>
-                        </div>
                       </div>
                     </td>
                     <td class="border-0 align-middle">
-                      <p class="mb-0 ms-auto">NT{{ item.product.price }}</p>
+                      <p class="mb-0 ms-auto">NT {{ item.product.price }}</p>
                     </td>
                     <td class="border-0 align-middle">
                       <span class="icon--close cartNav__close" @click="removeCartItem(item.id)"></span>
@@ -80,9 +78,42 @@
                   </tr>
                 </tbody>
               </table>
-              <div>
-                <p class="text-end border-0 px-0 pt-4">總計金額 NT${{ cartData.total }}</p>
-              </div>
+              <!-- sp -->
+              <ul class="cart__list d-md-none">
+                <li
+                  class="card cart__card"
+                  v-for="item in cartData.carts"
+                  :key="item.id">
+                  <div class="d-flex justify-content-between">
+                    <span class="icon--close icon-close--sp cartNav__close" @click="removeCartItem(item.id)"></span>
+                    <img :src="item.product.imageUrl" class="cart__image" :alt="item.product.title">
+                    <div class="cart__card__content">
+                      {{ item.product.title }}
+                        <div class="input-group cart__count">
+                          <div class="input-group input-group-sm">
+                            <div class="input-group">
+                                <select
+                                  class="form-select"
+                                  v-model="item.qty"
+                                  @change="updateCartItem(item)"
+                                  :disabled="isLoadingItem === item.id">
+                                <option selected>請選擇人數</option>
+                                <option v-for="num in 20"
+                                  :value="num"
+                                  :selected="item.qty === num"
+                                  :key="`${num}-${item.id}`" >
+                                  {{ num }}
+                                </option>
+                                </select>
+                              <span class="input-group-text">{{ item.product.unit }}</span>
+                            </div>
+                          </div>
+                      </div>
+                      <p class="mb-0 ms-auto">小計: NT {{ item.product.price }}</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
               <div class="text-end">
                 <button
                   class="btn btn-outline-danger"
@@ -95,55 +126,72 @@
                 </button>
               </div>
             </div>
-            <div class="col-md-5 mt-5 mt-md-0">
-              <h3 class="mb-3">填寫訂購資訊</h3>
-              <VueForm ref="form" class="col-md-10" v-slot="{ errors }" @submit="sendData()">
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <VueField id="email" name="email" type="email" class="form-control"
-                    :class="{ 'is-invalid': errors['email'] }"
-                    placeholder="請輸入 Email" rules="email|required"
-                    v-model="form.user.email" ></VueField>
-                  <error-message name="email" class="invalid-feedback"></error-message>
+            <div class="cart__order">
+              <div class="cart__info">
+                <h4 class="mb-3">訂單摘要</h4>
+                <div class="cart__info__inner">
+                  <table class="cart__info__form">
+                    <tr>
+                      <th>預計旅程: </th>
+                      <td><span>{{ cartData.carts.length }}</span>套</td>
+                    </tr>
+                    <tr>
+                      <th>金額總計: </th>
+                      <td><span class="cart__price">NT${{ cartData.total }}</span></td>
+                    </tr>
+                  </table>
                 </div>
-                <div class="mb-3">
-                  <label for="name" class="form-label">收件人姓名</label>
-                  <VueField id="name" name="姓名" type="text" class="form-control"
-                    :class="{ 'is-invalid': errors['姓名'] }"
-                    placeholder="請輸入姓名" rules="required" v-model="form.user.name"></VueField>
-                  <error-message name="姓名" class="invalid-feedback"></error-message>
-                </div>
-                <div class="mb-3">
-                  <label for="tel" class="form-label">收件人電話</label>
-                  <VueField id="tel" name="電話" type="text" class="form-control"
-                    :class="{ 'is-invalid': errors['電話'] }"
-                    placeholder="請輸入電話"  :rules="isPhone" v-model="form.user.tel"></VueField>
-                  <error-message name="電話" class="invalid-feedback"></error-message>
-                </div>
-                <div class="mb-3">
-                  <label for="address" class="form-label">收件人地址</label>
-                  <VueField id="address" name="地址" type="text" class="form-control"
-                  :class="{ 'is-invalid': errors['地址'] }"
-                  placeholder="請輸入地址" rules="required" v-model="form.user.address"></VueField>
-                  <error-message name="地址" class="invalid-feedback"></error-message>
-                </div>
-                <div class="mb-3">
-                  <label for="message" class="form-label">留言</label>
-                  <textarea id="message" class="form-control" cols="30" rows="10"
-                   v-model="form.message"></textarea>
-                </div>
-                <div class="text-end">
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    :disabled="isDisabled === 'send'">
-                    <span class="spinner-border spinner-border-sm"
-                    role="status" v-show="isDisabled === 'send'">
-                  </span>
-                    送出訂單
-                  </button>
-                </div>
-              </VueForm>
+              </div>
+              <div class="cart__form">
+                <h4 class="mb-3">填寫訂購資訊</h4>
+                <VueForm ref="form" v-slot="{ errors }" @submit="sendData()">
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <VueField id="email" name="email" type="email" class="form-control"
+                      :class="{ 'is-invalid': errors['email'] }"
+                      placeholder="請輸入 Email" rules="email|required"
+                      v-model="form.user.email" ></VueField>
+                    <error-message name="email" class="invalid-feedback"></error-message>
+                  </div>
+                  <div class="mb-3">
+                    <label for="name" class="form-label">收件人姓名</label>
+                    <VueField id="name" name="姓名" type="text" class="form-control"
+                      :class="{ 'is-invalid': errors['姓名'] }"
+                      placeholder="請輸入姓名" rules="required" v-model="form.user.name"></VueField>
+                    <error-message name="姓名" class="invalid-feedback"></error-message>
+                  </div>
+                  <div class="mb-3">
+                    <label for="tel" class="form-label">收件人電話</label>
+                    <VueField id="tel" name="電話" type="text" class="form-control"
+                      :class="{ 'is-invalid': errors['電話'] }"
+                      placeholder="請輸入電話"  :rules="isPhone" v-model="form.user.tel"></VueField>
+                    <error-message name="電話" class="invalid-feedback"></error-message>
+                  </div>
+                  <div class="mb-3">
+                    <label for="address" class="form-label">收件人地址</label>
+                    <VueField id="address" name="地址" type="text" class="form-control"
+                    :class="{ 'is-invalid': errors['地址'] }"
+                    placeholder="請輸入地址" rules="required" v-model="form.user.address"></VueField>
+                    <error-message name="地址" class="invalid-feedback"></error-message>
+                  </div>
+                  <div class="mb-3">
+                    <label for="message" class="form-label">留言</label>
+                    <textarea id="message" class="form-control" cols="30" rows="10"
+                     v-model="form.message"></textarea>
+                  </div>
+                  <div class="text-end">
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      :disabled="isDisabled === 'send'">
+                      <span class="spinner-border spinner-border-sm"
+                      role="status" v-show="isDisabled === 'send'">
+                    </span>
+                      送出訂單
+                    </button>
+                  </div>
+                </VueForm>
+              </div>
             </div>
           </div>
         </template>
