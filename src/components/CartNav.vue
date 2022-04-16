@@ -17,7 +17,7 @@
                 </thead>
                 <tr v-for="item in cartData.carts" :key="item.id" class="border-bottom border-top">
                   <th scope="row" class="border-0 px-0 font-weight-normal py-4">
-                    <img :src="item.product.imageUrl" alt="" style="width: 72px; height: 72px; object-fit: cover;">
+                    <img :src="item.product.imageUrl" alt="" class="cart__image">
                     <p class="mb-0 fw-bold ms-3 d-inline-block">{{ item.product.title }}</p>
                   </th>
                   <td class="border-0 align-middle" style="max-width: 160px;">
@@ -28,10 +28,7 @@
                   </td>
                   <td class="border-0 align-middle"><p class="mb-0 ms-auto">NT{{ item.product.price }}</p></td>
                   <td class="border-0 align-middle">
-                    <button type="button" class="btn btn-outline-danger btn-sm" @click="removeCartItem(item.id)">
-                    <i class="fas fa-spinner fa-pulse"></i>
-                    x
-                    </button>
+                      <span class="icon--close cartNav__close" @click="removeCartItem(item.id)"></span>
                   </td>
                 </tr>
               </table>
@@ -41,8 +38,15 @@
                     前往購物車
                   </button>
                 </RouterLink>
-                <button @click="clearCartItem" class="btn btn-outline-danger mt-3 py-2" type="button" :disabled="isDisabled === 'clear'">
-                  <span class="spinner-border spinner-border-sm" role="status" v-show="isDisabled === 'clear'"></span>
+                <button
+                  @click="clearCartItem"
+                  class="btn btn-outline-danger mt-3 py-2"
+                  type="button"
+                  :disabled="isDisabled === 'clear'">
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    v-show="isDisabled === 'clear'"></span>
                   清空購物車
                 </button>
               </div>
@@ -76,7 +80,6 @@ export default {
     },
     closeCart () {
       this.toggleCart = false
-      // this.$emitter.emit('toggle-overlay', false)
     },
     getCart () {
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)

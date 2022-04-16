@@ -3,15 +3,15 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">清空購物車</h5>
+              <h5 class="modal-title">移除商品</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p>您確定要清空購物車裡面的商品嗎？</p>
+              <p>您確定要移除購物車裡面的商品嗎？</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-danger" @click="$emit('clear-item')">確定刪除</button>
+              <button type="button" class="btn btn-danger" @click="$emit('del-product')">確定移除</button>
             </div>
           </div>
         </div>
@@ -27,7 +27,7 @@ export default {
       modal: ''
     }
   },
-  emits: ['clear-item'],
+  emits: ['del-product'],
   methods: {
     openModal () {
       this.modal.show()

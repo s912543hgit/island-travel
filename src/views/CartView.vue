@@ -1,7 +1,7 @@
 <template>
     <VueLoading :active="isLoading"></VueLoading>
-    <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
-      <div class="position-absolute background-image background-image--cart"></div>
+    <div class="section">
+      <div class="background-image background-image--cart"></div>
       <div class="background-title">
         <h2 class="fw-bold">填寫資料</h2>
       </div>
@@ -36,7 +36,7 @@
                 <tbody>
                   <tr v-for="item in cartData.carts" :key="item.id" class="border-bottom border-top">
                     <th scope="row" class="border-0 px-0 font-weight-normal py-4">
-                      <img :src="item.product.imageUrl" alt="" style="width: 72px; height: 72px; object-fit: cover;">
+                      <img :src="item.product.imageUrl" class="cart__image" alt="">
                       <p class="mb-0 fw-bold ms-3 d-inline-block">{{ item.product.title }}</p>
                     </th>
                     <td class="border-0 align-middle" style="max-width: 160px;">
@@ -48,10 +48,18 @@
                         </div>
                           <div class="input-group input-group-sm">
                             <div class="input-group mb-3">
-                                <select id="" class="form-select" v-model="item.qty" @change="updateCartItem(item)"
-                                :disabled="isLoadingItem === item.id">
+                                <select
+                                  class="form-select"
+                                  v-model="item.qty"
+                                  @change="updateCartItem(item)"
+                                  :disabled="isLoadingItem === item.id">
                                 <option selected>請選擇人數</option>
-                                <option v-for="num in 20" :value="num" :selected="item.qty === num" :key="`${num}-${item.id}`" >{{ num }}</option>
+                                <option v-for="num in 20"
+                                  :value="num"
+                                  :selected="item.qty === num"
+                                  :key="`${num}-${item.id}`" >
+                                  {{ num }}
+                                </option>
                                 </select>
                               <span class="input-group-text">{{ item.product.unit }}</span>
                             </div>
@@ -63,11 +71,11 @@
                         </div>
                       </div>
                     </td>
-                    <td class="border-0 align-middle"><p class="mb-0 ms-auto">NT{{ item.product.price }}</p></td>
                     <td class="border-0 align-middle">
-                      <a href="#" @click.prevent="removeCartItem(item.id)">
-                      <i class="bi bi-x-circle"></i>
-                      </a>
+                      <p class="mb-0 ms-auto">NT{{ item.product.price }}</p>
+                    </td>
+                    <td class="border-0 align-middle">
+                      <span class="icon--close cartNav__close" @click="removeCartItem(item.id)"></span>
                     </td>
                   </tr>
                 </tbody>
@@ -76,8 +84,11 @@
                 <p class="text-end border-0 px-0 pt-4">總計金額 NT${{ cartData.total }}</p>
               </div>
               <div class="text-end">
-                <button class="btn btn-outline-danger" type="button"
-                @click="clearCartItem" :disabled="isDisabled === 'clear'">
+                <button
+                  class="btn btn-outline-danger"
+                  type="button"
+                  @click="openModal()"
+                  :disabled="isDisabled === 'clear'">
                   <span class="spinner-border spinner-border-sm"
                   role="status" v-show="isDisabled === 'clear'"></span>
                   清空購物車
@@ -122,7 +133,9 @@
                    v-model="form.message"></textarea>
                 </div>
                 <div class="text-end">
-                  <button type="submit" class="btn btn-primary"
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
                     :disabled="isDisabled === 'send'">
                     <span class="spinner-border spinner-border-sm"
                     role="status" v-show="isDisabled === 'send'">
@@ -133,21 +146,25 @@
               </VueForm>
             </div>
           </div>
-          <button type="button" class="btn btn-primary" data-bs-toggle="cautionModal" @click="openModal()">
-            開啟modal
-          </button>
         </template>
-        <div v-else class="p-product--none d-flex flex-column justify-content-center align-items-center">
+        <div v-else class="container--center">
           <p>購物車內沒有商品唷</p>
-          <RouterLink class="btn btn-primary" to="/products" @click="isClicked = !isClicked">開始旅程</RouterLink>
+          <RouterLink
+            class="btn btn-primary"
+            to="/products"
+            @click="isClicked = !isClicked">
+            開始旅程
+        </RouterLink>
         </div>
       </div>
-      <CautionModal ref="cautionModal"></CautionModal>
+      <CautionModal ref="cautionModal" @clear-item="clearCartItem"></CautionModal>
+      <CautionDelModal ref="cautionDelModal" @del-product="removeCartItem"></CautionDelModal>
 </template>
 
 <script>
 import emitter from '@/libs/emitter'
 import CautionModal from '@/components/CautionModal.vue'
+import CautionDelModal from '@/components/CautionDelModal.vue'
 
 export default {
   data () {
@@ -169,13 +186,11 @@ export default {
         },
         message: ''
       }
-      // modal: {
-      //   cautionModal: ''
-      // }
     }
   },
   components: {
-    CautionModal
+    CautionModal,
+    CautionDelModal
   },
   emits: ['emit-form'],
   inject: ['emitter'],
@@ -202,19 +217,14 @@ export default {
           this.isLoading = false
         })
     },
-    showAlert () {
-      // Use sweetalert2
-      this.$swal({
-        text: 'Something went wrong!',
-        footer: '<button class="btn btn-primary" @click="clearCartItem">清空購物車</button>'
-      })
-    },
     clearCartItem () {
-      this.isDisabled = 'clear'
+      this.isLoading = true
+      const cautionModal = this.$refs.cautionModal
       this.$http.delete(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts/`)
         .then((res) => {
           this.getCart()
-          this.isDisabled = ''
+          this.isLoading = false
+          cautionModal.hideModal()
           emitter.emit('get-cart')
         })
     },
@@ -245,6 +255,10 @@ export default {
     openModal () {
       const cautionModal = this.$refs.cautionModal
       cautionModal.openModal()
+    },
+    openDelModal () {
+      const cautionDelModal = this.$refs.cautionDelModal
+      cautionDelModal.openModal()
     }
   },
   mounted () {

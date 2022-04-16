@@ -1,4 +1,7 @@
 .toast-message {
   top: 5%;
   right: 4%;
+  position: fixed;
+  z-index: 1000;
+  background-color: $light;
 }

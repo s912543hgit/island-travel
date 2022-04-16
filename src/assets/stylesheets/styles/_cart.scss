@@ -31,16 +31,18 @@
 .p-product--none {
   min-height: 75vh;
 }
-
-.p-cart--complete {
-  min-height: 60vh;
-}
-
 //購物車內容
 .form-select {
   padding-right: 0.25rem;
 }
 
+.cart {
+  &__image {
+    width: 72px;
+    height: 72px; 
+    object-fit: cover;
+  }
+}
 /*============
   nav
   =============*/
@@ -65,7 +67,6 @@
   }
 
   @include sp {
-    // left: -220px;
     width: 100%;
     transform: translateX(100%);
   }
@@ -155,4 +156,28 @@
   &::after {
     transform: translate(-50%, -50%) rotate(-45deg);
   }
+}
+
+// complete
+
+.container--complete {
+  display: flex;
+  flex-direction: column;
+  min-height: 60vh;
+}
+
+.container--center {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+// icon 
+.cart-badge {
+  border-radius: 50rem;
+  background-color: red;
+  position: absolute;
+  transform: translate(-50%, -50%) !important;
 }

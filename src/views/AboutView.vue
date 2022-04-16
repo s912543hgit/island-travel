@@ -1,8 +1,8 @@
 <template>
-    <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
-      <div class="position-absolute background-image--about background-image"></div>
+    <div class="section">
+      <div class="background-image--about background-image"></div>
       <div class="background-title">
-        <h2 class="fw-bold">產品列表</h2>
+        <h2 class="fw-bold">關於我們</h2>
       </div>
     </div>
     <div class="container mt-md-5 mt-3 mb-5">
@@ -10,7 +10,7 @@
         <div class="row mb-5">
           <div class="col-md-6 zoomIn">
             <div class="zoomIn__inner">
-              <img src="https://images.unsplash.com/photo-1593958866187-37e5c3b98278?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="" class="img-fluid">
+              <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="" class="img-fluid">
             </div>
           </div>
           <div class="col-md-4 m-auto">

@@ -14,12 +14,10 @@
           :navigation="true"
         >
           <swiper-slide>
-          <div :style="{backgroundImage: `url(${product.imageUrl})`}"
-          style="height: 500px; background-size: cover; background-position:center "></div>
+          <div class="product__image" :style="{backgroundImage: `url(${product.imageUrl})`}"></div>
           </swiper-slide>
           <swiper-slide v-for="image in product.imagesUrl" :key="image">
-            <div :style="{backgroundImage: `url(${image})`}"
-            style="height: 500px; background-size: cover; background-position:center "></div>
+            <div class="product__image" :style="{backgroundImage: `url(${image})`}"></div>
           </swiper-slide>
         </swiper>
         </div>
@@ -41,27 +39,36 @@
             <p class="text-muted  col-6">原價<del>NT${{ product.origin_price }}</del></p>
             <p class="text-end col-6">特價<span class="h4 fw-bold text-danger ms-2">NT${{ product.price }}</span></p>
           </div>
-          <a href="#" class="border rounded-circle p-2" @click.prevent="toggleFavorite(product.id)">
-            <i class="bi bi-suit-heart"></i>
+          <a href="#" class="border rounded-circle p-2 me-4"
+          @click.prevent="toggleFavorite(product.id)">
+            <span v-if="favorite.includes(product.id)">
+              <i  v-if="favorite.includes(product.id)" class="bi bi-suit-heart-fill"></i>
+            </span>
+          <i v-else class="bi bi-suit-heart"></i>
           </a>
           <ul class="list-unstyled mt-3">
             <li>費用已含機場稅、燃油費</li>
             <li>三人即可成團</li>
             <li>若需當地專業嚮導請洽客服電話</li>
           </ul>
-          <span v-if="favorite.includes(product.id)"><i class="bi bi-suit-heart"></i></span>
           <div class="row align-items-center">
             <div class="col-6">
               <div class="input-group">
                 <select class="form-select" v-model="product.qty">
                   <option value="0" disabled selected>請選擇人數</option>
-                  <option v-for="num in 20" :value="num" :selected="product.qty === num" :key="`${num}-${product.id}`" >{{ num }}</option>
+                  <option v-for="num in 20" :value="num"
+                  :selected="product.qty === num"
+                  :key="`${num}-${product.id}`" >{{ num }}</option>
                 </select>
               </div>
             </div>
             <div class="col-6">
-              <button type="button" class="text-nowrap btn btn-primary w-100 py-2" @click.prevent="updateCartItem(product)" :disabled="isDisabled === 'add'">
-                <span class="spinner-border spinner-border-sm" role="status" v-show="isDisabled === 'add'"></span>
+              <button type="button" class="text-nowrap btn btn-primary w-100 py-2"
+              @click.prevent="updateCartItem(product)"
+              :disabled="isDisabled === 'add'">
+                <span class="spinner-border spinner-border-sm"
+                role="status"
+                v-show="isDisabled === 'add'"></span>
                 加入購物車
               </button>
             </div>
@@ -91,6 +98,28 @@
             </ul>
         </div>
       </div>
+      <div class="my-5">
+        <div class="col-md-12">
+          <h3 class="fs-4 text-center p-4 text-primary">注意事項</h3>
+          <ul class="rule-list">
+            <li>此旅程的取消期限為1個月前，若有取消或人數變更請您主動聯繫客服，如逾期將會收取取消費用。詳情請參考下列取消政策。</li>
+            <li>產品結帳後我們將會於24小時內寄送相關電子郵件至您的信箱，請妥善保管。</li>
+            <li>若因天候不佳而致旅客無法盡興遊玩時，請您聯絡客服，我們將會有專人為您提供替代方案。</li>
+            <li>出發前請先查詢好當地氣候，並準備合適衣物。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="my-5">
+        <div class="col-md-12">
+          <h3 class="fs-4 text-center p-4 text-primary">取消政策</h3>
+          <ul class="rule-list">
+            <li>於30天前取消，將不會收取取消費用。</li>
+            <li>於30天~14天前取消，將酌收整體費用的20%</li>
+            <li>於14天~7天前取消，將酌收整體費用的50%</li>
+            <li>於7天前取消，將酌收整體費用的100%</li>
+          </ul>
+        </div>
+      </div>
   <!-- 相關商品 -->
   <div class="container-md">
     <h3 class="fs-4 text-center p-4 text-primary">相關商品</h3>
@@ -110,16 +139,16 @@
       :modules="modules"
     >
       <swiper-slide v-for="(item) in products" :key="item.id">
-          <div class="card border-0 mb-4 position-relative p-card">
-            <div class="p-card__image" :style="{backgroundImage: `url(${item.imageUrl})`}" style="height: 300px;">
+          <div class="p-card">
+            <div class="p-card__image" :style="{backgroundImage: `url(${item.imageUrl})`}">
               <RouterLink :to="`/product/${item.id}`" class="hover-area">
                 <div class="btn btn-primary px-5">查看商品</div>
               </RouterLink>
             </div>
-            <RouterLink  :to="`/product/${item.id}`" class="card-body text-left">
+            <RouterLink  :to="`/product/${item.id}`" class="p-card__body text-left">
               <h4>{{ item.title }}</h4>
               <div class="d-flex justify-content-between">
-                <p class="card-text text-muted mb-0" style="height: 4.5rem; overflow: hidden;">
+                <p class="p-card__text">
                   {{ item.description }}
                 </p>
               </div>

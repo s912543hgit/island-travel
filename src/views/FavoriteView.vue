@@ -1,7 +1,7 @@
 <template>
     <VueLoading :active="isLoading"></VueLoading>
-    <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
-      <div class="position-absolute background-image background-image--favorite"></div>
+    <div class="section">
+      <div class="background-image background-image--favorite"></div>
       <div class="background-title">
         <h2 class="fw-bold">收藏清單</h2>
       </div>
@@ -22,32 +22,34 @@
             <tr v-for="item in favoritesList" :key="item.id" class="border-bottom border-top">
               <th scope="row" class="border-0 px-0 font-weight-normal py-4">
                 <RouterLink :to="`/product/${item.id}`">
-                  <img class="favorite__thumbnail" :src="item.imageUrl" alt="{{ item.title }}" style="width: 80px; height: 80px; object-fit: cover;">
+                  <img class="favorite__thumbnail"
+                  :src="item.imageUrl" alt="{{ item.title }}">
                   <p class="mb-0 fw-bold ms-3 d-inline-block">{{ item.title }}</p>
                 </RouterLink>
               </th>
-              <td class="border-0 align-middle" style="max-width: 160px;">
+              <td class="favorite__price">
                   <p class="">NT{{ item.price }} / {{ item.unit }}</p>
               </td>
               <td class="border-0 align-middle">
                 <button class="btn-primary btn" type="button"
                 @click="addToCart(item.id)" :disabled="isLoadingItem === item.id">
-                  <span class="spinner-border spinner-border-sm" role="status" v-show="isLoadingItem === item.id"></span>
+                  <span class="spinner-border spinner-border-sm"
+                  role="status" v-show="isLoadingItem === item.id"></span>
                   加入購物車
                 </button>
               </td>
               <td class="border-0 align-middle">
-                <button type="button" class="btn btn-outline-danger btn-sm" @click="removeFavorite(item.id)">
-                x
-                </button>
+                <span class="icon--close cartNav__close" @click="removeCartItem(item.id)"></span>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div v-else class="d-flex flex-column justify-content-center align-items-center" style="min-height: 60vh;">
+      <div v-else class="container--center">
         <h3 class="text-center">目前還沒有收藏行程唷！快去逛逛吧！</h3>
-        <RouterLink to="/products" class="btn btn-primary mt-5" @click="isOpen = !isOpen">開始旅程</RouterLink>
+        <RouterLink to="/products"
+        class="btn btn-primary mt-5"
+        @click="isOpen = !isOpen">開始旅程</RouterLink>
       </div>
     </div>
 </template>

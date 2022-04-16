@@ -1,6 +1,4 @@
-/* ヘッダー */
 .header {
-  // background-color: #fff;
   width: 100%;
   height: 60px;
   position: fixed;
@@ -32,7 +30,6 @@
       width: 120px;
     }
   }
-  // nav
   &__nav {
     position: absolute;
     right: 0;
@@ -60,6 +57,7 @@
   }
 }
 
+// header下げる時
 .header.menu-scroll {
   background: #fff;
   .nav-list {
@@ -72,9 +70,16 @@
       color: #333;
     }
   }
+  .hamburger span {
+    background-color: #333;
+  }
+  .nav__footer .cart-icon {
+    color: #333;
+  }
 }
 
 .nav-list {
+  list-style: none;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -100,11 +105,29 @@
     font-size: 1em;
     margin-bottom: 24px;
   }
+  .active {
+    color: #fff;
+  }
   &:last-child a {
     margin-bottom: 0;
   }
 }
 
+.nav {
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 22%;
+    @include pc {
+      display: none;
+    }
+    .cart-icon {
+      color: #fff;
+      font-size: 1.25em;
+    }
+  }
+}
 .hamburger {
   background-color: transparent;
   border-color: transparent;
@@ -116,7 +139,7 @@
   span {
     width: 100%;
     height: 1px;
-    background-color: #000;
+    background-color: #fff;
     position: relative;
     transition: ease 0.4s;
     display: block;
@@ -132,9 +155,29 @@
   }
 }
 
-/* ハンバーガーメニュークリック後のスタイル */
 .header__nav.active {
   transform: translateX(0);
+  .nav-list__item a {
+    @include sp {
+      color: #333;    
+    }
+  }
+}
+
+.header__title.active {
+  z-index: 99;
+  a {
+    color: #333;
+  }
+}
+
+.nav__footer.active {
+  .hamburger span {
+    background-color: #333;
+  }
+  .cart-icon {
+    color: #333;
+  }
 }
 
 .hamburger.active {
@@ -152,7 +195,3 @@
     }
   }
 }
-
-// .cart-icon {
-//     display: f;
-// }

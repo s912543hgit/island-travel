@@ -1,6 +1,6 @@
 <template>
     <VueLoading :active="isLoading"></VueLoading>
-    <div class="position-relative d-flex align-items-center justify-content-center" style="min-height: 400px;">
+    <div class="section">
       <div class="position-absolute background-image background-image--cart"></div>
       <div class="background-title">
         <h2 class="fw-bold">確認訂單</h2>
@@ -31,8 +31,8 @@
           <template v-if="cartData.carts">
               <div class="col-md-6">
                   <div class="p-4 mb-4">
-                    <div class="d-flex"  v-for="item in cartData.carts" :key="item.id">
-                      <img :src="item.product.imageUrl" alt="" class="me-2" style="width: 48px; height: 48px; object-fit: cover">
+                    <div class="d-flex mb-3" v-for="item in cartData.carts" :key="item.id">
+                      <img :src="item.product.imageUrl" alt="" class="me-2 cart__image">
                       <div class="w-100">
                         <div class="d-flex justify-content-between">
                           <p class="mb-0 fw-bold">{{ item.product.title }}</p>
@@ -77,7 +77,10 @@
                   <p>{{ formData.message }}</p>
                 </li>
               </ul>
-              <button class="btn btn-primary w-100 py-3 mt-4" type="button" @click="putOrder">立即付款</button>
+              <button
+                class="btn btn-primary w-100 py-3 mt-4"
+                type="button"
+                @click="putOrder">立即付款</button>
             </div>
           </div>
         </div>
