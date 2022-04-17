@@ -14,7 +14,7 @@
             </div>
           </div>
           <div class="col-md-4 m-auto">
-            <p class="text-muted text-left">島遊是由一群熱愛旅遊，熱愛島嶼的年輕人所組成的新創團隊。
+            <p class="text-muted text-left mt-4 mt-md-0">島遊是由一群熱愛旅遊，熱愛島嶼的年輕人所組成的新創團隊。
               夥伴來自各界，共通點是對島嶼的熱愛，以及對服務品質的堅持<br>
               我們精選全球各地的島嶼景點，無論是單車環島、島上散步、潛水冒險，或是各種刺激的水上活動，全部任君選擇！<br>
               快來這裡尋找屬於您的心之島向吧！</p>
@@ -28,7 +28,7 @@
             </div>
           </div>
           <div class="col-md-4 m-auto">
-            <p class="text-muted text-right">島遊誕生於日本瀨戶內海上的一座小島，豊島。<br>
+            <p class="text-muted text-right mt-4 mt-md-0">島遊誕生於日本瀨戶內海上的一座小島，豊島。<br>
               豐島本來是產業廢棄物投放場的一座荒涼島嶼，但藝術讓這座島嶼得以重獲新生。<br>
               漫步於這座島嶼，欣賞各處令人屏息的藝術作品。讓人得以將所有的煩憂拋諸腦後。<br>
               就在那時，我理解了島嶼的獨特魅力，並決定搜羅世界各地，知名抑或是不為人知的島嶼，<br>
@@ -36,6 +36,7 @@
               <p>by 島遊創立者 SHIO</p>
           </div>
       </div>
-      <p class="text-center mt-5">網站版權宣告<br>本網站僅屬個人專案練習，不提供轉載、引用以及商業用途。</p>
+      <p class="text-center mt-5">網站版權宣告</p>
+      <p class="text-center mt-2">本網站僅屬個人專案練習，不提供轉載、<br class="d-md-none">引用以及商業用途。</p>
     </div>
 </template>

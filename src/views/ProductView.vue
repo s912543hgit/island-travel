@@ -36,8 +36,8 @@
           </nav>
           <h2 class="fw-bold h1 mb-3 mt-3 mt-md-0">{{ product.title }}</h2>
           <div class="row align-items-center">
-            <p class="text-muted  col-6">原價<del>NT${{ product.origin_price }}</del></p>
-            <p class="text-end col-6">特價<span class="h4 fw-bold text-danger ms-2">NT${{ product.price }}</span></p>
+            <p class="text-muted col-6">原價<del>NT${{ product.origin_price }}</del></p>
+            <p class="text-end col-6">特價<span class="h4 fw-bold text-primary ms-2">NT${{ product.price }}</span></p>
           </div>
           <a
             href="#"
@@ -251,13 +251,19 @@ export default {
       })
     },
     toggleFavorite (id) {
-      // findIndex 尋找陣列中符合對象並返回index 若沒有合適的會回傳-1
       const favoriteIndex = this.favorite.findIndex((item) => item === id)
-      // 第一次點擊時結果會是-1
       if (favoriteIndex === -1) {
         this.favorite.push(id)
+        this.emitter.emit('push-message', {
+          style: 'success',
+          title: '已加入收藏'
+        })
       } else {
         this.favorite.splice(favoriteIndex, 1)
+        this.emitter.emit('push-message', {
+          style: 'success',
+          title: '已移除收藏'
+        })
       }
     }
   },

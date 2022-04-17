@@ -167,7 +167,9 @@
 .header__title.active {
   z-index: 99;
   a {
-    color: #333;
+    @include sp {
+      color: #333;
+    }
   }
 }
 

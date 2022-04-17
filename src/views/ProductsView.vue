@@ -96,6 +96,7 @@ export default {
       productId: '',
       isLoadingItem: '',
       isActive: '',
+      category: '',
       // 從localStorage中取出的資料 必須給予預設值
       favorite: JSON.parse(localStorage.getItem('favorite')) || []
     }
@@ -166,8 +167,11 @@ export default {
     }
   },
   mounted () {
-    this.getProducts()
-    this.isActive = 'all'
+    this.emitter.on('sendCategory', (data) => {
+      console.log('hello', data)
+      this.category = data
+    })
+    this.getProducts(1, '')
   }
 }
 </script>

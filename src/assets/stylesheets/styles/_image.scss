@@ -25,6 +25,22 @@
   }
 }
 
+.section-nobackground {
+  min-height: 400px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  margin-bottom: 80px;
+  @include sp {
+    min-height: 300px;
+  }
+  p {
+    z-index: 1;
+  }
+}
+
 .section--about {
   margin: 6em 0;
 }

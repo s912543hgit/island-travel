@@ -58,10 +58,6 @@ const routes = [
       {
         path: 'orders',
         component: () => import('../views/Dashboard/OrdersView.vue')
-      },
-      {
-        path: 'coupon',
-        component: () => import('../views/Dashboard/CouponView.vue')
       }
     ]
   },

@@ -46,6 +46,9 @@
       <span>SCROLL</span>
     </div>
   </div>
+  <div class="container">
+    <CategoryFilter />
+  </div>
   <div class="container my-5">
     <h3 class="fs-4 text-center p-4">地區精選</h3>
     <div class="row">
@@ -92,7 +95,7 @@
       </div>
     </div>
   </div>
-  <div class="section">
+  <div class="section-nobackground">
     <div class="background-image--introduction background-image"></div>
     <p>一群愛島人，期望給您最深刻的島嶼記憶。</p>
     <RouterLink to="/about" class="btn btn-outline-primary button--search">關於我們</RouterLink>
@@ -119,6 +122,7 @@
   <swiper-slide v-for="(item) in products" :key="item.id" class="mb-5">
     <RouterLink :to="`/product/${item.id}`">
       <div class="p-card">
+        <div class="p-card__tag">{{ item.category }}</div>
         <div class="p-card__image" :style="{backgroundImage: `url(${item.imageUrl})`}">
           <div class="hover-area">
             <a class="btn btn-primary px-5" @click="getProduct(item.id)">查看商品</a>
@@ -139,6 +143,7 @@
 </template>
 
 <script>
+import CategoryFilter from '@/components/CategoryFilter.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import 'swiper/css/autoplay'
@@ -153,7 +158,8 @@ export default {
   },
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    CategoryFilter
   },
   setup () {
     return {
