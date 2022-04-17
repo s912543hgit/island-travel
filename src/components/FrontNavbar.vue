@@ -7,18 +7,15 @@
           <nav class="header__nav nav" :class="{active: isClicked}">
             <ul class="nav-list">
               <li class="nav-list__item">
-                <RouterLink class="nav-link" to="/" @click="isClicked = !isClicked">首頁</RouterLink>
-              </li>
-              <li class="nav-list__item">
                 <RouterLink class="nav-link" to="/about" @click="isClicked = !isClicked">關於我們</RouterLink>
               </li>
               <li class="nav-list__item">
                 <RouterLink class="nav-link" to="/products" @click="isClicked = !isClicked">產品列表</RouterLink>
               </li>
               <li class="nav-list__item">
-                <RouterLink class="nav-link" to="/favorite" @click="isClicked = !isClicked">
+                <RouterLink class="px-3" to="/favorite" @click="isClicked = !isClicked">
                   <i class="fs-5 bi bi-suit-heart d-none d-md-block"></i>
-                  <p class="d-md-none">收藏清單</p>
+                  <p class="d-md-none mb-0 py-2">收藏清單</p>
                 </RouterLink>
               </li>
               <li class="nav-list__item">

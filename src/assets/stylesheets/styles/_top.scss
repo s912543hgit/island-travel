@@ -126,9 +126,16 @@
   overflow: hidden;
 }
 
-// .product-slider {
-//   overflow: inherit;
-//   @include sp {
-//     overflow: hidden;
-//   }
-// }
+.slogan {
+  padding: 30px 0;
+  margin: 50px 0;
+  h3 {
+    font-family: "Zen Kurenaido", sans-serif;
+  }
+  &__content {
+    margin: 30px 0;
+    @include sp {
+      padding: 0 10px;
+    }
+  }
+}

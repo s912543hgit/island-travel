@@ -83,14 +83,18 @@
       <!-- 島嶼介紹 -->
       <div class="my-5">
         <div class="col-md-12">
-          <h3 class="fs-4 text-center p-4 text-primary">島嶼介紹</h3>
+          <div class="d-flex justify-content-center align-items-center mb-5">
+            <h3 class="section-heading">島嶼介紹</h3>
+          </div>
           <p>{{ product.description }}</p>
         </div>
       </div>
       <!-- 精選景點 -->
       <div class="my-5" v-if="product.placeOne">
         <div class="col-md-12">
-          <h3 class="fs-4 text-center p-4 text-primary">精選景點</h3>
+          <div class="d-flex justify-content-center align-items-center mb-5">
+            <h3 class="section-heading">精選景點</h3>
+          </div>
             <ul class="list-unstyled">
               <li>
                 <h4 class="fs-5">{{ product.placeOne }}</h4>
@@ -105,7 +109,9 @@
       </div>
       <div class="my-5">
         <div class="col-md-12">
-          <h3 class="fs-4 text-center p-4 text-primary">注意事項</h3>
+          <div class="d-flex justify-content-center align-items-center mb-5">
+            <h3 class="section-heading">注意事項</h3>
+          </div>
           <ul class="rule-list">
             <li>此旅程的取消期限為1個月前，若有取消或人數變更請您主動聯繫客服，如逾期將會收取取消費用。詳情請參考下列取消政策。</li>
             <li>產品結帳後我們將會於24小時內寄送相關電子郵件至您的信箱，請妥善保管。</li>
@@ -116,7 +122,9 @@
       </div>
       <div class="my-5">
         <div class="col-md-12">
-          <h3 class="fs-4 text-center p-4 text-primary">取消政策</h3>
+          <div class="d-flex justify-content-center align-items-center mb-5">
+            <h3 class="section-heading">取消政策</h3>
+          </div>
           <ul class="rule-list">
             <li>於30天前取消，將不會收取取消費用。</li>
             <li>於30天~14天前取消，將酌收整體費用的20%</li>
@@ -127,7 +135,9 @@
       </div>
   <!-- 相關商品 -->
   <div class="container-md">
-    <h3 class="fs-4 text-center p-4 text-primary">相關商品</h3>
+    <div class="d-flex justify-content-center align-items-center mb-5">
+      <h3 class="section-heading">相關商品</h3>
+    </div>
     <swiper :slides-per-view="1"
       :loop="true"
       :space-between="50"
@@ -145,6 +155,7 @@
     >
       <swiper-slide v-for="(item) in products" :key="item.id">
           <div class="p-card">
+            <div class="p-card__tag">{{ item.category }}</div>
             <div class="p-card__image" :style="{backgroundImage: `url(${item.imageUrl})`}">
               <RouterLink :to="`/product/${item.id}`" class="hover-area">
                 <div class="btn btn-primary px-5">查看商品</div>

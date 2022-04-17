@@ -8,7 +8,9 @@
     </div>
     <div class="container mt-md-5 mt-3 mb-5">
       <div v-if="favoritesList.length">
-        <h3 class="fs-4 text-center p-4 text-primary">已收藏的行程</h3>
+        <div class="d-flex justify-content-center align-items-center mb-5">
+          <h3 class="section-heading">收藏清單</h3>
+        </div>
         <table class="table">
           <thead>
             <tr>
@@ -24,11 +26,11 @@
                 <RouterLink :to="`/product/${item.id}`">
                   <img class="favorite__thumbnail"
                   :src="item.imageUrl" alt="{{ item.title }}">
-                  <p class="mb-0 fw-bold ms-3 d-inline-block">{{ item.title }}</p>
+                  <p class="mb-0 fw-bold ms-3 d-inline-block text-dark">{{ item.title }}</p>
                 </RouterLink>
               </th>
               <td class="favorite__price">
-                  <p class="">NT{{ item.price }} / {{ item.unit }}</p>
+                  <p class="">NT$ {{ item.price }} / {{ item.unit }}</p>
               </td>
               <td class="border-0 align-middle">
                 <button class="btn-primary btn" type="button"

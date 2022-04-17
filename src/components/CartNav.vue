@@ -18,7 +18,7 @@
                     <div class="cart__card__content lh-lg">
                       {{ item.product.title }}
                       <div>{{ item.qty }}<span>{{ item?.product?.unit }}</span></div>
-                      <p class="mb-0 ms-auto">小計: NT {{ item?.product?.price }}</p>
+                      <p class="mb-0 ms-auto">小計: NT$ {{ item?.product?.price }}</p>
                     </div>
                   </div>
                 </li>

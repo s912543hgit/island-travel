@@ -23,8 +23,10 @@
           </li>
         </ul>
         <div class="row">
-          <div class="col-md-10">
-            <h3 class="fw-bold mb-4 text-left">確認訂單</h3>
+          <div class="col-md-12">
+            <div class="d-flex justify-content-center align-items-center mb-5">
+              <h3 class="section-heading">確認訂單</h3>
+            </div>
           </div>
         </div>
         <div class="row justify-content-between pb-5">
@@ -41,7 +43,7 @@
                         <p class="mb-0 fw-bold mt-4">{{ item.qty }}人</p>
                       </div>
                     </div>
-                    <table class="table mt-4 border-top border-bottom text-muted">
+                    <table class="table mt-4 border-top border-bottom">
                       <tbody>
                         <tr>
                           <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">總金額</th>

@@ -24,7 +24,9 @@
           </ul>
           <div>
             <div>
-              <h4 class="mb-3">購物車</h4>
+              <div class="d-flex justify-content-center align-items-center mb-5">
+                <h3 class="section-heading">購物車內容</h3>
+              </div>
               <!-- pc -->
               <table class="table cart__table">
                 <thead>
@@ -70,7 +72,7 @@
                       </div>
                     </td>
                     <td class="border-0 align-middle">
-                      <p class="mb-0 ms-auto">NT {{ item?.product?.price }}</p>
+                      <p class="mb-0 ms-auto">NT$ {{ item?.product?.price }}</p>
                     </td>
                     <td class="border-0 align-middle">
                       <i class="bi bi-trash-fill fs-5" role="button" @click="openDelModal(item)"></i>
@@ -109,38 +111,29 @@
                             </div>
                           </div>
                       </div>
-                      <p class="mb-0 ms-auto">小計: NT {{ item?.product?.price }}</p>
+                      <p class="mb-0 ms-auto">小計: NT$ {{ item?.product?.price }}</p>
                     </div>
                   </div>
                 </li>
               </ul>
-              <div class="text-end">
+              <div class="d-flex justify-content-between align-items-center">
                 <button
-                  class="btn btn-outline-danger"
-                  type="button"
-                  @click="openModal()"
-                  :disabled="isDisabled === 'clear'">
-                  <span class="spinner-border spinner-border-sm"
-                  role="status" v-show="isDisabled === 'clear'"></span>
-                  清空購物車
-                </button>
+                class="btn btn-outline-danger"
+                type="button"
+                @click="openModal()"
+                :disabled="isDisabled === 'clear'">
+                <span class="spinner-border spinner-border-sm"
+                role="status" v-show="isDisabled === 'clear'"></span>
+                清空購物車
+              </button>
+                <RouterLink to="/products" class="btn btn-primary">繼續購物</RouterLink>
               </div>
             </div>
             <div class="cart__order">
               <div class="cart__info">
-                <h4 class="mb-3">訂單摘要</h4>
-                <!-- <div class="cart__info__inner">
-                  <table class="cart__info__form">
-                    <tr>
-                      <th>預計旅程: </th>
-                      <td><span class="me-2">{{ cartData?.carts?.length }}</span>套</td>
-                    </tr>
-                    <tr>
-                      <th>金額總計: </th>
-                      <td><span class="cart__price">NT${{ cartData.total }}</span></td>
-                    </tr>
-                  </table>
-                </div> -->
+                <div class="d-flex justify-content-center align-items-center mb-5">
+                  <h3 class="section-heading">訂單摘要</h3>
+                </div>
                 <div class="my-4">
                   <div class="d-flex mb-3" v-for="item in cartData.carts" :key="item.id">
                     <img :src="item.product.imageUrl" alt="" class="me-3 cart__image">
@@ -152,7 +145,7 @@
                       <p class="mb-0 fw-bold mt-4">{{ item.qty }}人</p>
                     </div>
                   </div>
-                  <table class="table mt-4 border-top border-bottom text-muted">
+                  <table class="table mt-4 border-top border-bottom">
                     <tbody>
                       <tr>
                         <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">總金額</th>
@@ -167,7 +160,9 @@
                 </div>
               </div>
               <div class="cart__form">
-                <h4 class="mb-3">填寫訂購資訊</h4>
+                <div class="d-flex justify-content-center align-items-center mb-5">
+                  <h3 class="section-heading">填寫資料</h3>
+                </div>
                 <VueForm ref="form" v-slot="{ errors }" @submit="sendData()">
                   <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
