@@ -17,10 +17,16 @@
             <RouterLink class="nav-link" to="/admin/orders">訂單</RouterLink>
           </li>
           <li class="nav-item">
+            <RouterLink class="nav-link" to="/admin/image">圖片上傳</RouterLink>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" @click="logout">登出</a>
           </li>
         </ul>
       </div>
+    </div>
+    <div>
+      <p>圖片上傳</p>
     </div>
 </nav>
 <RouterView v-if="checkSuccess"/>

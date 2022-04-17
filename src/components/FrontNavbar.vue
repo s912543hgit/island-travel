@@ -16,6 +16,12 @@
                 <RouterLink class="nav-link" to="/products" @click="isClicked = !isClicked">產品列表</RouterLink>
               </li>
               <li class="nav-list__item">
+                <RouterLink class="nav-link" to="/favorite" @click="isClicked = !isClicked">
+                  <i class="fs-5 bi bi-suit-heart d-none d-md-block"></i>
+                  <p class="d-md-none">收藏清單</p>
+                </RouterLink>
+              </li>
+              <li class="nav-list__item">
                 <div class="d-md-flex position-relative text-dark d-none d-md-block">
                   <a href="#" @click.prevent="openNav">
                     <i class="bi bi-cart fs-5"></i>
@@ -25,12 +31,6 @@
                     </span>
                   </a>
                 </div>
-              </li>
-              <li class="nav-list__item">
-                <RouterLink class="nav-link" to="/favorite" @click="isClicked = !isClicked">
-                  <i class="fs-5 bi bi-suit-heart d-none d-md-block"></i>
-                  <p class="d-md-none">收藏清單</p>
-                </RouterLink>
               </li>
             </ul>
           </nav>

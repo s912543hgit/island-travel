@@ -41,9 +41,9 @@
     width: 100px;
     height: 100px; 
     object-fit: cover;
-    @include sp {
-      width: 48%;
-    }
+    // @include sp {
+    //   width: 48%;
+    // }
   }
   &__order {
     margin-top: 70px;
@@ -67,7 +67,7 @@
     }
   }
   &__info {
-    width: 30%;
+    width: 40%;
     @include sp {
       width: 100%;
       margin-bottom: 50px;

@@ -129,7 +129,7 @@
             <div class="cart__order">
               <div class="cart__info">
                 <h4 class="mb-3">訂單摘要</h4>
-                <div class="cart__info__inner">
+                <!-- <div class="cart__info__inner">
                   <table class="cart__info__form">
                     <tr>
                       <th>預計旅程: </th>
@@ -140,6 +140,30 @@
                       <td><span class="cart__price">NT${{ cartData.total }}</span></td>
                     </tr>
                   </table>
+                </div> -->
+                <div class="my-4">
+                  <div class="d-flex mb-3" v-for="item in cartData.carts" :key="item.id">
+                    <img :src="item.product.imageUrl" alt="" class="me-3 cart__image">
+                    <div class="w-100">
+                      <div class="d-flex justify-content-between">
+                        <p class="mb-0 fw-bold">{{ item.product.title }}</p>
+                        <p class="mb-0">NT${{ item.product.price }}</p>
+                      </div>
+                      <p class="mb-0 fw-bold mt-4">{{ item.qty }}人</p>
+                    </div>
+                  </div>
+                  <table class="table mt-4 border-top border-bottom text-muted">
+                    <tbody>
+                      <tr>
+                        <th scope="row" class="border-0 px-0 pt-4 font-weight-normal">總金額</th>
+                        <td class="text-end border-0 px-0 pt-4">NT${{ cartData.total }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="d-flex justify-content-between mt-4">
+                    <p class="mb-0 h4 fw-bold">訂單金額</p>
+                    <p class="mb-0 h4 fw-bold text-primary">NT${{ cartData.total }}</p>
+                  </div>
                 </div>
               </div>
               <div class="cart__form">

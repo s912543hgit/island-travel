@@ -29,16 +29,16 @@
         </div>
         <div class="row justify-content-between pb-5">
           <template v-if="cartData.carts">
-              <div class="col-md-6">
+              <div class="col-md-5">
                   <div class="p-4 mb-4">
                     <div class="d-flex mb-3" v-for="item in cartData.carts" :key="item.id">
-                      <img :src="item.product.imageUrl" alt="" class="me-2 cart__image">
+                      <img :src="item.product.imageUrl" alt="" class="me-3 cart__image">
                       <div class="w-100">
                         <div class="d-flex justify-content-between">
                           <p class="mb-0 fw-bold">{{ item.product.title }}</p>
                           <p class="mb-0">NT${{ item.product.price }}</p>
                         </div>
-                        <p class="mb-0 fw-bold">{{ item.qty }}人</p>
+                        <p class="mb-0 fw-bold mt-4">{{ item.qty }}人</p>
                       </div>
                     </div>
                     <table class="table mt-4 border-top border-bottom text-muted">
@@ -51,7 +51,7 @@
                     </table>
                     <div class="d-flex justify-content-between mt-4">
                       <p class="mb-0 h4 fw-bold">訂單金額</p>
-                      <p class="mb-0 h4 fw-bold">NT${{ cartData.total }}</p>
+                      <p class="mb-0 h4 fw-bold text-primary">NT${{ cartData.total }}</p>
                     </div>
                   </div>
                 </div>
