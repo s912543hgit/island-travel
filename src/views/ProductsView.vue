@@ -167,11 +167,7 @@ export default {
     }
   },
   mounted () {
-    this.emitter.on('sendCategory', (data) => {
-      console.log('hello', data)
-      this.category = data
-    })
-    this.getProducts(1, '')
+    this.getProducts()
   }
 }
 </script>
