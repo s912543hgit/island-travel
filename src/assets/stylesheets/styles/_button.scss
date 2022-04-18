@@ -6,3 +6,21 @@
     width: 200px;
     z-index: 2;
 }
+.button--jump {
+  color: #fff;
+  font-size: 1rem;
+  background: #347e87;
+  padding: 10px 15px;
+  display: inline-block;
+  transition: .3s;
+  &:hover {
+    animation: pulsation .7s alternate infinite;
+    color: #fff;
+  }
+}
+
+@keyframes pulsation {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.9); }
+    100% { transform: scale(1.1); }
+}

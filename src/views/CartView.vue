@@ -126,7 +126,7 @@
                 role="status" v-show="isDisabled === 'clear'"></span>
                 清空購物車
               </button>
-                <RouterLink to="/products" class="btn btn-primary">繼續購物</RouterLink>
+                 <RouterLink to="/products" class="button--jump">繼續購物</RouterLink>
               </div>
             </div>
             <div class="cart__order">

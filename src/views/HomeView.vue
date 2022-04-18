@@ -1,5 +1,12 @@
 <template>
   <div class="position-relative">
+    <div class="p-mainvisual__container d-none d-md-block">
+      <div class="col-md-4 p-mainvisual__content p-3">
+        <h2 class="text-white logo">島遊</h2>
+        <p class="mb-3 text-white">尋找您的心之島向</p>
+        <RouterLink to="/products" class="button--jump">查看行程</RouterLink>
+      </div>
+    </div>
     <swiper
     :effect="'fade'"
     :modules="modules"
@@ -22,13 +29,6 @@
         ><img
           src="https://storage.googleapis.com/vue-course-api.appspot.com/shio-vue/1650177233464.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=UqkjRJd6ENTFsSuGMLYE8kYKCbEYHjjtPS4qiFxExWz11M%2Blfjs%2B8Pp7eAzQ%2Bsz8xkzwe4fJpwJQaE2T4ri%2BWgL4B0cmvKp87S19TCZ%2BAjupovMJE2xJYcMMtq1SS7yoGuivfRuYlsHIo7O1DmJ1y%2B3I2JiMMz3QdjHK%2FgTK4CuT6KSoFXIB00YmEEofvmUWvqzDSP%2Bt%2B%2BfaxGwT6AWb6bDZq5xLgv6zlvj8AizJRpoU0anniTImbMUyTxg8bPPrp1vxd5vY45jKewlyP1SqrJGWI3Yj6lv1lpko7Q8L%2BEp15GDH5kIWeN5m79MtzNEiuAE06%2Fi4A6TbBfn1T%2BLIGg%3D%3D" alt="island picture"/></swiper-slide
       >
-      <div class="p-mainvisual__container">
-        <div class="col-md-4 p-mainvisual__content p-3">
-          <h2 class="text-white logo">島遊</h2>
-          <p class="mb-3 text-white">尋找您的心之島向</p>
-          <RouterLink to="/products" class="text-white btn btn-primary rounded-0 mt-4">查看行程</RouterLink>
-        </div>
-      </div>
     </swiper>
   <div class="p-mainvisual--sp d-md-none"></div>
    <div class="container d-md-none p-mainvisual__outer--sp">
@@ -36,9 +36,7 @@
         <div class="col-md-4 p-mainvisual__content">
           <h2 class="logo">島遊</h2>
           <p class="mb-3 text-white">尋找您的心之島向</p>
-          <button class="btn btn-primary rounded-0 mt-4" type="button">
-            <RouterLink to="/products" class="text-white">查看行程</RouterLink>
-          </button>
+          <RouterLink to="/products" class="button--jump">查看行程</RouterLink>
         </div>
       </div>
     </div>
