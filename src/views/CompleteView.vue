@@ -27,7 +27,7 @@
               <h3 class="section-heading">完成訂單</h3>
             </div>
               <p>感謝您的光臨，我們期待與您一起啟程！</p>
-              <RouterLink class="btn btn-primary mt-4 px-5" to="/">回到首頁</RouterLink>
+              <RouterLink class="button--jump mt-4 px-5" to="/">回到首頁</RouterLink>
           </div>
         </div>
       </div>

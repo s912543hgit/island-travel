@@ -49,7 +49,7 @@
     <p class="slogan__content">愛島的人士有福了！我們精選全球各地的島嶼景點，<br class="d-none d-md-block">
       無論是單車環島、島上散步、潛水冒險 或是各種刺激的水上活動，應有盡有。<br class="d-none d-md-block">
       快來這裡尋找屬於您的心之島向吧！</p>
-    <RouterLink to="/products" class="btn btn-outline-primary button--search mx-auto">前往探索</RouterLink>
+    <RouterLink to="/products" class="button--slide btn">前往探索</RouterLink>
   </div>
   <div class="container my-5">
     <div class="d-flex justify-content-center align-items-center mb-5">
@@ -69,7 +69,7 @@
         <p class="text-muted text-left">直島位於瀨戶內海，擁有許多瀨戶群島之中最知名的藝術設施。原本面臨的人口高齡化危機的小島，因為藝術重獲新生，如今已經成為了國內外知名的旅遊勝地。<br>
         您可以花一整天來探訪這座島嶼上的各個美術館，以及散落各處的藝術作品。</p>
         <div class="row justify-content-center mt-5">
-          <RouterLink to="/products" class="button--search btn btn-outline-primary">前往探索</RouterLink>
+          <RouterLink to="/products" class="button--slide btn">前往探索</RouterLink>
         </div>
       </div>
     </div>
@@ -86,7 +86,7 @@
         <h4>夏威夷</h4>
         <p class="text-muted text-right">夏威夷位於太平洋沿岸，由夏威夷群島所組成。擁有一望無際的沙灘，熱情的人們，歡樂的慶典，以及全世界最活躍的火山。你可以在夏威夷與眾不同的壯麗景觀中來一場獨一無二的探險。</p>
         <div class="row justify-content-center mt-5">
-          <RouterLink to="/products" class="btn btn-outline-primary button--search">前往探索</RouterLink>
+          <RouterLink to="/products" class="button--slide btn">前往探索</RouterLink>
         </div>
       </div>
     </div>
@@ -103,7 +103,7 @@
         <h4>豊島</h4>
         <p class="text-muted text-left">原本是產業廢棄物投放場的荒涼島嶼，透過藝術重獲新生。<br>日本豐島位於瀨戶內海地區，從島上望去的蔚藍景色以及島上的梯田景觀都是一大絕景。<br>您也千萬不能錯過潛藏在島上四處的藝術景點。</p>
         <div class="row justify-content-center mt-5">
-          <RouterLink to="/products" class="btn btn-outline-primary button--search">前往探索</RouterLink>
+          <RouterLink to="/products" class="button--slide btn">前往探索</RouterLink>
         </div>
       </div>
     </div>
