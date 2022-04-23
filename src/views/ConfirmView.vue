@@ -34,7 +34,7 @@
               <div class="col-md-5">
                   <div class="p-4 mb-4">
                     <div class="d-flex mb-3" v-for="item in cartData.carts" :key="item.id">
-                      <img :src="item.product.imageUrl" alt="" class="me-3 cart__image">
+                      <img :src="item.product.imageUrl" :alt="item.product.title" class="me-3 cart__image">
                       <div class="w-100">
                         <div class="d-flex justify-content-between">
                           <p class="mb-0 fw-bold">{{ item.product.title }}</p>
@@ -129,7 +129,7 @@ export default {
           this.$router.push('/complete')
         })
         .catch((error) => {
-          alert(error.data.message)
+          alert(error.response.data.message)
         })
     }
   },

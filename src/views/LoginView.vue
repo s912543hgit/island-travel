@@ -1,9 +1,9 @@
 <template>
     <div class="container mt-5">
         <div class="row justify-content-center">
-          <h1 class="h3 mb-3 font-weight-normal">請先登入</h1>
+          <h1 class="h3 mb-3 font-weight-normal text-center">登入頁面</h1>
           <div class="col-8">
-            <form id="form" class="form-signin">
+            <form id="form" class="form-signin" @submit.prevent="login">
               <div class="form-floating mb-3">
                 <input
                   type="email"
@@ -13,7 +13,7 @@
                   required
                   autofocus
                 />
-                <label for="username">Email address</label>
+                <label for="username">電子信箱</label>
               </div>
               <div class="form-floating">
                 <input
@@ -22,21 +22,23 @@
                   v-model="user.password"
                   placeholder="Password"
                   required
+                  autocomplete
                 />
-                <label for="password">Password</label>
+                <label for="password">密碼</label>
               </div>
               <button
                 class="btn btn-lg btn-primary w-100 mt-3"
                 id="login"
-                type="button"
-                @click="login"
+                type="submit"
+                :disabled="this.user.username === '' || this.user.password === ''"
               >
                 登入
               </button>
+              <RouterLink  class="btn btn-lg btn-primary w-100 mt-3" to="/">回到首頁</RouterLink>
             </form>
           </div>
         </div>
-        <p class="mt-5 mb-3 text-muted">&copy; 2021~∞ - 六角學院</p>
+        <p class="mt-5 mb-3 text-muted text-center">&copy; 2021~∞ 島遊</p>
       </div>
 </template>
 
@@ -53,7 +55,6 @@ export default {
   methods: {
     login () {
       this.$http.post(`${process.env.VUE_APP_API}admin/signin`, this.user)
-        // 成功的結果
         .then((res) => {
           console.log(res)
           const { token, expired } = res.data
@@ -62,9 +63,9 @@ export default {
           document.cookie = `hexToken=${token}; expires=${new Date(expired)};`
           this.$router.push('/admin/products')
         })
-        // 失敗的結果
         .catch((error) => {
-          alert(error.data.message)
+          alert(error.response.data.message)
+          this.user.password = ''
         })
     }
   }

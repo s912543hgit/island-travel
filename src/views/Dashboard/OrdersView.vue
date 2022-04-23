@@ -133,7 +133,7 @@ export default {
         })
         .catch((error) => {
           this.isLoading = false
-          alert(error.data.message)
+          alert(error.response.data.message)
         })
     },
     delOrder () {

@@ -69,7 +69,7 @@
                 type="button"
                 class="text-nowrap btn btn-primary w-100 py-2"
                 @click.prevent="updateCartItem(product)"
-                :disabled="isDisabled === 'add'">
+                :disabled="product.qty === 0 || isDisabled === 'add'">
                 <span
                   class="spinner-border spinner-border-sm"
                   role="status"

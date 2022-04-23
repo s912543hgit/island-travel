@@ -1,7 +1,6 @@
 <template>
   <FrontNavbar></FrontNavbar>
-  <RouterView @emit-form="getData" @emit-favorite="getFavorite"
-  :form-data="formData"/>
+  <RouterView @emit-form="getData" :form-data="formData"/>
   <FooterView></FooterView>
   <PageTop></PageTop>
 </template>
@@ -14,8 +13,7 @@ import FooterView from '@/components/FooterView.vue'
 export default {
   data () {
     return {
-      formData: {},
-      favoriteData: []
+      formData: {}
     }
   },
   components: {

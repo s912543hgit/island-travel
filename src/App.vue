@@ -3,9 +3,6 @@
   <ToastMessages></ToastMessages>
 </template>
 
-<style lang="scss">
-  @import "./assets/stylesheets/all"
-</style>
 <script>
 import emitter from '@/libs/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
@@ -21,3 +18,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  @import "./assets/stylesheets/all"
+</style>

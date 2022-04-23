@@ -55,6 +55,7 @@
     <CautionModal ref="cautionModal" @clear-item="clearCartItem"></CautionModal>
     <CautionDelModal :item="tempProduct" ref="cautionDelModal" @del-product="removeCartItem"></CautionDelModal>
 </template>
+
 <script>
 import emitter from '@/libs/emitter'
 import CautionModal from '@/components/CautionModal.vue'

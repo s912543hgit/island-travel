@@ -117,7 +117,6 @@ export default {
       productComponent.openModal()
     },
     openDelProductModal (item) {
-      // 將點擊的產品帶入
       this.tempProduct = { ...item }
       const delComponent = this.$refs.delModal
       delComponent.openModal()
@@ -127,13 +126,11 @@ export default {
       let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
       let method = 'post'
       this.isLoading = true
-      // 根據status來決定要串接post或是put api
       if (!this.isNew) {
         api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`
         method = 'put'
       }
       const productComponent = this.$refs.productModal
-      // post和put需要代的參數相同，因此可以寫在一起
       this.$http[method](api, { data: this.tempProduct })
         .then((response) => {
           this.isLoading = false
@@ -143,7 +140,7 @@ export default {
         })
         .catch((error) => {
           this.isLoading = false
-          alert(error.data.message)
+          alert(error.response.data.message)
         })
     },
     delProduct () {

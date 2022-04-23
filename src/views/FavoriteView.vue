@@ -74,7 +74,6 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/`
       this.isLoading = true
       this.$http.get(api).then((res) => {
-      // 將產品列表帶入空陣列
         this.products = res.data.products
         this.getFavorites()
         this.isLoading = false
@@ -103,7 +102,6 @@ export default {
           })
           this.isLoading = false
           this.isDisabled = ''
-          // 觸發設置的監聽
           emitter.emit('get-cart')
         })
     },

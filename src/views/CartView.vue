@@ -136,7 +136,7 @@
                 </div>
                 <div class="my-4">
                   <div class="d-flex mb-3" v-for="item in cartData.carts" :key="item.id">
-                    <img :src="item.product.imageUrl" alt="" class="me-3 cart__image">
+                    <img :src="item.product.imageUrl" :alt="item.product.title" class="me-3 cart__image">
                     <div class="w-100">
                       <div class="d-flex justify-content-between">
                         <p class="mb-0 fw-bold">{{ item.product.title }}</p>
@@ -165,33 +165,33 @@
                 </div>
                 <VueForm ref="form" v-slot="{ errors }" @submit="sendData()">
                   <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
+                    <label for="email" class="form-label">電子郵件</label>
                     <VueField id="email" name="email" type="email" class="form-control"
                       :class="{ 'is-invalid': errors['email'] }"
-                      placeholder="請輸入 Email" rules="email|required"
+                      placeholder="請輸入電子郵件" rules="email|required"
                       v-model="form.user.email" ></VueField>
-                    <error-message name="email" class="invalid-feedback"></error-message>
+                    <ErrorMessage name="email" class="invalid-feedback"></ErrorMessage>
                   </div>
                   <div class="mb-3">
                     <label for="name" class="form-label">收件人姓名</label>
                     <VueField id="name" name="姓名" type="text" class="form-control"
                       :class="{ 'is-invalid': errors['姓名'] }"
                       placeholder="請輸入姓名" rules="required" v-model="form.user.name"></VueField>
-                    <error-message name="姓名" class="invalid-feedback"></error-message>
+                    <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
                   </div>
                   <div class="mb-3">
                     <label for="tel" class="form-label">收件人電話</label>
                     <VueField id="tel" name="電話" type="text" class="form-control"
                       :class="{ 'is-invalid': errors['電話'] }"
                       placeholder="請輸入電話"  :rules="isPhone" v-model="form.user.tel"></VueField>
-                    <error-message name="電話" class="invalid-feedback"></error-message>
+                    <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
                   </div>
                   <div class="mb-3">
                     <label for="address" class="form-label">收件人地址</label>
                     <VueField id="address" name="地址" type="text" class="form-control"
                     :class="{ 'is-invalid': errors['地址'] }"
                     placeholder="請輸入地址" rules="required" v-model="form.user.address"></VueField>
-                    <error-message name="地址" class="invalid-feedback"></error-message>
+                    <ErrorMessage name="地址" class="invalid-feedback"></ErrorMessage>
                   </div>
                   <div class="mb-3">
                     <label for="message" class="form-label">留言</label>
