@@ -1,59 +1,59 @@
 <template>
-    <VueLoading :active="isLoading"/>
-    <div class="section">
-      <div class="background-image background-image--favorite"></div>
-      <div class="background-title">
-        <h2 class="fw-bold">收藏清單</h2>
-      </div>
+  <VueLoading :active="isLoading"/>
+  <div class="section">
+    <div class="background-image background-image--favorite"></div>
+    <div class="background-title">
+      <h2 class="fw-bold">收藏清單</h2>
     </div>
-    <div class="container mt-md-5 mt-3 mb-5">
-      <div v-if="favoritesList.length">
-        <div class="d-flex justify-content-center align-items-center mb-5">
-          <h3 class="section-heading">收藏清單</h3>
-        </div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col" class="border-0 ps-0">商品名稱</th>
-              <th scope="col" class="border-0">價格</th>
-              <th scope="col" class="border-0">狀態</th>
-              <th scope="col" class="border-0">移除</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in favoritesList" :key="item.id" class="border-bottom border-top">
-              <th scope="row" class="border-0 px-0 font-weight-normal py-4">
-                <RouterLink :to="`/product/${item.id}`">
-                  <img class="favorite__thumbnail"
+  </div>
+  <div class="container mt-md-5 mt-3 mb-5">
+    <div v-if="favoritesList.length">
+      <div class="d-flex justify-content-center align-items-center mb-5">
+        <h3 class="section-heading">收藏清單</h3>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="border-0 ps-0">商品名稱</th>
+            <th scope="col" class="border-0">價格</th>
+            <th scope="col" class="border-0">狀態</th>
+            <th scope="col" class="border-0">移除</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in favoritesList" :key="item.id" class="border-bottom border-top">
+            <th scope="row" class="border-0 px-0 font-weight-normal py-4">
+              <RouterLink :to="`/product/${item.id}`">
+                <img class="favorite__thumbnail"
                   :src="item.imageUrl" alt="{{ item.title }}">
-                  <p class="mb-0 fw-bold ms-3 d-inline-block text-dark">{{ item.title }}</p>
-                </RouterLink>
-              </th>
-              <td class="favorite__price">
-                  <p class="">NT$ {{ item.price }} / {{ item.unit }}</p>
-              </td>
-              <td class="border-0 align-middle">
-                <button class="btn-primary btn" type="button"
-                @click="addToCart(item.id)" :disabled="isLoadingItem === item.id">
-                  <span class="spinner-border spinner-border-sm"
+                <p class="mb-0 fw-bold ms-3 d-inline-block text-dark">{{ item.title }}</p>
+              </RouterLink>
+            </th>
+            <td class="favorite__price">
+              <p class="">NT$ {{ item.price }} / {{ item.unit }}</p>
+            </td>
+            <td class="border-0 align-middle">
+              <button class="btn-primary btn" type="button"
+              @click="addToCart(item.id)" :disabled="isLoadingItem === item.id">
+                <span class="spinner-border spinner-border-sm"
                   role="status" v-show="isLoadingItem === item.id"></span>
                   加入購物車
-                </button>
-              </td>
-              <td class="border-0 align-middle">
-                <i class="bi bi-trash-fill fs-5" role="button" @click="removeFavorite(item.id)"></i>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div v-else class="container--center">
-        <h3 class="text-center">目前還沒有收藏行程唷！快去逛逛吧！</h3>
-        <RouterLink to="/products"
-        class="btn btn-primary mt-5"
-        @click="isOpen = !isOpen">開始旅程</RouterLink>
-      </div>
+              </button>
+            </td>
+            <td class="border-0 align-middle">
+              <i class="bi bi-trash-fill fs-5" role="button" @click="removeFavorite(item.id)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    <div v-else class="container--center">
+      <h3 class="text-center">目前還沒有收藏行程唷！快去逛逛吧！</h3>
+      <RouterLink to="/products"
+      class="btn btn-primary mt-5"
+      @click="isOpen = !isOpen">開始旅程</RouterLink>
+    </div>
+  </div>
 </template>
 
 <script>

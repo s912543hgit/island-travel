@@ -1,59 +1,59 @@
 <template>
-    <div :class="toggleCart ? 'open' : ''">
-        <nav class="cartNav">
-          <div class="cartNav__inner">
-            <div class="cartNav__header">
-              <p>購物車</p>
-              <span class="icon--close cartNav__close" @click="closeCart"></span>
-            </div>
-            <template v-if="cartData.carts.length">
-              <ul class="cart__list">
-                <li
-                  class="card cart__card"
-                  v-for="item in cartData.carts"
-                  :key="item.id">
-                  <div class="d-flex">
-                    <span class="icon--close icon-close--sp cartNav__close" @click="openDelModal(item)"></span>
-                    <img :src="item.product.imageUrl" class="cart__image me-3" :alt="item.product.title">
-                    <div class="cart__card__content lh-lg">
-                      {{ item.product.title }}
-                      <div>{{ item.qty }}<span>{{ item?.product?.unit }}</span></div>
-                      <p class="mb-0 ms-auto">小計: NT$ {{ item?.product?.price }}</p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-              <div class="text-center">
-                <RouterLink to="/cart" class="text-white" @click="closeCart">
-                  <button class="btn btn-primary mt-4 w-100 py-3" type="button">
-                    前往購物車
-                  </button>
-                </RouterLink>
-                <button
-                  class="btn btn-outline-danger mt-3 py-2"
-                  type="button"
-                  :disabled="isDisabled === 'clear'"
-                  @click="openModal()"
-                  >
-                  <span
-                    class="spinner-border spinner-border-sm"
-                    role="status"
-                    v-show="isDisabled === 'clear'"
-                    ></span>
-                  清空購物車
-                </button>
+  <div :class="toggleCart ? 'open' : ''">
+    <nav class="cartNav">
+      <div class="cartNav__inner">
+        <div class="cartNav__header">
+          <p>購物車</p>
+          <span class="icon--close cartNav__close" @click="closeCart"></span>
+        </div>
+        <template v-if="cartData.carts.length">
+          <ul class="cart__list">
+            <li
+              class="card cart__card"
+              v-for="item in cartData.carts"
+              :key="item.id">
+              <div class="d-flex">
+                <span class="icon--close icon-close--sp cartNav__close" @click="openDelModal(item)"></span>
+                <img :src="item.product.imageUrl" class="cart__image me-3" :alt="item.product.title">
+                <div class="cart__card__content lh-lg">
+                  {{ item.product.title }}
+                  <div>{{ item.qty }}<span>{{ item?.product?.unit }}</span></div>
+                  <p class="mb-0 ms-auto">小計: NT$ {{ item?.product?.price }}</p>
+                </div>
               </div>
-            </template>
-            <div v-else class="p-product--none d-flex flex-column justify-content-center align-items-center">
-              <p>購物車內沒有商品唷</p>
-              <RouterLink  to="/products" class="btn btn-primary" @click="closeCart">開始旅程</RouterLink>
-            </div>
+            </li>
+          </ul>
+          <div class="text-center">
+            <RouterLink to="/cart" class="text-white" @click="closeCart">
+              <button class="btn btn-primary mt-4 w-100 py-3" type="button">
+                前往購物車
+              </button>
+            </RouterLink>
+            <button
+              class="btn btn-outline-danger mt-3 py-2"
+              type="button"
+              :disabled="isDisabled === 'clear'"
+              @click="openModal()"
+            >
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                v-show="isDisabled === 'clear'">
+              </span>
+              清空購物車
+            </button>
           </div>
-        </nav>
-        <div class="cartNav__mask" :class="toggleCart ? 'open' : ''" @click="closeCart"></div>
-    </div>
-    <CautionModal ref="cautionModal" @clear-item="clearCartItem"></CautionModal>
-    <CautionDelModal :item="tempProduct" ref="cautionDelModal" @del-product="removeCartItem"></CautionDelModal>
+        </template>
+        <div v-else class="p-product--none d-flex flex-column justify-content-center align-items-center">
+          <p>購物車內沒有商品唷</p>
+          <RouterLink  to="/products" class="btn btn-primary" @click="closeCart">開始旅程</RouterLink>
+        </div>
+      </div>
+    </nav>
+    <div class="cartNav__mask" :class="toggleCart ? 'open' : ''" @click="closeCart"></div>
+  </div>
+  <CautionModal ref="cautionModal" @clear-item="clearCartItem"/>
+  <CautionDelModal :item="tempProduct" ref="cautionDelModal" @del-product="removeCartItem"/>
 </template>
 
 <script>

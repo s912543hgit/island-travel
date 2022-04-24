@@ -1,6 +1,7 @@
 <template>
-    <button id="page-top" class="page-top" type="button" @click="toTop"></button>
+  <button id="page-top" class="page-top" type="button" @click="toTop"></button>
 </template>
+
 <script>
 import smoothscroll from 'smoothscroll-polyfill'
 smoothscroll.polyfill()

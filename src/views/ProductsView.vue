@@ -1,84 +1,82 @@
 <template>
-    <VueLoading :active="isLoading"/>
-    <div class="section">
-      <div class="background-image background-image--products"></div>
-      <div class="background-title">
-        <h2 class="fw-bold">產品列表</h2>
-      </div>
+  <VueLoading :active="isLoading"/>
+  <div class="section">
+    <div class="background-image background-image--products"></div>
+    <div class="background-title">
+      <h2 class="fw-bold">產品列表</h2>
     </div>
-    <div class="container mt-md-5 mt-3 mb-5">
-      <div class="row">
-        <div class="col-md-3 position-relative">
-          <ul class="p-category">
-            <li class="list-group-item list-group-item-action"
-                :class="{ active: isActive === 'all' }">
-              <a class="px-3 px-md-4 py-1" href="#"
+  </div>
+  <div class="container mt-md-5 mt-3 mb-5">
+    <div class="row">
+      <div class="col-md-3 position-relative">
+        <ul class="p-category">
+          <li class="list-group-item list-group-item-action"
+            :class="{ active: isActive === 'all' }">
+            <a class="px-3 px-md-4 py-1" href="#"
               @click.prevent="getProducts(1)"> 全部</a>
-            </li>
-            <li class="list-group-item list-group-item-action"
-                :class="{ active: isActive === '日本' }">
-              <a class="px-3 px-md-4 py-1" href="#"
-              @click.prevent="getProducts(1,'日本')"> 日本</a>
-            </li>
-            <li class="list-group-item list-group-item-action"
-                :class="{ active: isActive === '太平洋' }">
-              <a class="px-3 px-md-4 py-1"  href="#"
-              @click.prevent="getProducts(1,'太平洋')"> 太平洋</a>
-            </li>
-            <li class="list-group-item list-group-item-action"
-                :class="{ active: isActive === '其他' }">
-              <a class="px-3 px-md-4 py-1" href="#"
-              @click.prevent="getProducts(1,'其他')"> 其他</a>
-            </li>
-          </ul>
-        </div>
-        <!-- products list -->
-        <div class="col-md-9">
-          <div class="row row-cols-1 row-cols-md-2">
-            <div class="col" v-for="product in products" :key="product.id">
-              <!-- products card -->
-                <div class="card mb-4 p-card">
-                  <div class="p-card__image" :style="{backgroundImage: `url(${product.imageUrl})`}">
-                    <RouterLink :to="`/product/${product.id}`" class="hover-area">
-                      <button class="btn btn-primary px-5 me-2">查看商品</button>
-                    </RouterLink>
-                  </div>
-                  <RouterLink :to="`/product/${product.id}`" class="card-body p-4 bg-white">
-                    <div>
-                      <a href="#" class="border rounded-circle p-2 me-4"
-                        @click.prevent="toggleFavorite(product.id)">
-                        <span v-if="favorite.includes(product.id)">
-                          <i v-if="favorite.includes(product.id)" class="bi bi-suit-heart-fill"></i>
-                        </span>
-                        <i v-else class="bi bi-suit-heart"></i>
-                      </a>
-                    </div>
-                    <h4 class="mb-0 mt-3 text-left">{{ product.title }}</h4>
-                    <div class="row align-items-center">
-                      <p class="text-muted col-6">
-                        <del>NT${{ product.origin_price }}</del>
-                      </p>
-                      <p class="text-end col-6">
-                        <span class="h4 fw-bold text-primary ms-2">NT${{ product.price }}</span>
-                      </p>
-                    </div>
-                    <button class="btn btn-primary w-100"
-                    @click.prevent="addToCart(product.id)"
-                    :disabled="isLoadingItem === product.id">
-                    <span class="spinner-border spinner-border-sm"
-                    role="status" v-show="isLoadingItem === product.id"></span>
-                    加入購物車
-                  </button>
-                  </RouterLink>
+          </li>
+          <li class="list-group-item list-group-item-action"
+            :class="{ active: isActive === '日本' }">
+            <a class="px-3 px-md-4 py-1" href="#"
+            @click.prevent="getProducts(1,'日本')"> 日本</a>
+          </li>
+          <li class="list-group-item list-group-item-action"
+            :class="{ active: isActive === '太平洋' }">
+            <a class="px-3 px-md-4 py-1"  href="#"
+            @click.prevent="getProducts(1,'太平洋')"> 太平洋</a>
+          </li>
+          <li class="list-group-item list-group-item-action"
+            :class="{ active: isActive === '其他' }">
+            <a class="px-3 px-md-4 py-1" href="#"
+            @click.prevent="getProducts(1,'其他')"> 其他</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-9">
+        <div class="row row-cols-1 row-cols-md-2">
+          <div class="col" v-for="product in products" :key="product.id">
+            <div class="card mb-4 p-card">
+              <div class="p-card__image" :style="{backgroundImage: `url(${product.imageUrl})`}">
+                <RouterLink :to="`/product/${product.id}`" class="hover-area">
+                  <button class="btn btn-primary px-5 me-2">查看商品</button>
+                </RouterLink>
+              </div>
+              <RouterLink :to="`/product/${product.id}`" class="card-body p-4 bg-white">
+                <div>
+                  <a href="#" class="border rounded-circle p-2 me-4"
+                     @click.prevent="toggleFavorite(product.id)">
+                    <span v-if="favorite.includes(product.id)">
+                      <i v-if="favorite.includes(product.id)" class="bi bi-suit-heart-fill"></i>
+                    </span>
+                    <i v-else class="bi bi-suit-heart"></i>
+                  </a>
                 </div>
+                <h4 class="mb-0 mt-3 text-left">{{ product.title }}</h4>
+                <div class="row align-items-center">
+                  <p class="text-muted col-6">
+                    <del>NT${{ product.origin_price }}</del>
+                  </p>
+                  <p class="text-end col-6">
+                    <span class="h4 fw-bold text-primary ms-2">NT${{ product.price }}</span>
+                  </p>
+                </div>
+                <button class="btn btn-primary w-100"
+                  @click.prevent="addToCart(product.id)"
+                  :disabled="isLoadingItem === product.id">
+                  <span class="spinner-border spinner-border-sm"
+                  role="status" v-show="isLoadingItem === product.id"></span>
+                    加入購物車
+                </button>
+              </RouterLink>
             </div>
           </div>
-          <PaginationView :pages="pagination"
+        </div>
+        <PaginationView :pages="pagination"
           @emit-pages="getProducts"
           class="justify-content-center d-flex mt-5" />
-        </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>

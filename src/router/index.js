@@ -41,7 +41,7 @@ const routes = [
       }
     ]
   },
-  // // 登入頁面
+  // 登入頁面
   {
     path: '/login',
     component: () => import('../views/LoginView.vue')

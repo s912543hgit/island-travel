@@ -7,7 +7,7 @@
         <RouterLink to="/products" class="button--jump">查看行程</RouterLink>
       </div>
     </div>
-    <swiper
+    <Swiper
     :effect="'fade'"
     :modules="modules"
     :speed="2000"
@@ -18,18 +18,17 @@
     }"
     class="p-mainvisual d-none d-md-block"
     >
-      <swiper-slide
-        ><img
-          src="https://storage.googleapis.com/vue-course-api.appspot.com/shio-vue/1650177067236.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=S%2Bh8qL40guzPunpWvL%2FMkN9%2BPq5mQRQ9VyZneqBSH7ftoAYkZDMab4Gq3tyYeErE%2FfwsjZ4GgTjJvA2%2BTOnStY8OJ2pZUYzNKX7FI0SmVsxr0Y62vU4WkyJk47Ck7a7lMhrCQfRmrmmRCqC24FZNLWGtsTL4zhKJYMQQoXksalOzxE8SgrgOtULg1XWkwWHWnWVtUMJBK1Kw%2BTlJDJp9TeuQhqlYQqAgTQmKGpZfwRNJMStr12yxfzIJlExMCz76HtYG9%2BeVsr6%2B0T3Rt9p2QrrV4jJRUFnRG16w5GBnUzLpOT0tNhNqdq51GGU6GboXTb4rdSqnUgXXN9YKOruUhw%3D%3D" alt="island picture"/></swiper-slide
-      >
-      <swiper-slide>
+      <Swiper-slide>
+      <img
+          src="https://storage.googleapis.com/vue-course-api.appspot.com/shio-vue/1650177067236.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=S%2Bh8qL40guzPunpWvL%2FMkN9%2BPq5mQRQ9VyZneqBSH7ftoAYkZDMab4Gq3tyYeErE%2FfwsjZ4GgTjJvA2%2BTOnStY8OJ2pZUYzNKX7FI0SmVsxr0Y62vU4WkyJk47Ck7a7lMhrCQfRmrmmRCqC24FZNLWGtsTL4zhKJYMQQoXksalOzxE8SgrgOtULg1XWkwWHWnWVtUMJBK1Kw%2BTlJDJp9TeuQhqlYQqAgTQmKGpZfwRNJMStr12yxfzIJlExMCz76HtYG9%2BeVsr6%2B0T3Rt9p2QrrV4jJRUFnRG16w5GBnUzLpOT0tNhNqdq51GGU6GboXTb4rdSqnUgXXN9YKOruUhw%3D%3D" alt="island picture"/>
+      </Swiper-slide>
+      <Swiper-slide>
         <img src="https://storage.googleapis.com/vue-course-api.appspot.com/shio-vue/1650177114084.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=XUMqOVyOn4z8YKJhzRVwJW0LbN38Of3meavl1sgFYiBhnxYxFyS7guJoyqI6tDeg57U8h1XxDqQwr5lURmIOA7TzwdqNBakxtBqD%2BMoPUmnZOE%2Fdp2lsoqx64W7YXhjpnX%2B2mKG0V3WdcyULH3ZPSYyZGWaitlmq7m8Gs%2FNvQaTltl1XtQBEDzXj3H5MWw0ICf3%2Fp0BGNYGQ3chGiUQaE7Q6K%2BNrYRd0MNYHUvy3DGR%2BH9fSTrSuzHAAXEJtAlxaNY7XUclP5nTzRV0rQ4gEPDSzDOM5B5WKi5afvBm5zcIHCWnP8DjieGHpKUGm0U1KsUo8KYKmtZfJ2hJGRsw%2F6Q%3D%3D" alt="island picture" />
-      </swiper-slide>
-      <swiper-slide
-        ><img
-          src="https://storage.googleapis.com/vue-course-api.appspot.com/shio-vue/1650177233464.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=UqkjRJd6ENTFsSuGMLYE8kYKCbEYHjjtPS4qiFxExWz11M%2Blfjs%2B8Pp7eAzQ%2Bsz8xkzwe4fJpwJQaE2T4ri%2BWgL4B0cmvKp87S19TCZ%2BAjupovMJE2xJYcMMtq1SS7yoGuivfRuYlsHIo7O1DmJ1y%2B3I2JiMMz3QdjHK%2FgTK4CuT6KSoFXIB00YmEEofvmUWvqzDSP%2Bt%2B%2BfaxGwT6AWb6bDZq5xLgv6zlvj8AizJRpoU0anniTImbMUyTxg8bPPrp1vxd5vY45jKewlyP1SqrJGWI3Yj6lv1lpko7Q8L%2BEp15GDH5kIWeN5m79MtzNEiuAE06%2Fi4A6TbBfn1T%2BLIGg%3D%3D" alt="island picture"/></swiper-slide
-      >
-    </swiper>
+      </Swiper-slide>
+      <Swiper-slide>
+      <img src="https://storage.googleapis.com/vue-course-api.appspot.com/shio-vue/1650177233464.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=UqkjRJd6ENTFsSuGMLYE8kYKCbEYHjjtPS4qiFxExWz11M%2Blfjs%2B8Pp7eAzQ%2Bsz8xkzwe4fJpwJQaE2T4ri%2BWgL4B0cmvKp87S19TCZ%2BAjupovMJE2xJYcMMtq1SS7yoGuivfRuYlsHIo7O1DmJ1y%2B3I2JiMMz3QdjHK%2FgTK4CuT6KSoFXIB00YmEEofvmUWvqzDSP%2Bt%2B%2BfaxGwT6AWb6bDZq5xLgv6zlvj8AizJRpoU0anniTImbMUyTxg8bPPrp1vxd5vY45jKewlyP1SqrJGWI3Yj6lv1lpko7Q8L%2BEp15GDH5kIWeN5m79MtzNEiuAE06%2Fi4A6TbBfn1T%2BLIGg%3D%3D" alt="island picture"/>
+      </Swiper-slide>
+    </Swiper>
   <div class="p-mainvisual--sp d-md-none"></div>
    <div class="container d-md-none p-mainvisual__outer--sp">
       <div class="row justify-content-start my-auto p-mainvisual__container">
@@ -116,7 +115,7 @@
   <div class="d-flex justify-content-center align-items-center mb-5">
     <h3 class="section-heading">島嶼風情</h3>
   </div>
-  <swiper
+  <Swiper
   :loop="true"
   :speed="1000"
   class="container"
@@ -133,7 +132,7 @@
   }"
   :modules="modules"
 >
-  <swiper-slide v-for="(item) in products" :key="item.id" class="mb-5">
+  <Swiper-slide v-for="(item) in products" :key="item.id" class="mb-5">
     <RouterLink :to="`/product/${item.id}`">
       <div class="p-card">
         <div class="p-card__tag">{{ item.category }}</div>
@@ -152,8 +151,8 @@
         </div>
       </div>
     </RouterLink>
-  </swiper-slide>
-</swiper>
+  </Swiper-slide>
+</Swiper>
 </template>
 
 <script>

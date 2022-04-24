@@ -1,5 +1,5 @@
 <template>
- <nav aria-label="Page navigation">
+  <nav aria-label="Page navigation">
     <ul class="pagination">
       <li class="page-item" :class="{ disabled: !pages.has_pre }">
         <a href="#" class="page-link" aria-label="Previous"
@@ -16,6 +16,7 @@
     </ul>
   </nav>
 </template>
+
 <script>
 export default {
   props: ['pages'],
