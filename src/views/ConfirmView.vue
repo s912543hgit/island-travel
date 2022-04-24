@@ -25,7 +25,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="d-flex justify-content-center align-items-center mb-5">
-            <h3 class="section-heading">確認訂單</h3>
+            <h3 class="section-heading">填寫資料</h3>
           </div>
         </div>
       </div>
