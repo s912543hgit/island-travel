@@ -71,7 +71,7 @@
                 <p>{{ formData.user.tel }}</p>
               </li>
               <li class="d-flex mb-3">
-                <p class="col-4">收件人Email</p>
+                <p class="col-4">收件人電子郵件</p>
                 <p>{{ formData.user.email }}</p>
               </li>
               <li class="d-flex mb-3">

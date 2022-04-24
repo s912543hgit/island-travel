@@ -149,6 +149,7 @@
           },
         }"
         :modules="modules"
+        class="p-2"
       >
         <Swiper-slide v-for="(item) in products" :key="item.id">
             <div class="p-card">
