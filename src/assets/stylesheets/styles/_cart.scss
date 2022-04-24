@@ -57,6 +57,10 @@
     }
   }
 
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+  }
   &__table {
     @include sp {
       display: none;

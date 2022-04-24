@@ -11,11 +11,11 @@
         <ul class="p-steps list-unstyled mb-5">
           <li class="col-4 mb-md-0 mb-3">
             <small>STEP1</small>
-            <p>填寫資料</p>
+            <p>購物車</p>
           </li>
           <li class="col-4 mb-md-0 mb-3">
             <small>STEP2</small>
-            <p>確認訂單</p>
+            <p>填寫資料</p>
           </li>
           <li class="col-4 is-active">
             <small>STEP3</small>
