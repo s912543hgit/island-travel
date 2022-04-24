@@ -71,6 +71,9 @@
   background-image: url("https://storage.googleapis.com/vue-course-api.appspot.com/shio-vue/1650181602493.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=VShtaJbwwTAyF8WGYkZqEQoP4OCXOoDPFC0IaESX25Nn5KOrP5PtcTwUA%2BoztdkWaZJaEwB40D8dPDmvcn3DCYRTGVpYFlhuwqAO6KVH%2FDCWd5AvQmEu%2BUqUGlHWULMXUXn2uE4nFZO53AOPPF00DnLjS0L66acWIPrRmKKNURL%2F0%2BzZzFW%2Bh9AUtEEtOuPmx7TlcVJftU5KGllfsJfLfDa4ccM62PTQCJz6PUc3OUntr7xKC0Pe7wsraQknCeyyekQKsqbKo4mC9SHPiTlByWdMhyTsoCAHB85SN1boQoB8rcGeeeaqNqxXpRvDLK50uTilPyd2L3AU5xOVdeK%2FrA%3D%3D");
   opacity: 0.5;
   background-attachment: fixed;
+  @include sp {
+    background-attachment: inherit;
+  }
 }
 
 .background-image--cart {

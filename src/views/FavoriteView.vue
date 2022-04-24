@@ -11,7 +11,7 @@
       <div class="d-flex justify-content-center align-items-center mb-5">
         <h3 class="section-heading">收藏清單</h3>
       </div>
-      <table class="table">
+      <table class="table favorite__table">
         <thead>
           <tr>
             <th scope="col" class="border-0 ps-0">商品名稱</th>
@@ -46,11 +46,33 @@
           </tr>
         </tbody>
       </table>
+      <ul class="cart__list d-md-none">
+        <li
+          class="card cart__card"
+          v-for="item in favoritesList"
+          :key="item.id">
+            <div class="d-flex justify-content-between">
+              <span class="icon--close icon-close--sp cartNav__close" @click="removeFavorite(item.id)"></span>
+              <img class="favorite__thumbnail"
+              :src="item.imageUrl" alt="{{ item.title }}">
+              <div class="cart__card__content">
+                {{ item.title }}
+                <p class="mb-0 ms-auto">小計: NT$ {{ item.price }}</p>
+                <button class="btn-primary btn w-100 mt-2" type="button"
+                @click="addToCart(item.id)" :disabled="isLoadingItem === item.id">
+                  <span class="spinner-border spinner-border-sm"
+                    role="status" v-show="isLoadingItem === item.id"></span>
+                    加入購物車
+                </button>
+              </div>
+            </div>
+        </li>
+      </ul>
     </div>
     <div v-else class="container--center">
-      <h3 class="text-center">目前還沒有收藏行程唷！快去逛逛吧！</h3>
+      <h3 class="text-center">目前還沒有收藏行程唷！<br>快去逛逛吧！</h3>
       <RouterLink to="/products"
-      class="btn btn-primary mt-5"
+      class="button--jump mt-5"
       @click="isOpen = !isOpen">開始旅程</RouterLink>
     </div>
   </div>
@@ -109,8 +131,8 @@ export default {
     },
     removeFavorite (id) {
       const favoriteId = this.favorite.indexOf(id)
+      this.isLoading = true
       if (favoriteId !== -1) {
-        this.isLoading = true
         this.favorite.splice(favoriteId, 1)
         localStorage.setItem('favorite', JSON.stringify(this.favorite))
         this.getFavorites()

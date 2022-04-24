@@ -93,12 +93,12 @@
           <h3 class="section-heading">精選景點</h3>
         </div>
         <ul class="list-unstyled">
-          <li>
-            <h4 class="fs-5">{{ product.placeOne }}</h4>
+          <li class="mb-5">
+            <h4 class="fs-5 product__subtitle">{{ product.placeOne }}</h4>
             <p>{{ product.introOne }}</p>
           </li>
           <li v-if="product.placeTwo">
-            <h4 class="fs-5">{{ product.placeTwo }}</h4>
+            <h4 class="fs-5 product__subtitle">{{ product.placeTwo }}</h4>
             <p>{{ product.introTwo }}</p>
           </li>
         </ul>
@@ -112,7 +112,7 @@
         <ul class="rule-list">
           <li>此旅程的取消期限為1個月前，若有取消或人數變更請您主動聯繫客服，如逾期將會收取取消費用。詳情請參考下列取消政策。</li>
           <li>產品結帳後我們將會於24小時內寄送相關電子郵件至您的信箱，請妥善保管。</li>
-          <li>若因天候不佳而致旅客無法盡興遊玩時，請您聯絡客服，我們將會有專人為您提供替代方案。</li>
+          <li>若因天候不佳而致旅客無法盡興遊玩時，<br class="d-md-none">請您聯絡客服，我們將會有專人為您提供替代方案。</li>
           <li>出發前請先查詢好當地氣候，並準備合適衣物。</li>
         </ul>
       </div>
