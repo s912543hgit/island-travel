@@ -64,19 +64,19 @@
             <ul class="list-unstyled p-confirmForm">
               <li class="d-flex mb-3">
                 <p class="col-4">姓名</p>
-                <p>{{ form.user.name }}</p>
+                <p>{{ formData.user.name }}</p>
               </li>
               <li class="d-flex mb-3">
                 <p class="col-4">電話</p>
-                <p>{{ form.user.tel }}</p>
+                <p>{{ formData.user.tel }}</p>
               </li>
               <li class="d-flex mb-3">
                 <p class="col-4">電子郵件</p>
-                <p>{{ form.user.email }}</p>
+                <p>{{ formData.user.email }}</p>
               </li>
               <li class="d-flex mb-3">
                 <p class="col-4">留言</p>
-                <p>{{ form.message }}</p>
+                <p>{{ formData.message }}</p>
               </li>
             </ul>
             <button
@@ -109,7 +109,7 @@ export default {
       }
     }
   },
-  inject: ['emitter'],
+  props: ['form-data'],
   methods: {
     getCart () {
       this.isLoading = true
@@ -135,11 +135,6 @@ export default {
   },
   mounted () {
     this.getCart()
-    this.emitter.on('FormData', (data) => {
-      console.log('on', data)
-      this.form = this.data
-      console.log('hello', this.form)
-    })
   }
 }
 </script>

@@ -77,7 +77,6 @@ export default {
     CartNav
   },
   methods: {
-    // 取得購物車內容
     getCart () {
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
         .then((res) => {
@@ -90,7 +89,6 @@ export default {
   },
   mounted () {
     this.getCart()
-    // 接收的部分 發起監聽
     emitter.on('get-cart', () => {
       this.getCart()
     })

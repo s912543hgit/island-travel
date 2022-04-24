@@ -1,4 +1,10 @@
 <template>
+  <div class="section">
+    <div class="background-image background-image--complete"></div>
+    <div class="background-title">
+      <h2 class="fw-bold">登入後台</h2>
+    </div>
+  </div>
   <div class="container mt-5">
     <FrontNavbar/>
     <div class="row justify-content-center">

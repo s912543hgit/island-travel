@@ -311,13 +311,13 @@ export default {
         this.isLoading = false
       })
     },
-    // emits: ['emit-form'],
+    emits: ['emit-form'],
     sendData () {
       this.isDisabled = 'send'
       this.$router.push('/confirm')
       // 送出表單內的資料給ConfirmView
-      this.emitter.emit('FormData', this.form)
-      // this.$emit('emit-form', this.form)
+      // this.emitter.emit('FormData', this.form)
+      this.$emit('emit-form', this.form)
     },
     isPhone (value) {
       const phoneNumber = /^(09)[0-9]{8}$/

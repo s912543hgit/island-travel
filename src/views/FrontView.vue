@@ -1,6 +1,6 @@
 <template>
   <FrontNavbar/>
-  <RouterView/>
+  <RouterView @emit-form="getData" :form-data="formData"/>
   <FooterView/>
   <PageTop/>
 </template>
@@ -11,10 +11,20 @@ import FrontNavbar from '@/components/FrontNavbar.vue'
 import FooterView from '@/components/FooterView.vue'
 
 export default {
+  data () {
+    return {
+      formData: {}
+    }
+  },
   components: {
     FrontNavbar,
     FooterView,
     PageTop
+  },
+  methods: {
+    getData (form) {
+      this.formData = form
+    }
   }
 }
 </script>
