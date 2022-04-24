@@ -1,5 +1,5 @@
 <template>
-    <VueLoading :active="isLoading"></VueLoading>
+    <VueLoading :active="isLoading"/>
     <div class="section">
       <div class="background-image background-image--favorite"></div>
       <div class="background-title">
@@ -55,6 +55,7 @@
       </div>
     </div>
 </template>
+
 <script>
 import emitter from '@/libs/emitter'
 
@@ -65,6 +66,7 @@ export default {
       favoritesList: [],
       isDisabled: '',
       isLoading: false,
+      isLoadingItem: '',
       favorite: JSON.parse(localStorage.getItem('favorite')) || []
     }
   },
@@ -107,7 +109,6 @@ export default {
     },
     removeFavorite (id) {
       const favoriteId = this.favorite.indexOf(id)
-      //  如果有找到
       if (favoriteId !== -1) {
         this.isLoading = true
         this.favorite.splice(favoriteId, 1)

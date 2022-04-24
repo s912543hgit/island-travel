@@ -1,5 +1,5 @@
 <template>
-    <VueLoading :active="isLoading"></VueLoading>
+    <VueLoading :active="isLoading"/>
     <div class="section">
       <div class="background-image background-image--cart"></div>
       <div class="background-title">
@@ -224,8 +224,8 @@
         </RouterLink>
         </div>
       </div>
-      <CautionModal ref="cautionModal" @clear-item="clearCartItem"></CautionModal>
-      <CautionDelModal :item="tempProduct" ref="cautionDelModal" @del-product="removeCartItem"></CautionDelModal>
+      <CautionModal ref="cautionModal" @clear-item="clearCartItem"/>
+      <CautionDelModal :item="tempProduct" ref="cautionDelModal" @del-product="removeCartItem"/>
 </template>
 
 <script>
@@ -260,7 +260,6 @@ export default {
     CautionModal,
     CautionDelModal
   },
-  emits: ['emit-form'],
   inject: ['emitter'],
   methods: {
     getCart () {
@@ -312,6 +311,7 @@ export default {
         this.isLoading = false
       })
     },
+    emits: ['emit-form'],
     sendData () {
       this.isDisabled = 'send'
       this.$router.push('/confirm')

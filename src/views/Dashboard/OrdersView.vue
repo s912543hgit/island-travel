@@ -1,5 +1,5 @@
 <template>
-  <VueLoading :active="isLoading"></VueLoading>
+  <VueLoading :active="isLoading"/>
   <div class="container">
     <table class="table mt-4">
       <thead>
@@ -63,10 +63,10 @@
         </template>
       </tbody>
     </table>
-    <PaginationView :pages="pagination" @emit-pages="getOrders"></PaginationView>
-    <DelModal :item="tempOrder" ref="delModal" @del-item="delOrder"></DelModal>
+    <PaginationView :pages="pagination" @emit-pages="getOrders"/>
+    <DelModal :item="tempOrder" ref="delModal" @del-item="delOrder"/>
     <!-- 將tempOrder傳入order -->
-    <OrderModal ref="orderModal" :order="tempOrder" @update-order="updateOrder"></OrderModal>
+    <OrderModal ref="orderModal" :order="tempOrder" @update-order="updateOrder"/>
   </div>
 </template>
 

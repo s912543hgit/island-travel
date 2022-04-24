@@ -113,7 +113,6 @@
     <p>一群愛島人，期望給您最深刻的島嶼記憶。</p>
     <RouterLink to="/about" class="btn btn-primary button--search">關於我們</RouterLink>
   </div>
-  <!-- 島嶼風情 -->
   <div class="d-flex justify-content-center align-items-center mb-5">
     <h3 class="section-heading">島嶼風情</h3>
   </div>

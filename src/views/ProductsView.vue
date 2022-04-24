@@ -1,5 +1,5 @@
 <template>
-    <VueLoading :active="isLoading"></VueLoading>
+    <VueLoading :active="isLoading"/>
     <div class="section">
       <div class="background-image background-image--products"></div>
       <div class="background-title">
@@ -75,7 +75,7 @@
           </div>
           <PaginationView :pages="pagination"
           @emit-pages="getProducts"
-          class="justify-content-center d-flex mt-5" ></PaginationView>
+          class="justify-content-center d-flex mt-5" />
         </div>
       </div>
     </div>

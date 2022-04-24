@@ -1,11 +1,11 @@
 <template>
   <div class="background-image--product" :style="{backgroundImage: `url(${product.imageUrl})`}">
   </div>
-    <VueLoading :active="isLoading"></VueLoading>
+    <VueLoading :active="isLoading"/>
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-7">
-          <swiper
+          <Swiper
           class="container-md slider--product"
           :slides-per-view="1"
           :space-between="50"
@@ -13,15 +13,14 @@
           :modules="modules"
           :navigation="true"
         >
-          <swiper-slide>
+          <Swiper-slide>
           <div class="product__image" :style="{backgroundImage: `url(${product.imageUrl})`}"></div>
-          </swiper-slide>
-          <swiper-slide v-for="image in product.imagesUrl" :key="image">
+          </Swiper-slide>
+          <Swiper-slide v-for="image in product.imagesUrl" :key="image">
             <div class="product__image" :style="{backgroundImage: `url(${image})`}"></div>
-          </swiper-slide>
-        </swiper>
+          </Swiper-slide>
+        </Swiper>
         </div>
-        <!-- 產品說明 -->
         <div class="col-md-5">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb px-0 mb-0 py-3 mt-3">
@@ -80,7 +79,6 @@
           </div>
         </div>
       </div>
-      <!-- 島嶼介紹 -->
       <div class="my-5">
         <div class="col-md-12">
           <div class="d-flex justify-content-center align-items-center mb-5">
@@ -89,7 +87,6 @@
           <p>{{ product.description }}</p>
         </div>
       </div>
-      <!-- 精選景點 -->
       <div class="my-5" v-if="product.placeOne">
         <div class="col-md-12">
           <div class="d-flex justify-content-center align-items-center mb-5">
@@ -138,7 +135,7 @@
     <div class="d-flex justify-content-center align-items-center mb-5">
       <h3 class="section-heading">相關商品</h3>
     </div>
-    <swiper :slides-per-view="1"
+    <Swiper :slides-per-view="1"
       :loop="true"
       :space-between="50"
       :autoplay="{
@@ -153,7 +150,7 @@
       }"
       :modules="modules"
     >
-      <swiper-slide v-for="(item) in products" :key="item.id">
+      <Swiper-slide v-for="(item) in products" :key="item.id">
           <div class="p-card">
             <div class="p-card__tag">{{ item.category }}</div>
             <div class="p-card__image" :style="{backgroundImage: `url(${item.imageUrl})`}">
@@ -170,8 +167,8 @@
               </div>
             </RouterLink>
           </div>
-      </swiper-slide>
-    </swiper>
+      </Swiper-slide>
+    </Swiper>
   </div>
 </div>
 </template>

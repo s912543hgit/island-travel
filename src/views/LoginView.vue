@@ -56,7 +56,6 @@ export default {
     login () {
       this.$http.post(`${process.env.VUE_APP_API}admin/signin`, this.user)
         .then((res) => {
-          console.log(res)
           const { token, expired } = res.data
           // 將token儲存在cookie裡面
           // expire設置有效時間

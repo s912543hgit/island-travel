@@ -69,7 +69,7 @@
                       <img
                         class="img-fluid"
                         :src="tempProduct.imagesUrl[key]"
-                        :alt="商品圖片"
+                        alt="商品圖片"
                       />
                     </template>
                     <button

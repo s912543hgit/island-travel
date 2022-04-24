@@ -1,5 +1,5 @@
 <template>
-  <VueLoading :active="isLoading"></VueLoading>
+  <VueLoading :active="isLoading"/>
   <div class="container">
     <div class="text-end mt-4">
       <button
@@ -55,9 +55,9 @@
         </tr>
       </tbody>
     </table>
-    <PaginationView :pages="pagination" @emit-pages="getProducts"></PaginationView>
-    <DelModal :item="tempProduct" ref="delModal" @del-item="delProduct"></DelModal>
-    <ProductModal :product="tempProduct" ref="productModal" :isNew="isNew" @update-product="updateProduct"></ProductModal>
+    <PaginationView :pages="pagination" @emit-pages="getProducts"/>
+    <DelModal :item="tempProduct" ref="delModal" @del-item="delProduct"/>
+    <ProductModal :product="tempProduct" ref="productModal" :isNew="isNew" @update-product="updateProduct"/>
   </div>
 </template>
 

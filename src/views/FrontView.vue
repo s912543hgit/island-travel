@@ -1,8 +1,8 @@
 <template>
-  <FrontNavbar></FrontNavbar>
+  <FrontNavbar/>
   <RouterView @emit-form="getData" :form-data="formData"/>
-  <FooterView></FooterView>
-  <PageTop></PageTop>
+  <FooterView/>
+  <PageTop/>
 </template>
 
 <script>

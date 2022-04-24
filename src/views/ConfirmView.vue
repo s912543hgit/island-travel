@@ -1,5 +1,5 @@
 <template>
-    <VueLoading :active="isLoading"></VueLoading>
+    <VueLoading :active="isLoading"/>
     <div class="section">
       <div class="position-absolute background-image background-image--cart"></div>
       <div class="background-title">
