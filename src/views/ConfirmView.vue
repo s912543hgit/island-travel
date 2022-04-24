@@ -63,20 +63,20 @@
             <p class="text-center h4 mb-3">訂購資訊</p>
             <ul class="list-unstyled p-confirmForm">
               <li class="d-flex mb-3">
-                <p class="col-4">收件人姓名</p>
-                <p>{{ formData.user.name }}</p>
+                <p class="col-4">姓名</p>
+                <p>{{ form.user.name }}</p>
               </li>
               <li class="d-flex mb-3">
-                <p class="col-4">收件人電話</p>
-                <p>{{ formData.user.tel }}</p>
+                <p class="col-4">電話</p>
+                <p>{{ form.user.tel }}</p>
               </li>
               <li class="d-flex mb-3">
-                <p class="col-4">收件人電子郵件</p>
-                <p>{{ formData.user.email }}</p>
+                <p class="col-4">電子郵件</p>
+                <p>{{ form.user.email }}</p>
               </li>
               <li class="d-flex mb-3">
                 <p class="col-4">留言</p>
-                <p>{{ formData.message }}</p>
+                <p>{{ form.message }}</p>
               </li>
             </ul>
             <button
@@ -109,7 +109,7 @@ export default {
       }
     }
   },
-  props: ['form-data'],
+  inject: ['emitter'],
   methods: {
     getCart () {
       this.isLoading = true
@@ -135,6 +135,11 @@ export default {
   },
   mounted () {
     this.getCart()
+    this.emitter.on('FormData', (data) => {
+      console.log('on', data)
+      this.form = this.data
+      console.log('hello', this.form)
+    })
   }
 }
 </script>

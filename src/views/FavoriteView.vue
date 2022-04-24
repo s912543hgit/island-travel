@@ -130,8 +130,8 @@ export default {
         })
     },
     removeFavorite (id) {
-      const favoriteId = this.favorite.indexOf(id)
       this.isLoading = true
+      const favoriteId = this.favorite.indexOf(id)
       if (favoriteId !== -1) {
         this.favorite.splice(favoriteId, 1)
         localStorage.setItem('favorite', JSON.stringify(this.favorite))

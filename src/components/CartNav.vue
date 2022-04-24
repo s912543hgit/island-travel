@@ -1,4 +1,5 @@
 <template>
+  <VueLoading :active="isLoading"/>
   <div :class="toggleCart ? 'open' : ''">
     <nav class="cartNav">
       <div class="cartNav__inner">
@@ -46,7 +47,7 @@
         </template>
         <div v-else class="p-product--none d-flex flex-column justify-content-center align-items-center">
           <p>購物車內沒有商品唷</p>
-          <RouterLink  to="/products" class="btn btn-primary" @click="closeCart">開始旅程</RouterLink>
+          <RouterLink  to="/products" class="button--jump" @click="closeCart">開始旅程</RouterLink>
         </div>
       </div>
     </nav>
