@@ -227,7 +227,6 @@ export default {
             })
             .catch((error) => {
               this.emitter.emit('push-message', {
-                style: 'danger',
                 title: '找不到分類',
                 content: error.response.data.message
               })
@@ -235,8 +234,7 @@ export default {
         })
         .catch((error) => {
           this.emitter.emit('push-message', {
-            style: 'danger',
-            title: '找不到商品',
+            title: '找不到商品qqqqq',
             content: error.response.data.message
           })
         })
