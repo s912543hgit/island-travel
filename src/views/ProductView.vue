@@ -214,25 +214,46 @@ export default {
       const { id } = this.$route.params
       this.isLoading = true
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`)
-        .then(res => {
+        .then((response) => {
           this.product = {
-            ...res.data.product,
+            ...response.data.product,
             qty: this.product.qty
           }
           this.isLoading = false
           const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products?category=${this.product.category}`
           this.$http.get(url)
-            .then(res => {
-              this.products = res.data.products
+            .then((response) => {
+              this.products = response.data.products
             })
+            .catch((error) => {
+              this.emitter.emit('push-message', {
+                style: 'danger',
+                title: '找不到分類',
+                content: error.response.data.message
+              })
+            })
+        })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '找不到商品',
+            content: error.response.data.message
+          })
         })
     },
     getCart () {
       this.isLoading = true
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
-        .then((res) => {
-          this.cartData = res.data.data
+        .then((response) => {
+          this.cartData = response.data.data
           this.isLoading = false
+        })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '找不到商品',
+            content: error.response.data.message
+          })
         })
     },
     updateCartItem (product) {
@@ -241,23 +262,29 @@ export default {
         qty: product.qty
       }
       this.isDisabled = 'add'
-      // 如果商品尚未被加入 使用add購物車
       let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       let method = 'post'
-      // 如果商品被加進購物車 使用update購物車
       if (!this.isNew) {
         api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${product.id}`
         method = 'put'
       }
-      this.$http[method](api, { data }).then((response) => {
-        this.emitter.emit('push-message', {
-          style: 'success',
-          title: '購物提示',
-          content: response.data.message
+      this.$http[method](api, { data })
+        .then((response) => {
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: '購物提示',
+            content: response.data.message
+          })
+          this.isDisabled = ''
+          emitter.emit('get-cart')
         })
-        this.isDisabled = ''
-        emitter.emit('get-cart')
-      })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '無法更新',
+            content: error.response.data.message
+          })
+        })
     },
     toggleFavorite (id) {
       const favoriteIndex = this.favorite.findIndex((item) => item === id)

@@ -27,7 +27,6 @@
   }
 }
 
-// 沒有商品時
 .p-product--none {
   min-height: 75vh;
 }
@@ -123,7 +122,7 @@
 
 /*============
   nav
-  =============*/
+=============*/
 
 .cartNav {
   display: block;
@@ -242,7 +241,6 @@
 }
 
 // complete
-
 .container--complete {
   display: flex;
   flex-direction: column;

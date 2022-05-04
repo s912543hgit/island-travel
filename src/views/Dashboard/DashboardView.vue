@@ -39,6 +39,7 @@ export default {
       checkSuccess: false
     }
   },
+  inject: ['emitter'],
   methods: {
     checkLogin () {
       const token = document.cookie.replace(
@@ -50,23 +51,30 @@ export default {
         // 把token夾帶到header裡面
         this.$http.defaults.headers.common.Authorization = `${token}`
         this.$http.post(`${process.env.VUE_APP_API}api/user/check`, { api_token: this.token })
-          .then((res) => {
+          .then((response) => {
             this.checkSuccess = true
           })
-          .catch((err) => {
-            console.dir(err)
-            alert(err.data.message)
+          .catch((error) => {
+            this.emitter.emit('push-message', {
+              style: 'danger',
+              title: '登入失敗',
+              content: error.response.data.message
+            })
             this.$router.push('/login')
           })
       } else {
-        alert('您尚未登入')
+        this.emitter.emit('push-message', {
+          title: '您尚未登入'
+        })
         this.$router.push('/login')
       }
     },
     logout () {
       // 刪除cookie
       document.cookie = 'hexToken=;expires=;'
-      alert('您已經登出')
+      this.emitter.emit('push-message', {
+        title: '您已經登出'
+      })
       this.$router.push('/login')
     }
   },

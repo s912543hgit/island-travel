@@ -63,18 +63,23 @@ export default {
   components: {
     FrontNavbar
   },
+  inject: ['emitter'],
   methods: {
     login () {
       this.$http.post(`${process.env.VUE_APP_API}admin/signin`, this.user)
-        .then((res) => {
-          const { token, expired } = res.data
+        .then((response) => {
+          const { token, expired } = response.data
           // 將token儲存在cookie裡面
           // expire設置有效時間
           document.cookie = `hexToken=${token}; expires=${new Date(expired)};`
           this.$router.push('/admin/products')
         })
         .catch((error) => {
-          alert(error.response.data.message)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '登入失敗',
+            content: error.response.data.message
+          })
           this.user.password = ''
         })
     }

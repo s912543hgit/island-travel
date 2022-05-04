@@ -97,13 +97,18 @@ export default {
     getProducts () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/`
       this.isLoading = true
-      this.$http.get(api).then((res) => {
-        this.products = res.data.products
-        this.getFavorites()
-        this.isLoading = false
-      })
+      this.$http.get(api)
+        .then((response) => {
+          this.products = response.data.products
+          this.getFavorites()
+          this.isLoading = false
+        })
         .catch((error) => {
-          console.dir(error)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '找不到收藏清單',
+            content: error.response.data.message
+          })
         })
     },
     getFavorites () {
@@ -127,6 +132,13 @@ export default {
           this.isLoading = false
           this.isDisabled = ''
           emitter.emit('get-cart')
+        })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '無法加入購物車',
+            content: error.response.data.message
+          })
         })
     },
     removeFavorite (id) {

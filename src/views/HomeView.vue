@@ -30,7 +30,7 @@
       </Swiper-slide>
     </Swiper>
   <div class="p-mainvisual--sp d-md-none"></div>
-   <div class="container d-md-none p-mainvisual__outer--sp">
+    <div class="container d-md-none p-mainvisual__outer--sp">
       <div class="row justify-content-start my-auto p-mainvisual__container">
         <div class="col-md-4 p-mainvisual__content">
           <h2 class="logo">島遊</h2>
@@ -116,22 +116,22 @@
     <h3 class="section-heading">島嶼風情</h3>
   </div>
   <Swiper
-  :loop="true"
-  :speed="1000"
-  class="container"
-  :slides-per-view="1"
-  :space-between="50"
-  :autoplay="{
-    delay: 3000,
-    disableOnInteraction: false,
-  }"
-  :breakpoints="{
-    '768': {
-      slidesPerView: 3,
-    },
-  }"
-  :modules="modules"
->
+    :loop="true"
+    :speed="1000"
+    class="container"
+    :slides-per-view="1"
+    :space-between="50"
+    :autoplay="{
+      delay: 3000,
+      disableOnInteraction: false,
+    }"
+    :breakpoints="{
+      '768': {
+        slidesPerView: 3,
+      },
+    }"
+    :modules="modules"
+  >
   <Swiper-slide v-for="(item) in products" :key="item.id" class="mb-5">
     <RouterLink :to="`/product/${item.id}`">
       <div class="p-card">
@@ -177,14 +177,20 @@ export default {
       modules: [EffectFade, Autoplay]
     }
   },
+  inject: ['emitter'],
   methods: {
     getProducts () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/`
-      this.$http.get(api).then((res) => {
-        this.products = res.data.products
-      })
+      this.$http.get(api)
+        .then((response) => {
+          this.products = response.data.products
+        })
         .catch((error) => {
-          console.dir(error)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '找不到產品',
+            content: error.response.data.message
+          })
         })
     }
   },

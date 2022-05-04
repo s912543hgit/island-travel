@@ -114,10 +114,17 @@ export default {
       }
       this.isLoading = true
       this.$http.get(url)
-        .then(res => {
-          this.products = res.data.products
-          this.pagination = res.data.pagination
+        .then((response) => {
+          this.products = response.data.products
+          this.pagination = response.data.pagination
           this.isLoading = false
+        })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '找不到產品',
+            content: error.response.data.message
+          })
         })
     },
     addToCart (id, qty = 1) {
@@ -135,6 +142,13 @@ export default {
           })
           this.isLoadingItem = ''
           emitter.emit('get-cart')
+        })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '無法加入購物車',
+            content: error.response.data.message
+          })
         })
     },
     toggleFavorite (id) {

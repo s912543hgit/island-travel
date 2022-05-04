@@ -91,18 +91,24 @@ export default {
     PaginationView,
     OrderModal
   },
+  inject: ['emitter'],
   methods: {
-    getOrders (Currentpage = 1) {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders`
+    getOrders (page = 1) {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders/?page=${page}`
       this.isLoading = true
-      this.$http.get(api).then((res) => {
-        this.orders = res.data.orders
-        this.pagination = res.data.pagination
-        this.isLoading = false
-      })
+      this.$http.get(api)
+        .then((response) => {
+          this.orders = response.data.orders
+          this.pagination = response.data.pagination
+          this.isLoading = false
+        })
         .catch((error) => {
           this.isLoading = false
-          console.dir(error)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '找不到訂單',
+            content: error.response.data.message
+          })
         })
     },
     openModal (item) {
@@ -133,21 +139,34 @@ export default {
         })
         .catch((error) => {
           this.isLoading = false
-          alert(error.response.data.message)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '更新失敗',
+            content: error.response.data.message
+          })
         })
     },
     delOrder () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
       this.isLoading = true
-      this.$http.delete(url).then((response) => {
-        alert(response.data.message)
-        this.getOrders()
-        const delComponent = this.$refs.delModal
-        delComponent.hideModal()
-      })
+      this.$http.delete(url)
+        .then((response) => {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '刪除訂單',
+            content: response.data.message
+          })
+          this.getOrders()
+          const delComponent = this.$refs.delModal
+          delComponent.hideModal()
+        })
         .catch((error) => {
           this.isLoading = false
-          console.dir(error)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '刪除失敗',
+            content: error.response.data.message
+          })
         })
     }
   },

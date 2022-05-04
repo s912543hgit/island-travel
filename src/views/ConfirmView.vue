@@ -144,21 +144,32 @@ export default {
     getCart () {
       this.isLoading = true
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
-        .then((res) => {
-          this.cartData = res.data.data
+        .then((response) => {
+          this.cartData = response.data.data
           this.isLoading = false
+        })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '無法取得商品',
+            content: error.response.data.message
+          })
         })
     },
     putOrder () {
       this.$http.post(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`, { data: this.form })
-        .then((res) => {
+        .then((response) => {
           this.getCart()
           emitter.emit('get-cart')
           this.isLoading = true
           this.$router.push('/complete')
         })
         .catch((error) => {
-          alert(error.response.data.message)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '訂購失敗',
+            content: error.response.data.message
+          })
         })
     },
     isPhone (value) {

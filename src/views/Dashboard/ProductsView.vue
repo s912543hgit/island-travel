@@ -89,18 +89,24 @@ export default {
     DelModal,
     ProductModal
   },
+  inject: ['emitter'],
   methods: {
     getProducts (page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
       this.isLoading = true
-      this.$http.get(api).then((res) => {
-        this.products = res.data.products
-        this.pagination = res.data.pagination
-        this.isLoading = false
-      })
+      this.$http.get(api)
+        .then((response) => {
+          this.products = response.data.products
+          this.pagination = response.data.pagination
+          this.isLoading = false
+        })
         .catch((error) => {
           this.isLoading = false
-          console.dir(error)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '找不到產品',
+            content: error.response.data.message
+          })
         })
     },
     openModal (isNew, item) {
@@ -134,13 +140,19 @@ export default {
       this.$http[method](api, { data: this.tempProduct })
         .then((response) => {
           this.isLoading = false
-          alert(response.data.message)
+          this.emitter.emit('push-message', {
+            title: '更新產品',
+            content: response.data.message
+          })
           productComponent.hideModal()
           this.getProducts()
         })
         .catch((error) => {
           this.isLoading = false
-          alert(error.response.data.message)
+          this.emitter.emit('push-message', {
+            title: '更新失敗',
+            content: error.response.data.message
+          })
         })
     },
     delProduct () {
@@ -149,14 +161,21 @@ export default {
         .delete(url, { data: this.tempProduct })
         .then((response) => {
           this.isLoading = true
-          alert(response.data.message)
+          this.emitter.emit('push-message', {
+            title: '刪除產品',
+            content: response.data.message
+          })
           this.getProducts()
           const delComponent = this.$refs.delModal
           delComponent.hideModal()
         })
         .catch((error) => {
           this.isLoading = false
-          console.dir(error)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '刪除失敗',
+            content: error.response.data.message
+          })
         })
     }
   },

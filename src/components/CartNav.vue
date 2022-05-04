@@ -88,8 +88,14 @@ export default {
     },
     getCart () {
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
-        .then((res) => {
-          this.cartData = res.data.data
+        .then((response) => {
+          this.cartData = response.data.data
+        })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            title: '找不到產品',
+            content: error.response.data.message
+          })
         })
     },
     removeCartItem (id) {
@@ -107,6 +113,13 @@ export default {
           cautionDelModal.hideModal()
           this.isLoading = false
         })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '無法刪除',
+            content: error.response.data.message
+          })
+        })
     },
     clearCartItem () {
       this.isLoading = true
@@ -120,6 +133,12 @@ export default {
           emitter.emit('get-cart')
           cautionModal.hideModal()
           this.isLoading = false
+        })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            title: '清空失敗',
+            content: error.response.data.message
+          })
         })
     },
     openModal () {

@@ -1,22 +1,22 @@
 .favorite {
-    &__thumbnail {
-        width: 80px;
-        height: 80px;
-        object-fit: cover;
-        @include sp {
-            width: auto;
-        }
+  &__thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    @include sp {
+      width: auto;
     }
+  }
 
-    &__price {
-        min-width: 160px;
-        border: 0;
-        vertical-align: middle;
-    }
+  &__price {
+    min-width: 160px;
+    border: 0;
+    vertical-align: middle;
+  }
 
-    &__table {
-        @include sp {
-            display: none;
-        }
+  &__table {
+    @include sp {
+      display: none;
     }
+  }
 }

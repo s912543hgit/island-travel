@@ -185,9 +185,15 @@ export default {
     getCart () {
       this.isLoading = true
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
-        .then((res) => {
-          this.cartData = res.data.data
+        .then((response) => {
+          this.cartData = response.data.data
           this.isLoading = false
+        })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            title: '找不到商品',
+            content: error.response.data.message
+          })
         })
     },
     removeCartItem (id) {
@@ -205,19 +211,32 @@ export default {
           cautionDelModal.hideModal()
           this.isLoading = false
         })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            title: '移除失敗',
+            content: error.response.data.message
+          })
+        })
     },
     clearCartItem () {
       this.isLoading = true
       const cautionModal = this.$refs.cautionModal
       this.$http.delete(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts/`)
-        .then((res) => {
+        .then((response) => {
           this.getCart()
           this.isLoading = false
           this.emitter.emit('push-message', {
-            title: '已清空購物車'
+            title: '已清空購物車',
+            content: response.data.message
           })
           cautionModal.hideModal()
           emitter.emit('get-cart')
+        })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            title: '清空失敗',
+            content: error.response.data.message
+          })
         })
     },
     updateCartItem (item) {
@@ -226,10 +245,17 @@ export default {
         qty: item.qty
       }
       this.isLoading = true
-      this.$http.put(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`, { data }).then((res) => {
-        this.getCart()
-        this.isLoading = false
-      })
+      this.$http.put(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`, { data })
+        .then((response) => {
+          this.getCart()
+          this.isLoading = false
+        })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            title: '更新失敗',
+            content: error.response.data.message
+          })
+        })
     },
     openModal () {
       const cautionModal = this.$refs.cautionModal

@@ -259,7 +259,6 @@
 import Modal from 'bootstrap/js/dist/modal'
 export default {
   props: {
-    // 利用prop 傳入
     product: {
       type: Object,
       default () { return {} }
@@ -329,7 +328,11 @@ export default {
         })
         .catch((error) => {
           this.status.fileUploading = false
-          console.dir(error)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '圖片上傳失敗',
+            content: error.response.data.message
+          })
         })
     }
   },

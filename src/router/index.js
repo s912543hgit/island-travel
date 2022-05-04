@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const routes = [
   {
@@ -8,8 +7,7 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'home',
-        component: HomeView
+        component: () => import('../views/HomeView.vue')
       },
       {
         path: 'cart',

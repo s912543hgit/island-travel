@@ -76,11 +76,18 @@ export default {
   components: {
     CartNav
   },
+  inject: ['emitter'],
   methods: {
     getCart () {
       this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`)
-        .then((res) => {
-          this.cartData = res.data.data
+        .then((response) => {
+          this.cartData = response.data.data
+        })
+        .catch((error) => {
+          this.emitter.emit('push-message', {
+            title: '找不到商品',
+            content: error.response.data.message
+          })
         })
     },
     openNav () {

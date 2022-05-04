@@ -20,10 +20,18 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload/`
       this.$http.post(url, formData)
         .then((response) => {
-          console.log(response)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '上傳成功',
+            content: response.data.message
+          })
         })
         .catch((error) => {
-          console.dir(error)
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '上傳失敗',
+            content: error.response.data.message
+          })
         })
     }
   }
