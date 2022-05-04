@@ -197,6 +197,7 @@ export default {
       isLoading: false,
       isLoadingItem: '',
       isDisabled: '',
+      name: '',
       favorite: JSON.parse(localStorage.getItem('favorite')) || []
     }
   },
@@ -310,16 +311,21 @@ export default {
       },
       deep: true
     },
-    // watch偵測到網址的id有變，將新的id帶入到data的 id
+    // watch偵測到網址的id有變，將新的id帶入到data的id
     $route (to) {
       this.id = to.params.id
-      this.getProduct()
+      if (this.name === 'product') {
+        this.getProduct()
+        console.log('success')
+      }
     }
   },
   mounted () {
-    // 找到產品id 並存起來
+    // 找到產品id並存起來
     this.id = this.$route.params.id
     this.getProduct()
+    this.name = this.$route.name
+    console.log(this.name)
   }
 }
 </script>
