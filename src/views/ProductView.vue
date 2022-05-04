@@ -159,7 +159,7 @@
                   <div class="btn btn-primary px-5">查看商品</div>
                 </RouterLink>
               </div>
-              <RouterLink  :to="`/product/${item.id}`" class="p-card__body text-left">
+              <RouterLink :to="`/product/${item.id}`" class="p-card__body text-left">
                 <h4>{{ item.title }}</h4>
                 <div class="d-flex justify-content-between">
                   <p class="p-card__text">
@@ -192,6 +192,7 @@ export default {
         category: ''
       },
       id: '',
+      // id: this.$route.params.id,
       isNew: true,
       isLoading: false,
       isLoadingItem: '',
@@ -309,7 +310,7 @@ export default {
       },
       deep: true
     },
-    // watch 偵測到網址的 id 有變，將新的 id 帶入到 data 的 id
+    // watch偵測到網址的id有變，將新的id帶入到data的 id
     $route (to) {
       this.id = to.params.id
       this.getProduct()
