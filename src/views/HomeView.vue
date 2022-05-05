@@ -51,9 +51,14 @@
     <RouterLink to="/products" class="button--slide btn">前往探索</RouterLink>
   </div>
   <div class="container my-5">
-    <div class="d-flex justify-content-center align-items-center mb-5">
+    <ScrollEffect>
+      <div class="d-flex justify-content-center align-items-center mb-5">
+        <h3 class="section-heading">地區精選</h3>
+      </div>
+    </ScrollEffect>
+    <!-- <div class="d-flex justify-content-center align-items-center mb-5">
       <h3 class="section-heading">地區精選</h3>
-    </div>
+    </div> -->
     <div class="row">
       <div class="col-md-6 zoomIn">
         <div class="zoomIn__inner">
@@ -162,6 +167,8 @@ import 'swiper/css/autoplay'
 import 'swiper/css/effect-fade'
 import { EffectFade, Autoplay } from 'swiper'
 
+import ScrollEffect from '@/components/ScrollEffect.vue'
+
 export default {
   data () {
     return {
@@ -170,7 +177,8 @@ export default {
   },
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    ScrollEffect
   },
   setup () {
     return {
