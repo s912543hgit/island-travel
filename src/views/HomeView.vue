@@ -143,7 +143,7 @@
         <div class="p-card__tag">{{ item.category }}</div>
         <div class="p-card__image" :style="{backgroundImage: `url(${item.imageUrl})`}">
           <div class="hover-area">
-            <a class="btn btn-primary px-5" @click="getProduct(item.id)">查看商品</a>
+            <a class="btn btn-primary px-5" :to="`/product/${item.id}`">查看商品</a>
           </div>
         </div>
         <div class="p-card__body">
@@ -187,35 +187,6 @@ export default {
   },
   inject: ['emitter'],
   methods: {
-    getProduct () {
-      const { id } = this.$route.params
-      this.isLoading = true
-      this.$http.get(`${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`)
-        .then((response) => {
-          this.product = {
-            ...response.data.product,
-            qty: this.product.qty
-          }
-          this.isLoading = false
-          const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products?category=${this.product.category}`
-          this.$http.get(url)
-            .then((response) => {
-              this.products = response.data.products
-            })
-            .catch((error) => {
-              this.emitter.emit('push-message', {
-                title: '找不到分類',
-                content: error.response.data.message
-              })
-            })
-        })
-        .catch((error) => {
-          this.emitter.emit('push-message', {
-            title: '找不到商品qqqqq',
-            content: error.response.data.message
-          })
-        })
-    },
     getProducts () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/`
       this.$http.get(api)

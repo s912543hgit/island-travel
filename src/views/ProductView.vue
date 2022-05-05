@@ -130,7 +130,6 @@
         </ul>
       </div>
     </div>
-    <!-- 相關商品 -->
     <div class="container-md">
       <div class="d-flex justify-content-center align-items-center mb-5">
         <h3 class="section-heading">相關商品</h3>
