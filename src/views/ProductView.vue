@@ -1,5 +1,5 @@
 <template>
-  <div class="background-image--product" :style="{backgroundImage: `url(${product.imageUrl})`}">
+  <div v-if="product.imageUrl" class="background-image--product" :style="{backgroundImage: `url(${product.imageUrl})`}">
   </div>
   <VueLoading :active="isLoading"/>
   <div class="container">
@@ -14,7 +14,7 @@
           :navigation="true"
         >
           <Swiper-slide>
-            <div class="product__image" :style="{backgroundImage: `url(${product.imageUrl})`}"></div>
+            <div v-if="product.imageUrl" class="product__image" :style="{backgroundImage: `url(${product.imageUrl})`}"></div>
           </Swiper-slide>
           <Swiper-slide v-for="image in product.imagesUrl" :key="image">
             <div class="product__image" :style="{backgroundImage: `url(${image})`}"></div>

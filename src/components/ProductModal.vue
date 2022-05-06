@@ -66,11 +66,11 @@
                       placeholder="請輸入圖片連結"
                       v-model="tempProduct.imagesUrl[key]"
                     />
-                    <img
+                    <!-- <img
                       class="img-fluid"
                       :src="tempProduct.imagesUrl[key]"
                       alt="商品圖片"
-                    />
+                    /> -->
                   </template>
                   <button
                     v-if="!tempProduct.imagesUrl.length || tempProduct.imagesUrl[tempProduct.imagesUrl.length -1] "
