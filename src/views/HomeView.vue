@@ -51,66 +51,67 @@
     <RouterLink to="/products" class="button--slide btn">前往探索</RouterLink>
   </div>
   <div class="container my-5">
+    <div class="d-flex justify-content-center align-items-center mb-5">
+      <h3 class="section-heading">地區精選</h3>
+    </div>
     <ScrollEffect>
-      <div class="d-flex justify-content-center align-items-center mb-5">
-        <h3 class="section-heading">地區精選</h3>
+      <div class="row">
+        <div class="col-md-6 zoomIn">
+          <div class="zoomIn__inner">
+            <img src="https://storage.googleapis.com/vue-course-api.appspot.com/shio-vue/1650178229741.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=BmnIqCcZy%2FDKRBxohfGxK93V2mAvSECOSapgCUx70QsJdfouXOW64wyRGKqPQQZJCxvzDeVUF3QZPBEQvaMWvRZlMFht7w4bsRKOzQgkVCF26VKHMHC3efcmdgsIR2fEBxiohQcQx%2F7ghHP0Vuz7fnq4muNDc5U4W0RiWJ5jQoBxbXSsVldd9f6sTbOJtgV%2FNdOtdRFrOQWNkKN2oZbF4JS3QgHUwoMxN9J5Sy%2BiypybDGzfqrAjazqL43CSPofnVqgN1k7C9PahSVZYtGb3dfFjDuoWhdB1t8q551%2Ff0bvc8rjwYIT2jZnhMzPUCjm5cvB5S2%2B8rdn12naeqTYgfA%3D%3D" alt="naoshima Japan" class="img-fluid">
+          </div>
+        </div>
+        <div class="col-md-4 m-auto">
+          <span class="divider-separator">
+            <span class="divider-separator__text">Noshima</span>
+          </span>
+          <h4 class="feature__title">直島</h4>
+          <p class="text-muted text-left">直島位於瀨戶內海，擁有許多瀨戶群島之中最知名的藝術設施。原本面臨的人口高齡化危機的小島，因為藝術重獲新生，如今已經成為了國內外知名的旅遊勝地。<br>
+          您可以花一整天來探訪這座島嶼上的各個美術館，以及散落各處的藝術作品。</p>
+          <div class="row justify-content-center mt-5">
+            <RouterLink to="/products" class="button--slide btn">前往探索</RouterLink>
+          </div>
+        </div>
       </div>
     </ScrollEffect>
-    <!-- <div class="d-flex justify-content-center align-items-center mb-5">
-      <h3 class="section-heading">地區精選</h3>
-    </div> -->
-    <div class="row">
-      <div class="col-md-6 zoomIn">
-        <div class="zoomIn__inner">
-          <img src="https://storage.googleapis.com/vue-course-api.appspot.com/shio-vue/1650178229741.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=BmnIqCcZy%2FDKRBxohfGxK93V2mAvSECOSapgCUx70QsJdfouXOW64wyRGKqPQQZJCxvzDeVUF3QZPBEQvaMWvRZlMFht7w4bsRKOzQgkVCF26VKHMHC3efcmdgsIR2fEBxiohQcQx%2F7ghHP0Vuz7fnq4muNDc5U4W0RiWJ5jQoBxbXSsVldd9f6sTbOJtgV%2FNdOtdRFrOQWNkKN2oZbF4JS3QgHUwoMxN9J5Sy%2BiypybDGzfqrAjazqL43CSPofnVqgN1k7C9PahSVZYtGb3dfFjDuoWhdB1t8q551%2Ff0bvc8rjwYIT2jZnhMzPUCjm5cvB5S2%2B8rdn12naeqTYgfA%3D%3D" alt="naoshima Japan" class="img-fluid">
+    <ScrollEffect>
+      <div class="row flex-row-reverse justify-content-between my-4">
+        <div class="col-md-6 zoomIn">
+          <div class="zoomIn__inner">
+            <img src="https://storage.googleapis.com/vue-course-api.appspot.com/shio-vue/1650178085637.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=hDuIZfQTUXPeHts63wcGtPGMaf4iMgO6DRo6lRqA8nZRN9UKyanOAL7mLvWzYtm5bwU84K3gv8McvYfOo5H0p07iOi9WjgtLl64SbiTou8myrPGY5XEEAKHeY9qK6a9Tyi502usBX9PTJhe42ta2Lr9P%2Bp2cZKUCoIcNXiVQ%2BQEO1DXN9Hv6K0yp4q4KxSVmck%2FnRpgttl5CeJnn9NIYHKkP4mM3sU1UAmH5BAlUSFkFh21Xiy4CvUx8RU48OdlsTJA689BB8nGJVsvkS73tOc6LHLvGtVMI5CmAoEbEY6jF2%2BsJfaWlFRWB9AXUZkjxtzHogzVFwz%2FkDFhyUvAUTQ%3D%3D" alt="Hawaii" class="img-fluid">
+          </div>
+        </div>
+        <div class="col-md-4 m-auto">
+          <span class="divider-separator">
+            <span class="divider-separator__text">Hawaii</span>
+          </span>
+          <h4 class="feature__title">夏威夷</h4>
+          <p class="text-muted text-right">夏威夷位於太平洋沿岸，由夏威夷群島所組成。擁有一望無際的沙灘，熱情的人們，歡樂的慶典，以及全世界最活躍的火山。你可以在夏威夷與眾不同的壯麗景觀中來一場獨一無二的探險。</p>
+          <div class="row justify-content-center mt-5">
+            <RouterLink to="/products" class="button--slide btn">前往探索</RouterLink>
+          </div>
         </div>
       </div>
-      <div class="col-md-4 m-auto">
-        <span class="divider-separator">
-          <span class="divider-separator__text">Noshima</span>
-        </span>
-        <h4 class="feature__title">直島</h4>
-        <p class="text-muted text-left">直島位於瀨戶內海，擁有許多瀨戶群島之中最知名的藝術設施。原本面臨的人口高齡化危機的小島，因為藝術重獲新生，如今已經成為了國內外知名的旅遊勝地。<br>
-        您可以花一整天來探訪這座島嶼上的各個美術館，以及散落各處的藝術作品。</p>
-        <div class="row justify-content-center mt-5">
-          <RouterLink to="/products" class="button--slide btn">前往探索</RouterLink>
+    </ScrollEffect>
+    <ScrollEffect>
+      <div class="row">
+        <div class="col-md-6 zoomIn">
+          <div class="zoomIn__inner">
+            <img src="https://storage.googleapis.com/vue-course-api.appspot.com/shio-vue/1650178193081.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=JhRwZ7gzAFizAxnW6xvxnLWDf2ZsZUrKwRHeMFcimEQh%2FIyp%2BIuYIrk8XSqCEK00QvdPcfmlCB1TDmuuwDO1zYTVqZTQ6dko%2B%2BLe79HNHl6W5aUXk6UP1SvugF99NiRdlSQqJ9qnzdvy%2BOAfPve69OcxkrngR6HiUQKXztVN5giUVVyQXNMeUXuZoDUYc%2F5EmiUKgoWiPpi8M1AmOJ0ex8jJV1qUYVcM3TbnxikMxyBfTWzbJ9R9o1vNQc%2F4oqSuTbShM5DQ7NybcuX8qBCNwcj4Q1onB3rjLFI0JrpyXtAMIsLWqWhvny5r%2BHA1M5lfHC1kTaiQZzlPaXKeZlP6Jw%3D%3D" alt="teshima Japan" class="img-fluid">
+          </div>
+        </div>
+        <div class="col-md-5 m-auto">
+          <span class="divider-separator">
+            <span class="divider-separator__text">Tenshima</span>
+          </span>
+          <h4 class="feature__title">豊島</h4>
+          <p class="text-muted text-left">原本是產業廢棄物投放場的荒涼島嶼，透過藝術重獲新生。<br>日本豐島位於瀨戶內海地區，從島上望去的蔚藍景色以及島上的梯田景觀都是一大絕景。<br>您也千萬不能錯過潛藏在島上四處的藝術景點。</p>
+          <div class="row justify-content-center mt-5">
+            <RouterLink to="/products" class="button--slide btn">前往探索</RouterLink>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row flex-row-reverse justify-content-between my-4">
-      <div class="col-md-6 zoomIn">
-        <div class="zoomIn__inner">
-          <img src="https://storage.googleapis.com/vue-course-api.appspot.com/shio-vue/1650178085637.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=hDuIZfQTUXPeHts63wcGtPGMaf4iMgO6DRo6lRqA8nZRN9UKyanOAL7mLvWzYtm5bwU84K3gv8McvYfOo5H0p07iOi9WjgtLl64SbiTou8myrPGY5XEEAKHeY9qK6a9Tyi502usBX9PTJhe42ta2Lr9P%2Bp2cZKUCoIcNXiVQ%2BQEO1DXN9Hv6K0yp4q4KxSVmck%2FnRpgttl5CeJnn9NIYHKkP4mM3sU1UAmH5BAlUSFkFh21Xiy4CvUx8RU48OdlsTJA689BB8nGJVsvkS73tOc6LHLvGtVMI5CmAoEbEY6jF2%2BsJfaWlFRWB9AXUZkjxtzHogzVFwz%2FkDFhyUvAUTQ%3D%3D" alt="Hawaii" class="img-fluid">
-        </div>
-      </div>
-      <div class="col-md-4 m-auto">
-        <span class="divider-separator">
-          <span class="divider-separator__text">Hawaii</span>
-        </span>
-        <h4 class="feature__title">夏威夷</h4>
-        <p class="text-muted text-right">夏威夷位於太平洋沿岸，由夏威夷群島所組成。擁有一望無際的沙灘，熱情的人們，歡樂的慶典，以及全世界最活躍的火山。你可以在夏威夷與眾不同的壯麗景觀中來一場獨一無二的探險。</p>
-        <div class="row justify-content-center mt-5">
-          <RouterLink to="/products" class="button--slide btn">前往探索</RouterLink>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 zoomIn">
-        <div class="zoomIn__inner">
-          <img src="https://storage.googleapis.com/vue-course-api.appspot.com/shio-vue/1650178193081.jpeg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=JhRwZ7gzAFizAxnW6xvxnLWDf2ZsZUrKwRHeMFcimEQh%2FIyp%2BIuYIrk8XSqCEK00QvdPcfmlCB1TDmuuwDO1zYTVqZTQ6dko%2B%2BLe79HNHl6W5aUXk6UP1SvugF99NiRdlSQqJ9qnzdvy%2BOAfPve69OcxkrngR6HiUQKXztVN5giUVVyQXNMeUXuZoDUYc%2F5EmiUKgoWiPpi8M1AmOJ0ex8jJV1qUYVcM3TbnxikMxyBfTWzbJ9R9o1vNQc%2F4oqSuTbShM5DQ7NybcuX8qBCNwcj4Q1onB3rjLFI0JrpyXtAMIsLWqWhvny5r%2BHA1M5lfHC1kTaiQZzlPaXKeZlP6Jw%3D%3D" alt="teshima Japan" class="img-fluid">
-        </div>
-      </div>
-      <div class="col-md-5 m-auto">
-        <span class="divider-separator">
-          <span class="divider-separator__text">Tenshima</span>
-        </span>
-        <h4 class="feature__title">豊島</h4>
-        <p class="text-muted text-left">原本是產業廢棄物投放場的荒涼島嶼，透過藝術重獲新生。<br>日本豐島位於瀨戶內海地區，從島上望去的蔚藍景色以及島上的梯田景觀都是一大絕景。<br>您也千萬不能錯過潛藏在島上四處的藝術景點。</p>
-        <div class="row justify-content-center mt-5">
-          <RouterLink to="/products" class="button--slide btn">前往探索</RouterLink>
-        </div>
-      </div>
-    </div>
+    </ScrollEffect>
   </div>
   <div class="section-nobackground">
     <div class="background-image--introduction background-image"></div>
@@ -120,7 +121,8 @@
   <div class="d-flex justify-content-center align-items-center mb-5">
     <h3 class="section-heading">島嶼風情</h3>
   </div>
-  <Swiper
+  <ScrollEffect>
+    <Swiper
     :loop="true"
     :speed="1000"
     class="container"
@@ -137,27 +139,28 @@
     }"
     :modules="modules"
   >
-  <Swiper-slide v-for="(item) in products" :key="item.id" class="mb-5">
-    <RouterLink :to="`/product/${item.id}`">
-      <div class="p-card">
-        <div class="p-card__tag">{{ item.category }}</div>
-        <div class="p-card__image" :style="{backgroundImage: `url(${item.imageUrl})`}">
-          <div class="hover-area">
-            <a class="btn btn-primary px-5" :to="`/product/${item.id}`">查看商品</a>
+    <Swiper-slide v-for="(item) in products" :key="item.id" class="mb-5">
+      <RouterLink :to="`/product/${item.id}`">
+        <div class="p-card">
+          <div class="p-card__tag">{{ item.category }}</div>
+          <div class="p-card__image" :style="{backgroundImage: `url(${item.imageUrl})`}">
+            <div class="hover-area">
+              <a class="btn btn-primary px-5" :to="`/product/${item.id}`">查看商品</a>
+            </div>
+          </div>
+          <div class="p-card__body">
+            <h4>{{ item.title }}</h4>
+            <div class="d-flex justify-content-between">
+              <p class="p-card__text">
+                {{ item.description }}
+              </p>
+            </div>
           </div>
         </div>
-        <div class="p-card__body">
-          <h4>{{ item.title }}</h4>
-          <div class="d-flex justify-content-between">
-            <p class="p-card__text">
-              {{ item.description }}
-            </p>
-          </div>
-        </div>
-      </div>
-    </RouterLink>
-  </Swiper-slide>
-</Swiper>
+      </RouterLink>
+    </Swiper-slide>
+  </Swiper>
+  </ScrollEffect>
 </template>
 
 <script>

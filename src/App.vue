@@ -8,6 +8,9 @@ import emitter from '@/libs/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
 
 export default {
+  directives: {
+    visible: false
+  },
   components: {
     ToastMessages
   },
