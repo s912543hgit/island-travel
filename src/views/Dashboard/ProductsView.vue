@@ -4,7 +4,6 @@
     <div class="text-end mt-4">
       <button
         class="btn btn-primary"
-        data-bs-toggle="modal"
         id="modal"
         type="button"
         @click="openModal(true)"
