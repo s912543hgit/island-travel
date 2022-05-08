@@ -9,7 +9,7 @@
     <FrontNavbar/>
     <div class="row justify-content-center">
       <h1 class="h3 mb-3 font-weight-normal text-center">登入頁面</h1>
-      <div class="col-6">
+      <div class="col-12 col-md-6">
         <form id="form" class="form-signin" @submit.prevent="login">
           <div class="form-floating mb-3">
             <input

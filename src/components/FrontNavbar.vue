@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="header__inner container">
+    <div class="header__inner container-md">
       <h1 class="header__title" :class="{active: isClicked}">
         <RouterLink to="/">島遊</RouterLink>
       </h1>
