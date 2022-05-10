@@ -31,6 +31,7 @@
     position: relative;
     @include sp {
       height: 88vh;
+      overflow-x: hidden;
     }
   }
   &__container {

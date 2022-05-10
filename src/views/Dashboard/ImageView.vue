@@ -7,11 +7,21 @@
         ref="fileInput"
         @change="uploadFile"
       />
+      <div class="container text-break">
+        圖片網址：
+        {{ text }}
+      </div>
     </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      text: ''
+    }
+  },
+  inject: ['emitter'],
   methods: {
     uploadFile () {
       const uploadFile = this.$refs.fileInput.files[0]
@@ -20,6 +30,8 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload/`
       this.$http.post(url, formData)
         .then((response) => {
+          // console.log(response)
+          this.text = response.data.imageUrl
           this.emitter.emit('push-message', {
             style: 'danger',
             title: '上傳成功',
