@@ -1,31 +1,30 @@
-
-修改變數
-
-1.先將樣式套用在板上
-2.購物車
-
-
 # island-travel
+A travel e-commerce site with the theme of island travel(in Chinese)
+DEMO:https://s912543hgit.github.io/island-travel/#/
 
-## Project setup
-```
-npm install
-```
+## Project introduction
+* Mainly built using Vue.js(Vue3) and Vue CLI
+* Using Vue Router and vue-axios to pass the data
+* Using Bootstrap 5 style
+* Add ESLint Standard Style
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### Front Page
+* Pages: home page, product list, product introduction, favorite list
+* Shopping cart: you can delete and modify the number of products
+* Checkout
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### Backstage
+* Login/Logout
+* Product Management (add,delete or modify the product)
+* Order Management (add,delete or modify the order)
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Use
+* Vue3
+* Vue Cli
+* Vue Component
+* Vue Router
+* Vue Axios
+* Vee Validation
+* Swiper
+* mitt
+* Bootstrap 5
